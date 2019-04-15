@@ -784,9 +784,13 @@ if __name__ == "__main__":
 ```
 * `return render_template('hello.html', name= "BIPM", count = count)`: instead of a string, we create a HTML page based on the template `hello.html`. We give the render_template function the variables `name` and `count`.
 
-Try to just refresh the browser and look if it works. If not, you should rebuild the container:
+You can just refresh the browser without rebuilding the container, because your local app folder is mounted to the app folder in the container:
 
-Run
+Open http://localhost:4000/
+
+Refresh the page a couple of times.
+
+If you change the image or if you are not using a mounted volume, you have to rebuild the images and rerun Docker compose: 
 ```bash
 docker-compose build
 ```
@@ -794,10 +798,6 @@ and then
 ```bash
 docker-compose up
 ```
-
-Open http://localhost:4000/
-
-Refresh the page a couple of times.
 
 # Customize the Website
 
