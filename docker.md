@@ -641,8 +641,8 @@ Real world applications are build with multiple services that are interacting. F
 
 We will enhance our little web application with a visitor counter. The count of visitors will be stored in Redis (https://redis.io/). Redis is a NoSQL database. Redis is an in-memory key-value database, used often as a cache or as part of a message broker.
 
-Create in your `docker` foler a
-`docker-compose.yml`:
+Create in your `docker` folder a
+`docker-compose.yml` file:
 
 ```yaml
 version: '3'
@@ -653,17 +653,23 @@ services:
       - "4000:80"
     depends_on:
       - redis
+    restart: always
+    volumes:
+      - ./app:/app
   redis:
     image: "redis:alpine"
+    restart: always
 ```
 
-The `docker-compose.yml` is a YAML file and has the following elements:
+`docker-compose.yml` is a YAML file and has the following elements:
 *  The version of the `docker-compose.yml` file format (here it is version 3)
 * Two services (the web application and the Redis database)
 * The web service is build based on the Dockerfile in the current directory (`build: .`). Alternatively we could also use an image from Docker Hub (e.g. our own user image that we just pushed to Docker Hub)
 * Port publishing of the container  port 80 to the host port 4000
-* The second service is an offical Redis image from Docker Hub
+* The second service is an offical Redis image from Docker Hu
 * The web service starts after the Redis service, because it `depends_on` Redis.
+* `restart: always`: Restarts the Web Server if it crashes or if the content of the app is changing. Restarts also the Redis Database after a crash.
+* `volumes`: Maps the app folder in the host (your computer) to the app folder in the container. You can now just edit the content and the webpage should update without a new build of the container (just by reloading the page in the browser).
 
 Change the `requirements.txt` file in the `app` folder:
 ```bash
@@ -701,7 +707,7 @@ if __name__ == "__main__":
 ```
 * `cache = redis.Redis(host='redis', port=6379)`: Connext to the Redis datebase. As the host name we can use the service name from the `docker-compose.yml`file (`host='redis'`). The Redis connection is stored in the variable `cache`.
 * The function `get_hit_count` will try to connect 5 time to connect to the Redis database.
-* `return cache.incr('hits')` will increase the counter and return the counter value
+* `return cache.incr('hits')` will increase the counter `'hits'` and then return the increased counter value. Redis is a Key-Value Database (similar to a dictionary in Python). `'hits'` is the key-name (could be any other name) and it will return the increased value for this key.
 * `count = get_hit_count()`: stores the counter value in the variable `count`
 * `return 'Hello BIPM! I have been seen {} times.\n'.format(count)`: Normal Python String interpolation. Variable `count` will be included in the `{}` position.
 
@@ -778,6 +784,8 @@ if __name__ == "__main__":
 ```
 * `return render_template('hello.html', name= "BIPM", count = count)`: instead of a string, we create a HTML page based on the template `hello.html`. We give the render_template function the variables `name` and `count`.
 
+Try to just refresh the browser and look if it works. If not, you should rebuild the container:
+
 Run
 ```bash
 docker-compose build
@@ -794,7 +802,7 @@ Refresh the page a couple of times.
 # Customize the Website
 
 The final task is to customize the website like you want:
-1. Add a picture to the web page (hint: it works similar to the static CSS file)
+1. Add an image to the web page (hint: it works similar to the static CSS file)
 2. Change some CSS
 3. Maybe you have other ideas to change the website (see the Flask website for help http://flask.pocoo.org/docs/1.0/)
 4. Create a screenshot of your web page and upload it to Moodle
