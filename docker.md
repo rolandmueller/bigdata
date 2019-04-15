@@ -506,9 +506,7 @@ The file is still there!
 
 # Create a small Flask Web App
 
-Based on https://docs.docker.com/compose/gettingstarted/
-
-We will build a web application with `Flask` (http://flask.pocoo.org/). Create a `requirements.txt` file in the `app` folder. Here we can specify all python `pip` packages that we need:
+We will build a web application with `Flask` (http://flask.pocoo.org/) (Partially based on https://docs.docker.com/compose/gettingstarted/). Create a `requirements.txt` file in the `app` folder. Here we can specify all python `pip` packages that we need:
 ```bash
 Flask
 ```
