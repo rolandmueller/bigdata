@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+   	<body>
+    	<h1>I have been seen {{ count }} times.</h1> 
+    	<h2>Hallo</h2>
+    	<ul>
+    		{% for i in range(1, count+1) %}
+    			<li>{{ i }}: Hello {{ name }}! </li>
+    		{% endfor %}
+    	</ul>
+    </body>
+</html>
