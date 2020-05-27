@@ -398,7 +398,7 @@ you get
 [0, 1, 8, 27, 64, 125, 216, 343, 512, 729, 1000, 1331, 1728, 2197, 2744]
 ```
 
-To more easily attach data to an image but also store resulting data (e.g. from a computation or from a database) independent of the lifetime of the image, we can use images.
+To more easily attach data to an image but also store resulting data (e.g. from a computation or from a database) independent of the lifetime of the image, we can use volumes.
 
 We can mount an volume when you run a volume with the `-v` parameter. However, only absolute paths are possible. So first check out our current path with `pwd` (print working directory)
 ```bash
