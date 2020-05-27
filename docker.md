@@ -400,7 +400,7 @@ you get
 
 To more easily attach data to an image but also store resulting data (e.g. from a computation or from a database) independent of the lifetime of the image, we can use volumes.
 
-We can mount an volume when you run a volume with the `-v` parameter. However, only absolute paths are possible. So first check out our current path with `pwd` (print working directory)
+We can mount an volume when you run an image with the `-v` parameter. However, only absolute paths are possible. So first check out our current path with `pwd` (print working directory)
 ```bash
 pwd
 ```
