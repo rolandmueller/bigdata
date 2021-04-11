@@ -801,6 +801,9 @@ docker-compose up
 
 The final task is to customize the website like you want:
 1. Add an image to the web page (hint: it works similar to the static CSS file)
-2. Change some CSS
-3. Maybe you have other ideas to change the website (see the Flask website for help http://flask.pocoo.org/docs/1.0/)
+2. Use MVP.css (Minimal viable product) as a CSS template, instead of our ugly own CSS. You can find a description of MVP.CSS here https://andybrewer.github.io/mvp/ 
+Change in the file `hello.html` the line `<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">` to a link to the MVP css template: `<link rel="stylesheet" href="https://unpkg.com/mvp.css">`
+You do not have to download and host the CSS itself. It is hosted for you via a Content Delivery Network (CDN)
+Check how it looks now. The MVP CSS is also responsive, i.e. it is mobile-friendly. 
+3. Implement at least one other ideas to change the website (see the Flask website for help http://flask.pocoo.org/docs/1.0/ for Flask and the MVP.CSS website https://andybrewer.github.io/mvp/  for help for MVP.CSS) 
 4. Create a screenshot of your web page and upload it to Moodle
