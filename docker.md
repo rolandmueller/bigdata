@@ -817,6 +817,6 @@ Check how it looks now. The MVP CSS is also responsive, i.e. it is mobile-friend
 
 3. Add a solid link button in `hello.html` that links to the HWR Berlin homepage (check the MVP.CSS website https://andybrewer.github.io/mvp/  for help. For HTML help, check https://www.w3schools.com/TAGS/ref_byfunc.asp )
 4. Add the CSV (comma seperated) file of the Titanic Dataset to your project. Use Pandas to load the CSV file and show the first 5 rows in the webpage. You can use the DataFrame method to_html https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_html.html 
-5. Add a Barchar to the website, that shows how many men and women survived each.
+5. Add a bar chart to the website, that shows how many men and women survived.
 6. Implement at least one other ideas to change the website (see the Flask website for help http://flask.pocoo.org/docs/1.0/ for Flask and the MVP.CSS website https://andybrewer.github.io/mvp/  for help for MVP.CSS  and https://andybrewer.github.io/mvp/mvp.html for the quickstart template) 
 7. Create a screenshot of your web page and upload it to Moodle
