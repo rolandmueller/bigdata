@@ -398,9 +398,9 @@ you get
 [0, 1, 8, 27, 64, 125, 216, 343, 512, 729, 1000, 1331, 1728, 2197, 2744]
 ```
 
-To more easily attach data to an image but also store resulting data (e.g. from a computation or from a database) independent of the lifetime of the image, we can use images.
+To more easily attach data to an image but also store resulting data (e.g. from a computation or from a database) independent of the lifetime of the image, we can use volumes.
 
-We can mount an volume when you run a volume with the `-v` parameter. However, only absolute paths are possible. So first check out our current path with `pwd` (print working directory)
+We can mount an volume when you run an image with the `-v` parameter. However, only absolute paths are possible. So first check out our current path with `pwd` (print working directory)
 ```bash
 pwd
 ```
@@ -801,6 +801,22 @@ docker-compose up
 
 The final task is to customize the website like you want:
 1. Add an image to the web page (hint: it works similar to the static CSS file)
-2. Change some CSS
-3. Maybe you have other ideas to change the website (see the Flask website for help http://flask.pocoo.org/docs/1.0/)
-4. Create a screenshot of your web page and upload it to Moodle
+2. Use MVP.css (Minimal Viable Product) as a CSS template, instead of our ugly own CSS. You can find a description of MVP.CSS here https://andybrewer.github.io/mvp/ 
+
+Change in the file `hello.html` the line 
+```html
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+```
+to a link to the MVP css template: 
+```html
+<link rel="stylesheet" href="https://unpkg.com/mvp.css">
+```
+You do not have to download and host the CSS itself. It is hosted for you via a Content Delivery Network (CDN)
+
+Check how it looks now. The MVP CSS is also responsive, i.e. it is mobile-friendly. 
+
+3. Add a solid link button in `hello.html` that links to the HWR Berlin homepage (check the MVP.CSS website https://andybrewer.github.io/mvp/  for help. For HTML help, check https://www.w3schools.com/TAGS/ref_byfunc.asp )
+4. Add the CSV (comma seperated) file of the Titanic Dataset to your project. Use Pandas to load the CSV file and show the first 5 rows in the webpage. You can use the DataFrame method to_html https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_html.html 
+5. Add a bar chart to the website, that shows how many men and women survived.
+6. Implement at least one other ideas to change the website (see the Flask website for help http://flask.pocoo.org/docs/1.0/ for Flask and the MVP.CSS website https://andybrewer.github.io/mvp/  for help for MVP.CSS  and https://andybrewer.github.io/mvp/mvp.html for the quickstart template) 
+7. Create a screenshot of your web page and upload it to Moodle
