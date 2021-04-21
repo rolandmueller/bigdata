@@ -1,4 +1,4 @@
-# Docker Basics
+# Docker
 
 ## Install and Login
 
