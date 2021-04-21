@@ -742,7 +742,7 @@ Add in the `app` folder  a `templates` folder. Create in the `templates` folder 
 * if you have a loop (like a `for`) or if-statement, you need also an end statement (like `endfor`) because Jinja is not using indentation for ending blocks.
 * `<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">`: We create a link for the CSS style sheets. The CSS file is called `style.css` and is in the `static` folder. The function `url_for` creates the URL for this file.
 
-Now let us add the CSS style. Add in the `app` folder  a `static` folder. Create in the `static` folder a file `style.css` with the following content:
+Now let us add the CSS style. See https://developer.mozilla.org/en-US/docs/Web/CSS for a CSS tutorial. Add in the `app` folder  a `static` folder. Create in the `static` folder a file `style.css` with the following content:
 ```css
 body { font-family: sans-serif; background: #eee; }
 a, h1, h2 { color: #377ba8; }
