@@ -38,21 +38,21 @@ There are two things, you have to do, before building the dashboard.
 
 ## Streamlit App
 
-Create based on the requirements the Streamlit App
+Based on the requirements, create a Streamlit App
 
 You can find more about Streamlit in this sources:
+- https://calmcode.io/streamlit/hello-world.html
 - https://docs.streamlit.io/en/stable/index.html
 - https://streamlit.io/ 
-- https://calmcode.io/streamlit/hello-world.html
 
 ## Dockerize your Streamlit App
 
-Create a Dockerfile for your Streamlit App and try it out.
+Create a Dockerfile for your Streamlit App. Run and test the Docker container.
 
 Some tips:
 
-Use a `requirements.txt`for managing your Python Packages:
-requirements.txt:
+Use a `requirements.txt` for managing your Python Packages:
+e.g. requirements.txt:
 ```txt
 streamlit
 pandas
