@@ -6,20 +6,20 @@ Apply for the free GitHub Student Developer Pack at: https://education.github.co
 
 ## Register a Domain Name
 
-Use either name.com or namecheap.com for registering a domain name (you might want to use the GitHub Student Developer Pack discount)
+Use either https://www.name.com/ or https://www.namecheap.com/ for registering a domain name (you might want to use the GitHub Student Developer Pack discount)
 
-## Register at an Cloud Provider for a VPS
+## Register at a Cloud Provider for a Virtual Private Server (VPS)
 
-Register at DigitalOcean via your GitHub Student Developer Pack to get $100 in platform credit for new users.
+Register at https://www.digitalocean.com/ via your GitHub Student Developer Pack to get $100 in platform credit for new users.
 
-## Install CapRover on the VPS
+## Install CapRover on your VPS
 
 Instructions:
-- https://caprover.com/docs/get-started.html 
 - https://www.youtube.com/watch?v=VPHEXPfsvyQ 
+- https://caprover.com/docs/get-started.html 
 
 On DigitalOcean you can select a Droplet with CapRover preinstalled. 
-Alternativly you have to install on the server a) Docker (also available as a Droplet or manual installation) and b) CapRover
+Alternativly you have to install on the server a) Docker (also available as a Droplet or manual installation) and b) CapRover.
 
 ## Install CapRover CLI (Command Line Interface) on your laptop
 
