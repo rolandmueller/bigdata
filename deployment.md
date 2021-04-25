@@ -10,7 +10,7 @@ Use either https://www.name.com/ or https://www.namecheap.com/ for registering a
 
 ## Register at a Cloud Provider and create a Virtual Private Server (VPS)
 
-Register at DigitalOcean https://www.digitalocean.com/ via your GitHub Student Developer Pack to get $100 in platform credit for new users. Alternatively you can use also any other cloud provider, that is offering a VPS, like Hetzner https://www.hetzner.com/cloud 
+Register at DigitalOcean https://www.digitalocean.com/ via your GitHub Student Developer Pack to get $100 in platform credit for new users. Alternatively you can use also any other cloud provider that is offering a VPS, like Hetzner https://www.hetzner.com/cloud 
 
 ## Add a Wild Card entry at your Domain Name register
 
