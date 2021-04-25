@@ -9,6 +9,8 @@ The dashboard should have the following interactive widgets:
 1. a year slider to control the year
 2. a multiselect widget for selecting one or more countries
 
+The dashboard does **NOT** to have to be animated (like the gapminder one).
+
 The chart should have show the following KPIs:
 1. On the x-axis: the logarithmic Gross Natition Income (GNI) per captia (inflation-adjusted and converted to $ based on purchasing power parity (PPP)). The maximal x value should be constant independent what you select, so that you can more easily compare the charts.
 2. On the y-axis: Life expectancy
