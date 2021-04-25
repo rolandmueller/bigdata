@@ -1,15 +1,15 @@
 
 # Create a Streamlit App similar to Gapminder
 
-You task is to create a interactive bubble chart with Streamlit similar to https://www.gapminder.org/tools/ 
+You task is to create an interactive bubble chart with Streamlit, similar to Gapminder https://www.gapminder.org/tools/ 
 
 ## Requirements
 
 The dashboard should have the following interactive widgets:
-1. a year slider to control the year
+1. a year slider to control the year (only one year will be displayes)
 2. a multiselect widget for selecting one or more countries
 
-The dashboard does **NOT** to have to be animated (like the gapminder one).
+The dashboard does **NOT** to have to be animated (like the Gapminder one).
 
 The bubble chart should show the following KPIs:
 1. On the x-axis: the logarithmic Gross Natition Income (GNI) per captia (inflation-adjusted and converted to $ based on purchasing power parity (PPP)). The maximal x value should be constant independent what you select, so that you can more easily compare the charts.
