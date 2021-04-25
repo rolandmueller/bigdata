@@ -31,8 +31,8 @@ You have then 3 CSV files.
 ## Data Preprocessing
 
 There are two things, you have to do, before building the dashboard. 
-1. The data contain missing values. For all three CSV, use forward fill, to use earlier KPIs for the country for filling later ones (there is a Pandas function for that)
-2. We have to merge all three CVS. For each CSV, transform the dataframe into a tidy format, with only three columns: (1) country, (2) year, (3) the KPI (that means either a) life expectancy, b) population, or 3) GNI per capita)
+1. The data contains missing values. For all three CSVs, use forward filling for imputing the missing data. Forward filling uses earlier values of the country for filling later ones (tips´: there exist a Pandas function for that)
+2. You have to merge all three CVS. For each CSV, transform the dataframe into a tidy format (see e.g. https://en.wikipedia.org/wiki/Tidy_data), with only three columns: (1) country, (2) year, (3) the KPI (that means either a) life expectancy, b) population, or 3) GNI per capita)
 3. Merge the three dataframe into one dataframe, that just has 5 columns (country, year and all three KPIs)
 
 
