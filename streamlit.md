@@ -6,7 +6,7 @@ You task is to create an interactive bubble chart with Streamlit, similar to Gap
 ## Requirements
 
 The dashboard should have the following interactive widgets:
-1. a year slider to control the year (only one year will be displayes)
+1. a year slider to control the year (only one year will be displayed)
 2. a multiselect widget for selecting one or more countries
 
 The dashboard does **NOT** to have to be animated (like the Gapminder one).
