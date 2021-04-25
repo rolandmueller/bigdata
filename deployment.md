@@ -35,7 +35,7 @@ We will use a Dockerfile for the deployment: https://caprover.com/docs/captain-d
 - Go into your Streamlit application folder from the last exercise
 - Create a new file with the name `captain-definition`
 
-put in the `captain-definition` the following content:
+put in the `captain-definition` file the following content:
 ```json
  {
   "schemaVersion": 2,
