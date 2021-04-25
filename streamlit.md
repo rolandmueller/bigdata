@@ -1,5 +1,5 @@
 
-# Create a Streamlit App
+# Create a Streamlit App similar to Gapminder
 
 You task is to create a interactive bubble chart with Streamlit similar to https://www.gapminder.org/tools/ 
 
