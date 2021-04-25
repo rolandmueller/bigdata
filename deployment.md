@@ -52,7 +52,7 @@ put in the `captain-definition` file the following content:
 
 ## On the Server, create an App
 
-Go to your the CapRover server web dashboard and create your app
+Go to your the CapRover server web dashboard and create an app
 
 ## On the Laptop, your App
 
@@ -62,9 +62,25 @@ In the folder of your Streamlit app, execute in the Terminal:
 caprover deploy
 ```
 
+Check if you can reach your Streamlit app on the web
+
+## Add additional URL to your Streamlit app
+
+We want to reach your Streamlit website via the subdomain `gapminder` so that if you would have the domain name `example.com`, the URL of your app would be `gapminder.example.com`
+
+For that, you have to do two things:
+1. Add at your Domain register (e.g. namecheap.com) a new A record with the host `gapminder` and the value the IP address of your VPS.
+2. In the CapRover Dashboard, go to your app, enter next to "Connect New Domain" your URL and click "Connect New Domain". 
+
+Test if the new URL works
+
 ## Enable HTTPS
 
-On the server, enable HTTPS for your main CapRover Dashboard and your Streamlit app
+On the server, enable HTTPS for your main CapRover Dashboard and your Streamlit app. Check "Force HTTPS by redirecting all HTTP traffic to HTTPS" 
 
-Deliverable: Copy the URL of your deployed Streamlit App to Moodle
+Test that the redirect works.
+
+## Deliverable
+
+Copy the URL of your deployed Streamlit App to Moodle
 
