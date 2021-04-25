@@ -8,9 +8,16 @@ Apply for the free GitHub Student Developer Pack at: https://education.github.co
 
 Use either https://www.name.com/ or https://www.namecheap.com/ for registering a domain name (you might want to use the GitHub Student Developer Pack discount)
 
-## Register at a Cloud Provider for a Virtual Private Server (VPS)
+## Register at a Cloud Provider and create a Virtual Private Server (VPS)
 
 Register at https://www.digitalocean.com/ via your GitHub Student Developer Pack to get $100 in platform credit for new users.
+
+## Add a Wild Card entry at your Domain Name register
+
+Add a wildcard DNS entry for your VPS at your Domain Name register (e.g. name.com or namecheap.com)
+- Go to the domain name panel of your Domain Name register and add a A Record:
+1. Host should be a wild card for a subdomain, e.g. `*.dev`
+2. Value should be the IP Address of your VPS
 
 ## Install CapRover on your VPS
 
