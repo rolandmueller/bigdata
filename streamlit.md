@@ -66,4 +66,5 @@ to install the Python packages inside the Docker container.
 
 ## Deliverable
 
-Take a screenshot of the Streamlit App and upload it to Moodle
+1. Push your Strimlit directory to Github and post the URL of your repository to Moodle
+2. Take a screenshot of the Streamlit App and upload it to Moodle
