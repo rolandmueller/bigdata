@@ -56,13 +56,13 @@ More information about how to Dockerize a Streamlit App:
 Some tips:
 
 Use a `requirements.txt` for managing your Python Packages:
-e.g. requirements.txt:
+e.g. `requirements.txt`:
 ```txt
 streamlit
 pandas
 ```
 
-In the Dockerfile you can write somethin like this
+In the `Dockerfile` you can write somethin like this
 ```dockerfile
 FROM python:3.7
 COPY . /app
