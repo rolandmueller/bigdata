@@ -45,6 +45,13 @@ You can find more about Streamlit in this sources:
 - https://docs.streamlit.io/en/stable/index.html
 - https://streamlit.io/ 
 
+### Charting in Streamlit
+
+You can use different Python charting libraries in Streamlit, like Streamlit's own charting library, but also other Python packages like Matplotlib, Seaborn, Plotly or whatever you like. 
+
+https://docs.streamlit.io/en/stable/api.html#display-charts 
+
+### Getting started
 Create a new folder. 
 Inside the folder, open a editor like PyCharm, Sublime or Visual Studio code https://code.visualstudio.com/
 Have the whole folder as a project. 
