@@ -12,7 +12,7 @@ The dashboard should have the following interactive widgets:
 The dashboard does **NOT** to have to be animated (like the Gapminder one).
 
 The bubble chart should show the following KPIs:
-1. On the x-axis: the logarithmic Gross Natition Income (GNI) per captia (inflation-adjusted and converted to $ based on purchasing power parity (PPP)). The maximal x value should be constant independent what you select, so that you can more easily compare the charts.
+1. On the x-axis: the **logarithmic** Gross Natition Income (GNI) per captia (inflation-adjusted and converted to $ based on purchasing power parity (PPP)). The maximal x value should be **constant** independent what you select, so that you can more easily compare the charts.
 2. On the y-axis: Life expectancy
 3. Size of the bubble: population
 4. Color: Country
