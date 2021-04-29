@@ -48,7 +48,7 @@ You can find more about Streamlit in this sources:
 Create a new folder. 
 Inside the folder, open a editor like PyCharm, Sublime or Visual Studio code https://code.visualstudio.com/
 Have the whole folder as a project. 
-Create a file app.py and enter a bare-bone Streamlit application:
+Create a file `app.py` and enter a bare-bone Streamlit application:
 
 ```python
 import streamlit as st
