@@ -45,6 +45,23 @@ You can find more about Streamlit in this sources:
 - https://docs.streamlit.io/en/stable/index.html
 - https://streamlit.io/ 
 
+Create a new folder. 
+Inside the folder, open a editor like PyCharm, Sublime or Visual Studio code https://code.visualstudio.com/
+Have the whole folder as a project. 
+Create a file app.py and enter a bare-bone Streamlit application:
+
+```python
+import streamlit as st
+```
+
+On the Terminal run
+
+```bash
+streamlit run app.py
+```
+
+When you change the code, you can jsut refrech the browser or autoupdate the browser. 
+
 ## Dockerize your Streamlit App
 
 Create a Dockerfile for your Streamlit App. Run and test the Docker container.
@@ -73,7 +90,9 @@ ENTRYPOINT ["streamlit","run"]
 CMD ["app.py"]
 ```
 
-`pip install -r requirements.txt` is installing the Python packages inside the Docker container .
+`pip install -r requirements.txt` is installing the Python packages inside the Docker container.
+
+The data loading (and preprocessing) should be cached.
 
 ## Deliverable
 
