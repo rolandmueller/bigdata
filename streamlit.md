@@ -49,7 +49,9 @@ You can find more about Streamlit in this sources:
 
 Create a Dockerfile for your Streamlit App. Run and test the Docker container.
 
-Here is a video about how to Dockerize a Streamlit App https://www.youtube.com/watch?v=doCia_CKcko
+More information about how to Dockerize a Streamlit App:
+* https://blog.jcharistech.com/2020/01/08/how-to-deploy-streamlit-apps-with-docker/
+* https://www.youtube.com/watch?v=doCia_CKcko
 
 Some tips:
 
@@ -60,11 +62,18 @@ streamlit
 pandas
 ```
 
-In the Dockerfile you can than use 
+In the Dockerfile you can write somethin like this
 ```dockerfile
+FROM python:3.7
+COPY . /app
+WORKDIR /app
 RUN pip install -r requirements.txt
+EXPOSE 8501
+ENTRYPOINT ["streamlit","run"]
+CMD ["app.py"]
 ```
-to install the Python packages inside the Docker container.
+
+`pip install -r requirements.txt` is installing the Python packages inside the Docker container .
 
 ## Deliverable
 
