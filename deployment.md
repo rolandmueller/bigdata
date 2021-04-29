@@ -1,5 +1,9 @@
 # Deployment with CapRover
 
+You find more information here 
+* https://discuss.streamlit.io/t/slug-size-error-in-heroku-when-deploying-streamlit-app/4821/12 
+* https://caprover.com/ 
+
 ## Apply for GitHub Student Developer Pack
 
 Apply for the free GitHub Student Developer Pack at https://education.github.com/pack
@@ -12,21 +16,25 @@ Use either https://www.name.com/ or https://www.namecheap.com/ for registering a
 
 Register at DigitalOcean https://www.digitalocean.com/ via your GitHub Student Developer Pack to get $100 in platform credit for new users. Alternatively you can use also any other cloud provider that is offering a VPS, like Hetzner https://www.hetzner.com/cloud 
 
-## Add a Wild Card entry at your Domain Name register
-
-Add a wildcard DNS entry for your VPS at your Domain Name register (e.g. name.com or namecheap.com)
-- Go to the domain name panel of your Domain Name register and add a A Record:
-1. Host should be a wild card for a subdomain, e.g. `*.dev`
-2. Value should be the IP Address of your VPS
-
-## Install CapRover on your VPS
+## Crearte a VPS and instal CapRover on your VPS
 
 Instructions:
 - https://www.youtube.com/watch?v=VPHEXPfsvyQ 
 - https://caprover.com/docs/get-started.html 
 
-On DigitalOcean you can select a Droplet with CapRover preinstalled. 
-Alternativly you have to install on the server a) Docker (also available as a Droplet or manual installation) and b) CapRover.
+Create a VPS on the Cloud Provider. On DigitalOcean you can select a Droplet with CapRover preinstalled. 
+Alternativly you have to install on the server a) Docker (also available as a Droplet or manual installation), c) change Firewall settins and b) install CapRover.
+
+## Add a Wild Card entry at your Domain Name register
+
+https://caprover.com/docs/get-started.html#step-2-connect-root-domain
+
+Add a wildcard DNS entry for your VPS at your Domain Name register (e.g. name.com or namecheap.com).
+
+Go to the domain name panel of your Domain Name register and add a A Record:
+1. Host should be a wild card for a subdomain, e.g. `*.dev`
+2. Value should be the IP Address of your VPS
+
 
 ## Install CapRover CLI (Command Line Interface) on your laptop
 
@@ -35,7 +43,7 @@ Alternativly you have to install on the server a) Docker (also available as a Dr
 
 ## Create a CapRover captain-definition file
 
-CapRover has different ways to define how to deploy an application through a Captain Definition File `captain-definition`, see https://caprover.com/docs/captain-definition-file.html for more details.
+CapRover has different ways to define how to deploy an application through a Captain Definition File `captain-definition`, see https://caprover.com/docs/captain-definition-file.html for more details. 
 
 We will use a Dockerfile for the deployment: https://caprover.com/docs/captain-definition-file.html#use-dockerfile-in-captain-definition 
 
@@ -49,10 +57,15 @@ put in the `captain-definition` file the following content:
   "dockerfilePath": "./Dockerfile"
  }
 ```
+See https://discuss.streamlit.io/t/slug-size-error-in-heroku-when-deploying-streamlit-app/4821/12  for Steamlit specific help.
 
 ## On the Server, create an App
 
 Go to your the CapRover server web dashboard and create an app
+
+Set parameter for the app:
+- http container port: the same port where the streamlit app is running.
+- Enable websocket support (click checkbox)
 
 ## On the Laptop, your App
 
