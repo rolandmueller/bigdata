@@ -49,6 +49,8 @@ You can find more about Streamlit in this sources:
 
 Create a Dockerfile for your Streamlit App. Run and test the Docker container.
 
+Here is a video about how to Dockerize a Streamlit App https://www.youtube.com/watch?v=doCia_CKcko
+
 Some tips:
 
 Use a `requirements.txt` for managing your Python Packages:
