@@ -67,7 +67,7 @@ On the Terminal run
 streamlit run app.py
 ```
 
-When you change the code, you can jsut refrech the browser or autoupdate the browser. 
+When you change the code, you can just refrech the browser or enable autoupdate in Streamlit. 
 
 ## Dockerize your Streamlit App
 
