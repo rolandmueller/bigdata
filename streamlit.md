@@ -69,6 +69,8 @@ streamlit run app.py
 
 When you change the code, you can just refrech the browser or enable autoupdate in Streamlit. 
 
+The data loading (and preprocessing) should be cached.
+
 ## Dockerize your Streamlit App
 
 Create a Dockerfile for your Streamlit App. Run and test the Docker container.
@@ -98,8 +100,6 @@ CMD ["app.py"]
 ```
 
 `pip install -r requirements.txt` is installing the Python packages inside the Docker container.
-
-The data loading (and preprocessing) should be cached.
 
 ## Deliverable
 
