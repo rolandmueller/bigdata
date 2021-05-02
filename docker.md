@@ -239,7 +239,7 @@ Everything gone.
 
 ## Containers and images
 
-Let us start three different containers from the same iamge.
+Let us start three different containers from the same image.
 ```bash
 docker run -it -d --name ubuntu1 ubuntu bash
 ```
