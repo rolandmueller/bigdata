@@ -317,7 +317,7 @@ CMD ["python", "computation.py"]
 ```
 
 
-Create the `app` folder in change into the folder
+Create the `app` folder and change into the folder
 ```bash
 mkdir app
 ```
