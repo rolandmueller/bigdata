@@ -1,8 +1,9 @@
-# Deployment with CapRover
+# Cloud Deployment with CapRover
 
 You find more information here 
 * https://discuss.streamlit.io/t/slug-size-error-in-heroku-when-deploying-streamlit-app/4821/12 
 * https://caprover.com/ 
+* https://www.youtube.com/watch?v=VPHEXPfsvyQ
 
 ## Apply for GitHub Student Developer Pack
 
