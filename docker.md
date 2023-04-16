@@ -307,7 +307,11 @@ Stop all other containers.
 
 # Define and build a new Image
 
-Create a file with the name `Dockerfile` with the following content:
+Create a file with the name `Dockerfile` with the following content (e.g. with an IDE (integrated development environment) or editor like  Visual Studio Code or PyCharm).
+You might be able to open an editor from the terminal directly (might be configure before in the IDE).
+* For opening VS Code in the current folder you can type in the terminal: `code .`
+* For opening PyCharm type: `charm .` 
+* The `.`mean the current folder
 
 ```bash
 # Use an official Python runtime as a parent image
@@ -373,7 +377,7 @@ docker container ls -a
 ```
 you can also see the stopped containers.
 
-## Volumes
+## Building images
 
 Change the `computation.py` file to
 
@@ -405,6 +409,8 @@ you get
 [0, 1, 8, 27, 64, 125, 216, 343, 512, 729, 1000, 1331, 1728, 2197, 2744]
 ```
 
+## Volumes
+
 To more easily attach data to an image but also store resulting data (e.g. from a computation or from a database) independent of the lifetime of the image, we can use volumes.
 
 We can mount an volume when you run an image with the `-v` parameter. However, only absolute paths are possible. So first check out our current path with `pwd` (print working directory)
@@ -419,6 +425,8 @@ docker run -v /Users/rolandmueller/Documents/sourcecode/bigdata/docker/app/:/app
 ```
 
 The `-v` flag expects two directories before and after the `:`. On the left of the `:` is the absolute path to a directory on the host system (your laptop) that will be mounted to an directory in the container (right side of `:`)
+
+On Mac you might have to give file access to Docker. You can change this in the Privacy and Security Settings and restart Docker.
 
 There is also a clumbsy always to use the relative path. This depends if you use Mac/Linux or Windows:
 
@@ -439,9 +447,9 @@ my_list = [i**4 for i in range(5)]
 print(my_list)
 ```
 
-Run (Adjust the command for your path or use a realtive path):
+Run again (or use your absolute path) (you can go back in history in the terminal with the arrow keys):
 ```bash
-docker run -v /Users/rolandmueller/Documents/sourcecode/bigdata/docker/app/:/app bipm_compute
+docker run -v `pwd`/app/:/app bipm_compute
 ```
 You should see the new result with building the container again.
 
