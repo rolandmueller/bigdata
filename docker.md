@@ -134,6 +134,11 @@ ls
 ```
 The file is gone!
 
+log out of the container by entering
+```bash
+exit
+```
+
 Check all containers.
 ```bash
 docker container ls -a
@@ -150,7 +155,7 @@ You can also use the `CONTAINER ID` (first column) to identify a container  (e.g
 
 Look not for the last but the the second last container (in this example `angry_goldstine` as NAME or `94cb0399ba60` as CONTAINER ID)
 
-Restart the container (change the name or use the CONTAINER ID)
+Restart the container (change the name or use the CONTAINER ID in YOUR (!) list)
 ```bash
 docker start angry_goldstine
 ```
@@ -165,7 +170,7 @@ You can als just use the first numbers of the CONATINER ID as long as they ident
 docker start 94
 ```
 
-Login to an already running container with `docker exec` (change the CONTAINER ID);
+Login to an already running container with `docker exec` (change the CONTAINER ID in your (!) list);
 ```bash
 docker exec -it 94 bash
 ```
@@ -239,7 +244,13 @@ Everything gone.
 
 ## Containers and images
 
-Let us start three different containers from the same image.
+Let us start three different containers from the same image. 
+Meaning of the parameters:
+* `-it` interactive
+* `--name` gives a container a name (e.g. ubuntu1)
+* `-d` Detach: detaches the command line from the container so it is running in the background.
+
+
 ```bash
 docker run -it -d --name ubuntu1 ubuntu bash
 ```
@@ -249,10 +260,6 @@ docker run -it -d --name ubuntu2 ubuntu bash
 ```bash
 docker run -it -d --name ubuntu3 ubuntu bash
 ```
-
-Meaning of the parameters:
-* `--name` gives a container a name (e.g. ubuntu1)
-* `-d` Detach: detaches the command line from the container so it is running in the background.
 
 
 Check if all three containers running:
@@ -274,7 +281,7 @@ In the fourth terminal, Enter
 ```bash
 docker attach ubuntu3
 ```
-In the termina of container ubuntu1 create a folder
+In the terminal of container ubuntu1 create a folder
 ```bash
 mkdir iwashere
 ```
@@ -304,7 +311,7 @@ Create a file with the name `Dockerfile` with the following content:
 
 ```bash
 # Use an official Python runtime as a parent image
-FROM python:3.7-slim
+FROM python:3.8-slim-buster
 
 # Set the working directory to /app
 WORKDIR /app
@@ -534,7 +541,7 @@ This mini Flask app creates a dynamic web applications:
 Change the `Dockerfile` file:
 ```bash
 # Use an official Python runtime as a parent image
-FROM python:3.7-slim
+FROM python:3.8-slim-buster
 
 # Set the working directory to /app
 WORKDIR /app
@@ -543,7 +550,7 @@ WORKDIR /app
 COPY app/ /app
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
