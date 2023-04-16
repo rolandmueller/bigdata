@@ -242,7 +242,7 @@ docker container ls -a
 ```
 Everything gone.
 
-## Containers and images
+### Containers and images
 
 Let us start three different containers from the same image. 
 Meaning of the parameters:
@@ -305,7 +305,7 @@ What happens with your second terminal (where you are logged into ubuntu1)?
 
 Stop all other containers.
 
-# Define and build a new Image
+## Define a new Image
 
 Create a file with the name `Dockerfile` with the following content (e.g. with an IDE (integrated development environment) or editor like  Visual Studio Code or PyCharm).
 You might be able to open an editor from the terminal directly (might be configure before in the IDE).
@@ -326,7 +326,6 @@ COPY app/ /app
 # Run computation.py when the container launches
 CMD ["python", "computation.py"]
 ```
-
 
 Create the `app` folder and change into the folder
 ```bash
@@ -352,7 +351,7 @@ You can see the built bipm_compute image with:
 docker image ls
 ```
 
-# Run a Docker containers
+## Run Docker containers
 
 To run the an image, use the following command:
 ```bash
@@ -377,7 +376,6 @@ docker container ls -a
 ```
 you can also see the stopped containers.
 
-## Building images
 
 Change the `computation.py` file to
 
@@ -453,7 +451,7 @@ docker run -v `pwd`/app/:/app bipm_compute
 ```
 You should see the new result with building the container again.
 
-# Named Volumes
+## Named Volumes
 
 You can also create a volume directly with docker.
 
