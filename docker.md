@@ -859,7 +859,7 @@ docker-compose up
 
 # Customize the Website
 
-The final task is to customize the website like you want:
+The final task is to customize the website like you want (see https://simplecss.org/demo for help):
 1. Add an image to the web page
 2. Add a link  in `hello.html` that links to the HWR Berlin homepage
 3. Add the CSV (comma seperated) file of the Titanic Dataset to your project. Use Pandas to load the CSV file and show the first 5 rows in the webpage. You can use the DataFrame method to_html https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_html.html 
