@@ -863,7 +863,7 @@ The final task is to customize the website like you want (see https://simplecss.
 1. Add a link in `hello.html` that links to the HWR Berlin homepage
 2. Add a footer with your name
 3. Add an image to the web page.
-4. Add a navigation menu to the web page, with two menu items: Home (the current page) and About (a link to your Github homepage)
-5. Add the CSV (comma seperated) file of the Titanic Dataset to your project. Use Pandas to load the CSV file and show the first 5 rows in the webpage. You can use the DataFrame method to_html https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_html.html 
-6. Add a bar chart to the website, that shows how many men and women survived.
-7. Create a screenshot of your web page and upload it to Moodle
+4. Add a navigation menu to the web page, with two menu items: Home (the current page), Titanic (another internal page) and About (a link to your Github homepage)
+6. Add the CSV (comma seperated) file of the Titanic Dataset to your project. Use Pandas to load the CSV file and show the first 5 rows in the Titanic page. You can use the DataFrame method to_html https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_html.html 
+7. Add a bar chart to the Titanic page, that shows how many men and women survived.
+8. Create two screenshots of your web page (Home and Titanic) and upload them to Moodle
