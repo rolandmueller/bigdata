@@ -1,5 +1,10 @@
 # Docker
 
+Docker has manly three advantages:
+* Reproducibility of the working environment. A colleague can easily reproduce the exact context of the code.
+* Deployment of the work to the cloud 
+* Creating a solution that consist of multiple service. For example, a web server (like Flask) that stores data into a database (like PostgreSQL or Redis).
+
 ## Install and Login
 
 * Install docker
@@ -605,7 +610,6 @@ CMD ["python", "app.py"]
 ```
 
 
-
 Build the container:
 ```bash
 docker build --tag=bipm_hello .
@@ -689,7 +693,7 @@ Open in your browser http://localhost:4000/
 
 Stop with Control+C.
 
-## Create a stack of services with a docker-compose.yml file
+# Create a stack of services with a docker-compose.yml file
 
 Real world applications are build with multiple services that are interacting. For example, a Wordpress blog might at least use two services: the PHP Wordpress Blog and a MySQL database. Typically this two services would be two Docker images. Docker allows you to define this multi-service applications with a `docker-compose.yml` file. (see https://docs.docker.com/compose/overview/ for more infos about Docker compose)
 
