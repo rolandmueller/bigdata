@@ -76,8 +76,7 @@ The data loading (and preprocessing) should be cached.
 Create a Dockerfile for your Streamlit App. Run and test the Docker container.
 
 More information about how to Dockerize a Streamlit App:
-* https://blog.jcharistech.com/2020/01/08/how-to-deploy-streamlit-apps-with-docker/
-* https://www.youtube.com/watch?v=doCia_CKcko
+* https://docs.streamlit.io/knowledge-base/tutorials/deploy/docker
 
 Some tips:
 
@@ -90,7 +89,7 @@ pandas
 
 In the `Dockerfile` you can write somethin like this
 ```dockerfile
-FROM python:3.7
+FROM python:3.9-slim-buster
 COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
@@ -103,5 +102,5 @@ CMD ["app.py"]
 
 ## Deliverable
 
-1. Push your Strimlit directory to Github and post the URL of your repository to Moodle
+1. Push your Streamlit directory to Github and post the URL of your repository to Moodle
 2. Take a screenshot of the Streamlit App and upload it to Moodle
