@@ -47,9 +47,9 @@ You can find more about Streamlit in this sources:
 
 ### Charting in Streamlit
 
-You can use different Python charting libraries in Streamlit, like Streamlit's own charting library, but also other Python packages like Matplotlib, Seaborn, Plotly or whatever you like. 
+You can use different Python charting libraries in Streamlit, like Streamlit's own charting library, but also other Python packages like Matplotlib, Seaborn, Plotly or Bokeh. 
 
-https://docs.streamlit.io/en/stable/api.html#display-charts 
+https://docs.streamlit.io/library/api-reference/charts
 
 ### Getting started
 Create a new folder. 
