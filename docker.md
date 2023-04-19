@@ -790,6 +790,96 @@ and then
 ```bash
 docker-compose up
 ```
+# Add Password to the Database
+
+Right now Redis is not secured through a password. This is right now not a problem, because everything is running on the laptop and we do not have any sensible data in the database. However, when we will deploy the app to a cloud provider, it is better to use a password access for the database.
+
+Typically we do not want any plain password in the source code. The alternative is using environment variables (variables from the operation systems) or password files that we do not add into the source repository.
+
+Adjust the `docker-compose.yml`file:
+```yaml
+services:
+  redis:
+    image: redislabs/redismod
+    ports:
+      - '6379:6379'
+    command: --requirepass ${REDIS_PASSWORD}
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+  web:
+    build: .
+    stop_signal: SIGINT
+    ports:
+      - '4000:80'
+    volumes:
+      - ./app:/app
+    depends_on:
+      - redis
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+```
+
+Create a new file in the docker folder (not in the app folder) with the name `.env` (with a `.` at the beginning), with the following content:
+
+```bash
+REDIS_PASSWORD=MySuperPassword
+```
+
+Change the `requirements.txt` file by adding one more Python package [python-dotenv](https://pypi.org/project/python-dotenv/). 
+```
+Flask
+Redis
+python-dotenv
+```
+
+python-dotenv allows to either use environment variables or hidden files (`.env`) for things like passwords.
+
+
+Change the `app.py` file.  
+
+Add the following lines:
+```python
+from dotenv import load_dotenv
+
+load_dotenv() 
+cache = redis.Redis(host='redis', port=6379,  password=os.getenv('REDIS_PASSWORD'))
+```
+
+This loads the environments and with `os.getenv('REDIS_PASSWORD')` we can then use the password in the python code.
+
+The `app.py` file should now look like this:
+
+```python
+import time
+import redis
+from flask import Flask, render_template
+import os
+from dotenv import load_dotenv
+
+load_dotenv() 
+cache = redis.Redis(host='redis', port=6379,  password=os.getenv('REDIS_PASSWORD'))
+app = Flask(__name__)
+
+def get_hit_count():
+    retries = 5
+    while True:
+        try:
+            return cache.incr('hits')
+        except redis.exceptions.ConnectionError as exc:
+            if retries == 0:
+                raise exc
+            retries -= 1
+            time.sleep(0.5)
+
+@app.route('/')
+def hello():
+    count = get_hit_count()
+    return render_template('hello.html', name= "BIPM", count = count)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=80, debug=True)
+```
+
 
 # Customize the Website
 
