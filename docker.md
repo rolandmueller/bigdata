@@ -1,5 +1,10 @@
 # Docker
 
+Docker has manly three advantages:
+* Reproducibility of the working environment. A colleague can easily reproduce the exact context of the code.
+* Deployment of the work to the cloud 
+* Creating a solution that consist of multiple service. For example, a web server (like Flask) that stores data into a database (like PostgreSQL or Redis).
+
 ## Install and Login
 
 * Install docker
@@ -134,6 +139,11 @@ ls
 ```
 The file is gone!
 
+log out of the container by entering
+```bash
+exit
+```
+
 Check all containers.
 ```bash
 docker container ls -a
@@ -150,7 +160,7 @@ You can also use the `CONTAINER ID` (first column) to identify a container  (e.g
 
 Look not for the last but the the second last container (in this example `angry_goldstine` as NAME or `94cb0399ba60` as CONTAINER ID)
 
-Restart the container (change the name or use the CONTAINER ID)
+Restart the container (change the name or use the CONTAINER ID in YOUR (!) list)
 ```bash
 docker start angry_goldstine
 ```
@@ -165,7 +175,7 @@ You can als just use the first numbers of the CONATINER ID as long as they ident
 docker start 94
 ```
 
-Login to an already running container with `docker exec` (change the CONTAINER ID);
+Login to an already running container with `docker exec` (change the CONTAINER ID in your (!) list);
 ```bash
 docker exec -it 94 bash
 ```
@@ -237,9 +247,15 @@ docker container ls -a
 ```
 Everything gone.
 
-## Containers and images
+### Containers and images
 
-Let us start three different containers from the same image.
+Let us start three different containers from the same image. 
+Meaning of the parameters:
+* `-it` interactive
+* `--name` gives a container a name (e.g. ubuntu1)
+* `-d` Detach: detaches the command line from the container so it is running in the background.
+
+
 ```bash
 docker run -it -d --name ubuntu1 ubuntu bash
 ```
@@ -249,10 +265,6 @@ docker run -it -d --name ubuntu2 ubuntu bash
 ```bash
 docker run -it -d --name ubuntu3 ubuntu bash
 ```
-
-Meaning of the parameters:
-* `--name` gives a container a name (e.g. ubuntu1)
-* `-d` Detach: detaches the command line from the container so it is running in the background.
 
 
 Check if all three containers running:
@@ -274,7 +286,7 @@ In the fourth terminal, Enter
 ```bash
 docker attach ubuntu3
 ```
-In the termina of container ubuntu1 create a folder
+In the terminal of container ubuntu1 create a folder
 ```bash
 mkdir iwashere
 ```
@@ -298,13 +310,17 @@ What happens with your second terminal (where you are logged into ubuntu1)?
 
 Stop all other containers.
 
-# Define and build a new Image
+## Define a new Image
 
-Create a file with the name `Dockerfile` with the following content:
+Create a file with the name `Dockerfile` with the following content (e.g. with an IDE (integrated development environment) or editor like  Visual Studio Code or PyCharm).
+You might be able to open an editor from the terminal directly (might be configure before in the IDE).
+* For opening VS Code in the current folder you can type in the terminal: `code .`
+* For opening PyCharm type: `charm .` 
+* The `.`mean the current folder
 
 ```bash
 # Use an official Python runtime as a parent image
-FROM python:3.7-slim
+FROM python:3.9-slim-buster
 
 # Set the working directory to /app
 WORKDIR /app
@@ -315,7 +331,6 @@ COPY app/ /app
 # Run computation.py when the container launches
 CMD ["python", "computation.py"]
 ```
-
 
 Create the `app` folder and change into the folder
 ```bash
@@ -341,7 +356,7 @@ You can see the built bipm_compute image with:
 docker image ls
 ```
 
-# Run a Docker containers
+## Run Docker containers
 
 To run the an image, use the following command:
 ```bash
@@ -366,7 +381,6 @@ docker container ls -a
 ```
 you can also see the stopped containers.
 
-## Volumes
 
 Change the `computation.py` file to
 
@@ -398,6 +412,8 @@ you get
 [0, 1, 8, 27, 64, 125, 216, 343, 512, 729, 1000, 1331, 1728, 2197, 2744]
 ```
 
+## Volumes
+
 To more easily attach data to an image but also store resulting data (e.g. from a computation or from a database) independent of the lifetime of the image, we can use volumes.
 
 We can mount an volume when you run an image with the `-v` parameter. However, only absolute paths are possible. So first check out our current path with `pwd` (print working directory)
@@ -412,6 +428,8 @@ docker run -v /Users/rolandmueller/Documents/sourcecode/bigdata/docker/app/:/app
 ```
 
 The `-v` flag expects two directories before and after the `:`. On the left of the `:` is the absolute path to a directory on the host system (your laptop) that will be mounted to an directory in the container (right side of `:`)
+
+On Mac you might have to give file access to Docker. You can change this in the Privacy and Security Settings and restart Docker.
 
 There is also a clumbsy always to use the relative path. This depends if you use Mac/Linux or Windows:
 
@@ -432,13 +450,13 @@ my_list = [i**4 for i in range(5)]
 print(my_list)
 ```
 
-Run (Adjust the command for your path or use a realtive path):
+Run again (or use your absolute path) (you can go back in history in the terminal with the arrow keys):
 ```bash
-docker run -v /Users/rolandmueller/Documents/sourcecode/bigdata/docker/app/:/app bipm_compute
+docker run -v `pwd`/app/:/app bipm_compute
 ```
 You should see the new result with building the container again.
 
-# Named Volumes
+## Named Volumes
 
 You can also create a volume directly with docker.
 
@@ -487,8 +505,8 @@ Exit the container:
 exit
 ```
 
-* List all containers
-* Delete the last created container
+* List all containers (you have to figure out the command)
+* Delete the last created container (you have to figure out the command)
 
 Start a new container with the  volume and log into the container:
 ```bash
@@ -503,10 +521,16 @@ ls
 ```
 The file is still there!
 
+Exit
+```bash
+exit
+```
 
 # Create a small Flask Web App
 
-We will build a web application with `Flask` (http://flask.pocoo.org/) (Partially based on https://docs.docker.com/compose/gettingstarted/). Create a `requirements.txt` file in the `app` folder. Here we can specify all python `pip` packages that we need:
+We will build a web application with `Flask` (http://flask.pocoo.org/) (Partially based on https://docs.docker.com/compose/gettingstarted/). 
+
+Create a `requirements.txt` file in the `app` folder. Here we can specify all python `pip` packages that we need. Add in the first line in the `requirements.txt` file:
 ```bash
 Flask
 ```
@@ -526,15 +550,48 @@ if __name__ == "__main__":
 ```
 
 This mini Flask app creates a dynamic web applications:
+* `from flask import Flask`: Imports the Flask class
 *  `app = Flask(__name__)`: Creates the Flask object `app` that represent the main application
 * @app.route('/'): This is a Python decorator. Python decorators (starting with `@`) are functions that change the behavior of other functions (https://realpython.com/primer-on-python-decorators/). Python decorators are  useful for example for logging or monitoring a function or calling a function via a web interface. Here we specify the web routing, that means what URL-path should call what function. Here we want, that the root URL (e.g. http://localhost/) should call the hello function. We could also link the function to any other URL-path like "/hello" so that the URL would be e.g. http://localhost/hello.
 * `if __name__ == "__main__":` If we call a Python file with e.g. `python app.py`, the Python interpreter will assign the string `"__main__"` to the variable `__name__`. That means that this if statement will only be executed if it is run directly (and not if Python code is e.g. loaded as a module in another code).
 * `app.run(host="0.0.0.0", port=80, debug=True)`: The Flask server starts and listens to port 80 and the debug mode is turned on.
 
+# Running Flask with a local environment
+
+First we try this out without Docker. 
+
+We create an environment:
+```bash
+python3 -m venv --upgrade-deps venv
+```
+
+Then we activate the environment:
+```bash
+source venv/bin/activate
+```
+
+Then we install in the environment wheel, setuptools, and all the Python packages from requirements.txt
+```bash
+python -m pip install -U pip wheel setuptools
+python -m pip install -r app/requirements.txt
+```
+
+Run in the terminal:
+
+```bash
+python app/app.py
+```
+
+You can now open http://127.0.0.1:80 and see the file.
+
+Stop the Flask server with Control+C
+
+# Running Flask with Docker
+
 Change the `Dockerfile` file:
 ```bash
 # Use an official Python runtime as a parent image
-FROM python:3.7-slim
+FROM python:3.9-slim-buster
 
 # Set the working directory to /app
 WORKDIR /app
@@ -543,7 +600,7 @@ WORKDIR /app
 COPY app/ /app
 
 # Install any needed packages specified in requirements.txt
-RUN pip install --trusted-host pypi.python.org -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
@@ -551,6 +608,7 @@ EXPOSE 80
 # Run app.py when the container launches
 CMD ["python", "app.py"]
 ```
+
 
 Build the container:
 ```bash
@@ -585,7 +643,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 ccf9e14d3f3a        bipm_hello       "python app.py"     40 seconds ago      Up 39 seconds       0.0.0.0:4000->80/tcp   modest_joliot
 ```
 
-With the container ID you can stop the running container:
+With the container ID you can stop the running container (Use your CONTAINER ID):
 ```bash
 docker container stop ccf9e14d3f3a
 ```
@@ -606,7 +664,7 @@ docker login
 
 To associtate a local image with a repository on a registry (like Docker Hub) you should use the following tagging schema: username/repository:tag. The tag is optional, but recommended, since it is the mechanism that registries use to give Docker images a version.
 
-Exchange the username rolandmmueller with your own Docker Hub user name and run:
+Exchange the username `rolandmmueller` with your own Docker Hub user name and run:
 ```bash
 docker tag bipm_hello rolandmmueller/bipm_hello:vers1
 ```
@@ -633,7 +691,9 @@ docker run -p 4000:80 rolandmmueller/bipm_hello:vers1
 
 Open in your browser http://localhost:4000/
 
-## Create a stack of services with a docker-compose.yml file
+Stop with Control+C.
+
+# Create a stack of services with a docker-compose.yml file
 
 Real world applications are build with multiple services that are interacting. For example, a Wordpress blog might at least use two services: the PHP Wordpress Blog and a MySQL database. Typically this two services would be two Docker images. Docker allows you to define this multi-service applications with a `docker-compose.yml` file. (see https://docs.docker.com/compose/overview/ for more infos about Docker compose)
 
@@ -643,31 +703,32 @@ Create in your `docker` folder a
 `docker-compose.yml` file:
 
 ```yaml
-version: '3'
 services:
+  redis:
+    image: redislabs/redismod
+    ports:
+      - '6379:6379'
   web:
     build: .
+    stop_signal: SIGINT
     ports:
-      - "4000:80"
-    depends_on:
-      - redis
-    restart: always
+      - '4000:80'
     volumes:
       - ./app:/app
-  redis:
-    image: "redis:alpine"
-    restart: always
+    depends_on:
+      - redis
 ```
 
 `docker-compose.yml` is a YAML file and has the following elements:
-*  The version of the `docker-compose.yml` file format (here it is version 3)
-* Two services (the web application and the Redis database)
-* The web service is build based on the Dockerfile in the current directory (`build: .`). Alternatively we could also use an image from Docker Hub (e.g. our own user image that we just pushed to Docker Hub)
+* Two services (the Redis database and the web application )
+* The first service is an offical Redis image from Docker Hub
+* Port publishing of the container port 6379 to the host port 6379
+* The web service is build based on the Dockerfile in the current directory. Alternatively we could also use an image from Docker Hub (e.g. our own user image that we just pushed to Docker Hub)
+* flask requires SIGINT to stop gracefully (default stop signal from Compose is SIGTERM)
 * Port publishing of the container  port 80 to the host port 4000
-* The second service is an offical Redis image from Docker Hu
+* `volumes`: Maps the app folder in the host (your computer) to the app folder in the container. You can now just edit the content and the webpage should update without a new build of the container (just by reloading the page in the browser).
 * The web service starts after the Redis service, because it `depends_on` Redis.
 * `restart: always`: Restarts the Web Server if it crashes or if the content of the app is changing. Restarts also the Redis Database after a crash.
-* `volumes`: Maps the app folder in the host (your computer) to the app folder in the container. You can now just edit the content and the webpage should update without a new build of the container (just by reloading the page in the browser).
 
 Change the `requirements.txt` file in the `app` folder:
 ```bash
@@ -722,35 +783,38 @@ Refresh the page a couple of times.
 
 Add in the `app` folder  a `templates` folder. Create in the `templates` folder a file `hello.html` with the following content:
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-   	<body>
-    	<h1>I have been seen {{ count }} times.</h1>
-    	<ul>
-    		{% for i in range(1, count+1) %}
-    			<li>{{ i }}: Hello {{ name }}! </li>
-    		{% endfor %}
-    	</ul>
-    </body>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My first dynamic Website</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+
+<body>
+    <h1>I have been seen {{ count }} times.</h1>
+    <ul>
+        {% for i in range(1, count+1) %}
+        <li>{{ i }}: Hello {{ name }}! </li>
+        {% endfor %}
+    </ul>
+</body>
+
 </html>
 ```
 * The template uses a Python template engine named Jinja http://jinja.pocoo.org/
-* This is just HTML with embedded Python
+* This is just HTML (HyperText Markup Language) with embedded Python. HTML is the language of the World Wide Web.
+* HTML is just text with  opening tags (e.g `<head>`) and closing tags (e.g `</head>`). HTML tags are now showen in a Web browser, but interpreted. A HTML page has two main parts: the head with meta data (e.g. with the styles, the title of the page) and the body with the main text. 
+* `<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">`: We create a link for an existing CSS style sheet and use https://simplecss.org/. Alternatively we could create or customize our own CSS style. CSS stands for Cascading Style Sheets and is the way how Web pages are designed. 
+* `<meta charset="utf-8" />`: We will use UTF-8 for the characters.
+* `<meta name="viewport" content="width=device-width, initial-scale=1" />`: Setting the viewport to make your website look good on mobile devices
+* `<title>My first dynamic Website</title>`: This is the title of the web page. It will be displayed in the tab name in the browser and will appear in the search engine results
 * You can embed variables with `{{ variable_name }}`. We will get from the render template function the variables `count` and `name`. `i` is just the loop variable.
 * You can include Python control structures like loops or if-statements with `{% statement %}`
 * if you have a loop (like a `for`) or if-statement, you need also an end statement (like `endfor`) because Jinja is not using indentation for ending blocks.
-* `<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">`: We create a link for the CSS style sheets. The CSS file is called `style.css` and is in the `static` folder. The function `url_for` creates the URL for this file.
 
-Now let us add the CSS style. See https://developer.mozilla.org/en-US/docs/Web/CSS for a CSS tutorial. Add in the `app` folder  a `static` folder. Create in the `static` folder a file `style.css` with the following content:
-```css
-body { font-family: sans-serif; background: #eee; }
-a, h1, h2 { color: #377ba8; }
-h1, h2 { font-family: 'Georgia', serif; margin: 0; }
-h1 { border-bottom: 2px solid #eee; }
-h2 { font-size: 1.2em; }
-ul { font-size: 0.8em;  }
-```
 
 Change the `app.py` file in the `app` folder:
 ```python
@@ -799,24 +863,11 @@ docker-compose up
 
 # Customize the Website
 
-The final task is to customize the website like you want:
-1. Add an image to the web page (hint: it works similar to the static CSS file)
-2. Use MVP.css (Minimal Viable Product) as a CSS template, instead of our ugly own CSS. You can find a description of MVP.CSS here https://andybrewer.github.io/mvp/ 
-
-Change in the file `hello.html` the line 
-```html
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
-```
-to a link to the MVP css template: 
-```html
-<link rel="stylesheet" href="https://unpkg.com/mvp.css">
-```
-You do not have to download and host the CSS itself. It is hosted for you via a Content Delivery Network (CDN)
-
-Check how it looks now. The MVP CSS is also responsive, i.e. it is mobile-friendly. 
-
-3. Add a solid link button in `hello.html` that links to the HWR Berlin homepage (check the MVP.CSS website https://andybrewer.github.io/mvp/  for help. For HTML help, check https://www.w3schools.com/TAGS/ref_byfunc.asp )
-4. Add the CSV (comma seperated) file of the Titanic Dataset to your project. Use Pandas to load the CSV file and show the first 5 rows in the webpage. You can use the DataFrame method to_html https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_html.html 
-5. Add a bar chart to the website, that shows how many men and women survived.
-6. Implement at least one other idea to change the website (see the Flask website for help http://flask.pocoo.org/docs/1.0/ for Flask and the MVP.CSS website https://andybrewer.github.io/mvp/  for help for MVP.CSS  and https://andybrewer.github.io/mvp/mvp.html for the quickstart template) 
-7. Create a screenshot of your web page and upload it to Moodle
+The final task is to customize the website like you want (see https://simplecss.org/demo for help):
+1. Add a link in `hello.html` that links to the HWR Berlin homepage
+2. Add a footer with your name
+3. Add an image to the web page.
+4. Add a navigation menu to the web page, with two menu items: Home (the current page), Titanic (another internal page) and About (a link to your Github homepage)
+6. Add the CSV (comma seperated) file of the Titanic Dataset to your project. Use Pandas to load the CSV file and show the first 5 rows in the Titanic page. You can use the DataFrame method to_html https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_html.html 
+7. Add a bar chart to the Titanic page, that shows how many men and women survived.
+8. Create two screenshots of your web page (Home and Titanic) and upload them to Moodle
