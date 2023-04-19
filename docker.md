@@ -556,36 +556,6 @@ This mini Flask app creates a dynamic web applications:
 * `if __name__ == "__main__":` If we call a Python file with e.g. `python app.py`, the Python interpreter will assign the string `"__main__"` to the variable `__name__`. That means that this if statement will only be executed if it is run directly (and not if Python code is e.g. loaded as a module in another code).
 * `app.run(host="0.0.0.0", port=80, debug=True)`: The Flask server starts and listens to port 80 and the debug mode is turned on.
 
-# Running Flask with a local environment
-
-First we try this out without Docker. 
-
-We create an environment:
-```bash
-python3 -m venv --upgrade-deps venv
-```
-
-Then we activate the environment:
-```bash
-source venv/bin/activate
-```
-
-Then we install in the environment wheel, setuptools, and all the Python packages from requirements.txt
-```bash
-python -m pip install -U pip wheel setuptools
-python -m pip install -r app/requirements.txt
-```
-
-Run in the terminal:
-
-```bash
-python app/app.py
-```
-
-You can now open http://127.0.0.1:80 and see the file.
-
-Stop the Flask server with Control+C
-
 # Running Flask with Docker
 
 Change the `Dockerfile` file:
@@ -652,46 +622,6 @@ Check if the container is still running:
 ```bash
 docker container ls
 ```
-
-# Upload your Docker Image to Docker Hub
-
-## Tag your image
-
-You might need to login before:
-```bash
-docker login
-```
-
-To associtate a local image with a repository on a registry (like Docker Hub) you should use the following tagging schema: username/repository:tag. The tag is optional, but recommended, since it is the mechanism that registries use to give Docker images a version.
-
-Exchange the username `rolandmmueller` with your own Docker Hub user name and run:
-```bash
-docker tag bipm_hello rolandmmueller/bipm_hello:vers1
-```
-
-Check the newly tagged image
-```bash
-docker image ls
-```
-## Publish an image on Docker Hub
-
-Exchange the username rolandmmueller with your own Docker Hub user name and run:
-```bash
-docker push rolandmmueller/bipm_hello:vers1
-```
-
-Check at https://hub.docker.com/ if your image is on Docker Hub.
-
-You can run an image directly from a remote repository. If it is not locally present it will download (pull) it automatically.
-
-Exchange the username rolandmmueller with the  Docker Hub user of one of your neighboring students (or your own if nobody is done yet):
-```bash
-docker run -p 4000:80 rolandmmueller/bipm_hello:vers1
-```
-
-Open in your browser http://localhost:4000/
-
-Stop with Control+C.
 
 # Create a stack of services with a docker-compose.yml file
 
