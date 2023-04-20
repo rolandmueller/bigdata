@@ -320,7 +320,7 @@ You might be able to open an editor from the terminal directly (might be configu
 
 ```bash
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim-buster
+FROM python:3.10-slim-buster
 
 # Set the working directory to /app
 WORKDIR /app
@@ -559,18 +559,22 @@ This mini Flask app creates a dynamic web applications:
 # Running Flask with Docker
 
 Change the `Dockerfile` file:
-```bash
+
+```dockerfile
 # Use an official Python runtime as a parent image
-FROM python:3.9-slim-buster
+FROM python:3.10-slim-buster
 
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY app/ /app
+# Copy requirements.txt into the container at /app
+COPY app/requirements.txt requirements.txt
 
 # Install any needed packages specified in requirements.txt
 RUN pip install -r requirements.txt
+
+# Copy the current directory contents into the container at /app
+COPY app/ /app
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
@@ -724,19 +728,21 @@ Add in the `app` folder  a `templates` folder. Create in the `templates` folder 
 </head>
 
 <body>
-    <h1>I have been seen {{ count }} times.</h1>
-    <ul>
-        {% for i in range(1, count+1) %}
-        <li>{{ i }}: Hello {{ name }}! </li>
-        {% endfor %}
-    </ul>
+    <main>
+        <h1>I have been seen {{ count }} times.</h1>
+        <ul>
+            {% for i in range(1, count+1) %}
+            <li>{{ i }}: Hello {{ name }}! </li>
+            {% endfor %}
+        </ul>
+    </main>
 </body>
 
 </html>
 ```
 * The template uses a Python template engine named Jinja http://jinja.pocoo.org/
 * This is just HTML (HyperText Markup Language) with embedded Python. HTML is the language of the World Wide Web.
-* HTML is just text with  opening tags (e.g `<head>`) and closing tags (e.g `</head>`). HTML tags are now showen in a Web browser, but interpreted. A HTML page has two main parts: the head with meta data (e.g. with the styles, the title of the page) and the body with the main text. 
+* HTML is just text with  opening tags (e.g `<head>`) and closing tags (e.g `</head>`). HTML tags are not shown directly in the Web browser, but only interpreted and used for formatting. A HTML page has two main parts: the head with meta data (e.g. with the styles, the title of the page) and the body with the main text and maybe also a navigation. 
 * `<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">`: We create a link for an existing CSS style sheet and use https://simplecss.org/. Alternatively we could create or customize our own CSS style. CSS stands for Cascading Style Sheets and is the way how Web pages are designed. 
 * `<meta charset="utf-8" />`: We will use UTF-8 for the characters.
 * `<meta name="viewport" content="width=device-width, initial-scale=1" />`: Setting the viewport to make your website look good on mobile devices
@@ -790,11 +796,52 @@ and then
 ```bash
 docker-compose up
 ```
+
+# Source controll with Git and Github
+
+A `.gitignore` file is used in Git repositories to specify which files and directories should be excluded from version control. By listing patterns of files or directories that you don't want to track, you can prevent unwanted files like temporary files, build artifacts, logs, or sensitive configuration files from being included in your repository. This helps keep your repository clean and focused on the source code and relevant files.
+
+Add a `.gitignore` file with the following content:
+
+```sh
+.env
+venv
+.idea
+.ipynb_checkpoints
+.vscode
+.DS_Store
+```
+
+A .dockerignore file is used to specify files and directories that should be excluded from the build context when creating a Docker image. This can help reduce the size of the build context, improve build performance, and prevent sensitive or unnecessary files from being included in the image. 
+
+Add a `.dockerignore` file with the following content:
+```sh
+.env
+venv
+.idea
+.ipynb_checkpoints
+.vscode
+.DS_Store
+.git
+.gitignore
+```
+
+In VS Code, click on the Source Controll side icon (on the left side). Click on the button `Initialize Repository`.
+
+Now you should see at the Source Controll panel 9 files that are not yet checked in. Click on the `+` symbole next to Changes, to stage all files. Enter a Commit Message and commit the changes. Then publish the branch.
+
 # Add Password to the Database
 
 Right now Redis is not secured through a password. This is right now not a problem, because everything is running on the laptop and we do not have any sensible data in the database. However, when we will deploy the app to a cloud provider, it is better to use a password access for the database.
 
 Typically we do not want any plain password in the source code. The alternative is using environment variables (variables from the operation systems) or password files that we do not add into the source repository.
+
+Create a new file in the docker folder (not in the app folder) with the name `.env` (with a `.` at the beginning), with the following content:
+
+```bash
+REDIS_PASSWORD=MyBIPMPassword
+REDIS_HOST=redis
+```
 
 Adjust the `docker-compose.yml`file:
 ```yaml
@@ -804,8 +851,6 @@ services:
     ports:
       - '6379:6379'
     command: --requirepass ${REDIS_PASSWORD}
-    environment:
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
   web:
     build: .
     stop_signal: SIGINT
@@ -817,13 +862,10 @@ services:
       - redis
     environment:
       - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_HOST=${REDIS_HOST}
 ```
 
-Create a new file in the docker folder (not in the app folder) with the name `.env` (with a `.` at the beginning), with the following content:
-
-```bash
-REDIS_PASSWORD=MySuperPassword
-```
+`${REDIS_PASSWORD}` and `${REDIS_HOST}` will read the environment variables from the `.env` file.
 
 Change the `requirements.txt` file by adding one more Python package [python-dotenv](https://pypi.org/project/python-dotenv/). 
 ```
@@ -835,17 +877,15 @@ python-dotenv
 python-dotenv allows to either use environment variables or hidden files (`.env`) for things like passwords.
 
 
-Change the `app.py` file.  
-
-Add the following lines:
+Change the `app.py` file.  Add the following lines:
 ```python
 from dotenv import load_dotenv
 
 load_dotenv() 
-cache = redis.Redis(host='redis', port=6379,  password=os.getenv('REDIS_PASSWORD'))
+cache = redis.Redis(host=os.getenv('REDIS_HOST'), port=6379,  password=os.getenv('REDIS_PASSWORD'))
 ```
 
-This loads the environments and with `os.getenv('REDIS_PASSWORD')` we can then use the password in the python code.
+This loads the environments and with `os.getenv('REDIS_HOST')` and `os.getenv('REDIS_PASSWORD')` we can use the host name and the password in the Python code.
 
 The `app.py` file should now look like this:
 
@@ -857,7 +897,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv() 
-cache = redis.Redis(host='redis', port=6379,  password=os.getenv('REDIS_PASSWORD'))
+cache = redis.Redis(host=os.getenv('REDIS_HOST'), port=6379,  password=os.getenv('REDIS_PASSWORD'))
 app = Flask(__name__)
 
 def get_hit_count():
@@ -880,6 +920,19 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80, debug=True)
 ```
 
+Try it out with 
+
+```bash
+docker-compose build   
+```
+
+and then
+
+```bash
+docker-compose up
+```
+
+If it works, cancel the service (control+C). In VS Code, add all changes to git and commit and push the changes.
 
 # Customize the Website
 
@@ -887,7 +940,7 @@ The final task is to customize the website like you want (see https://simplecss.
 1. Add a link in `hello.html` that links to the HWR Berlin homepage
 2. Add a footer with your name
 3. Add an image to the web page.
-4. Add a navigation menu to the web page, with two menu items: Home (the current page), Titanic (another internal page) and About (a link to your Github homepage)
-6. Add the CSV (comma seperated) file of the Titanic Dataset to your project. Use Pandas to load the CSV file and show the first 5 rows in the Titanic page. You can use the DataFrame method to_html https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_html.html 
+4. Add a navigation menu to the web page, with three menu items: Home (the current hello page), Titanic (another internal page) and About (a link to your Github homepage)
+6. Create another page for the Titanic link (similar like the hello page). You have to add a new `titanic` function in `app.py`, but change the route to e.g. `/titanic`. This will tell what URL paths are mapped to this function.  Add a new `titanic.html` template. Add the CSV (comma seperated) file of the Titanic Dataset to your project. Use Pandas to load the CSV file and show the first 5 rows in the Titanic page. You can use the DataFrame method to_html https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_html.html 
 7. Add a bar chart to the Titanic page, that shows how many men and women survived.
 8. Create two screenshots of your web page (Home and Titanic) and upload them to Moodle
