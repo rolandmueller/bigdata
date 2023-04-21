@@ -103,10 +103,12 @@ Open the URL http://0.0.0.0:8501
 Let the terminal running and change the `app.py` file by adding at the end the following line:
 
 ```py
-st.markdown("Unlocking Lifetimes: Visualizing Progress in Longevity and Poverty Eradication")
+st.write("Unlocking Lifetimes: Visualizing Progress in Longevity and Poverty Eradication")
 ```
 
-Refresh the browser to show the changes. You do not have to rebuild the Docker image, because the app folder is mounted as an external volume.
+Refresh the browser to show the changes. You do not have to rebuild the Docker image, because the app folder is mounted as an external volume. 
+
+You can find the meaning of the different Streamlit methods here: https://docs.streamlit.io/library/api-reference 
 
 # Requirements
 
