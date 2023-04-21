@@ -5,7 +5,7 @@ You task is to create an interactive bubble chart with Streamlit, similar to Gap
 
 # Docker Working Environment
 
-Create a folder `gapminder`. Open this folder in VS Code (e.g. type in the terminal `code .`). Create in VS Code the following files with the content:
+Create a folder `gapminder`. Open this folder in VS Code (e.g. type in the folder in the terminal `code .`). Create in VS Code the following files with the content:
 
 `.gitignore`: 
 ```bash
@@ -61,7 +61,7 @@ ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.addres
 }
 ```
 
-Create a `app` folder inside the `gapminder` folder.
+Create an `app` folder inside the `gapminder` folder.
 
 In the `app` folder, create the following files with the content:
 
@@ -79,7 +79,12 @@ import pandas as pd
 st.title('Gapminder')
 ```
 
-On the comand line, we will run the Docker container and attach the `app` as a volume. With this, we can change the source code of the `app.py` file and just refresh the browser and see the change, without rebuilding the Docker image.
+Now we will build the Docker image. Run in the terminal:
+```bash
+docker build -t gapminder .
+```
+
+On the comand line, we will run the Docker container and attach the `app` folder as a volume. With this trick, we can change the source code of the `app.py` file and just refresh the browser and see the change, without rebuilding the Docker image.
 
 In the terminal, run
 
@@ -87,10 +92,10 @@ In the terminal, run
 pwd
 ```
 
-This will show the absolute path. (e.g. `/Users/rolandmueller/Documents/source/streamlit`) In the next step you have to use the abolute path of the `app` folder, that means in my case `/Users/rolandmueller/Documents/source/streamlit/app` and map it to the Docker folder `/app`. Change this folder in the next command based on your path:
+This will show the absolute path. (e.g. `/Users/rolandmueller/Documents/source/gapminder`) In the next step you have to use the abolute path of the `app` folder, that means in my case `/Users/rolandmueller/Documents/source/gapminder/app` and map it to the Docker folder `/app`. Change this folder in the next command based on your path:
 
 ```bash
-docker run -p 8501:8501 -v /Users/rolandmueller/Documents/source/streamlit/app:/app streamlit
+docker run -p 8501:8501 -v /Users/rolandmueller/Documents/source/gapminder/app:/app gapminder
 ```
 
 Open the URL http://0.0.0.0:8501
@@ -137,20 +142,20 @@ There are three things, you have to do, before building the dashboard.
 
 The data loading and preprocessing should be cached. https://docs.streamlit.io/library/api-reference/performance/st.cache_data 
 
-### Streamlit App
+### Streamlit Docs
 
 Based on the requirements, create a Streamlit App
 
 You can find more about Streamlit in this sources:
+- https://docs.streamlit.io/
+- https://docs.streamlit.io/library/api-reference
 - https://calmcode.io/streamlit/hello-world.html
-- https://docs.streamlit.io/ 
-
-
-### Charting in Streamlit
 
 You can use different Python charting libraries in Streamlit, like Streamlit's own charting library, but also other Python packages like Matplotlib, Seaborn, Plotly or Bokeh. 
 
 https://docs.streamlit.io/library/api-reference/charts
+
+When you have finished the app according to the requirements, you should push it to Github and deploy it to a cloud server. 
 
 # Adding code to Git and Github
 
