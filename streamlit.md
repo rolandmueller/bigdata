@@ -166,8 +166,8 @@ In VS Code, click on the Source Controll side icon (on the left side). Click on 
 # Deployment of your Streamlit app to CapRover
 
 1. Create at the CapRover Web GUI a new app with the name `gapminder`
-2. Enter for the app, at `Container HTTP Port`: 8501 
-3. Enable with the checkmark `Websocket Support`
+2. Enter for the app, at `Container HTTP Port`: 8501  (The Streamlit Docker container exposes Port 8501)
+3. Enable with the checkmark `Websocket Support` (This is important because Streamlit is using Websockets)
 4. Click `Save & Update`
 5. On the local terminal in the gapminder folder, run 
 ```bash
