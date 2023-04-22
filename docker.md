@@ -801,7 +801,7 @@ docker-compose up
 
 A `.gitignore` file is used in Git repositories to specify which files and directories should be excluded from version control. By listing patterns of files or directories that you don't want to track, you can prevent unwanted files like temporary files, build artifacts, logs, or sensitive configuration files from being included in your repository. This helps keep your repository clean and focused on the source code and relevant files.
 
-Add a `.gitignore` file with the following content:
+Create a `.gitignore` file (with `.` at the beginning) with the following content:
 
 ```sh
 .env
@@ -812,9 +812,9 @@ venv
 .DS_Store
 ```
 
-A .dockerignore file is used to specify files and directories that should be excluded from the build context when creating a Docker image. This can help reduce the size of the build context, improve build performance, and prevent sensitive or unnecessary files from being included in the image. 
+A `.dockerignore` file is used to specify files and directories that should be excluded from the build context when creating a Docker image. This can help reduce the size of the build context, improve build performance, and prevent sensitive or unnecessary files from being included in the image. 
 
-Add a `.dockerignore` file with the following content:
+Create a `.dockerignore` file with the following content:
 ```sh
 .env
 venv
@@ -830,13 +830,13 @@ In VS Code, click on the Source Controll side icon (on the left side). Click on 
 
 Now you should see at the Source Controll panel 9 files that are not yet checked in. Click on the `+` symbole next to Changes, to stage all files. Enter a Commit Message and commit the changes. Then publish the branch.
 
-# Add Password to the Database
+# Add a Password to the Database
 
-Right now Redis is not secured through a password. This is right now not a problem, because everything is running on the laptop and we do not have any sensible data in the database. However, when we will deploy the app to a cloud provider, it is better to use a password access for the database.
+Right now Redis is not secured through a password. This is right now not a problem, because everything is running on the laptop and we do not have any sensible data in the database. However, when we will deploy the app to a cloud provider, it is better to use a password for accessing the database.
 
-Typically we do not want any plain password in the source code. The alternative is using environment variables (variables from the operation systems) or password files that we do not add into the source repository.
+Typically we do not want any plain-text password in the source code. The alternative is using environment variables (variables from the operation systems) or password files that we do not add into the source repository (often hidden files (that start with a `.` in the file name) with the name `.env`).
 
-Create a new file in the docker folder (not in the app folder) with the name `.env` (with a `.` at the beginning), with the following content:
+Create a new file in the docker folder (not in the app folder) with the name `.env` (with a `.` at the beginning), with the following content (you should use your own secrete password):
 
 ```bash
 REDIS_PASSWORD=MyBIPMPassword
@@ -875,7 +875,6 @@ python-dotenv
 ```
 
 python-dotenv allows to either use environment variables or hidden files (`.env`) for things like passwords.
-
 
 Change the `app.py` file.  Add the following lines:
 ```python
@@ -932,12 +931,14 @@ and then
 docker-compose up
 ```
 
-If it works, cancel the service (control+C). In VS Code, add all changes to git and commit and push the changes.
+and open the project in a web browser.
+
+If it works, cancel the service in the terminal (control+C). In VS Code, add all changes to git and commit and push the changes.
 
 # Customize the Website
 
 The final task is to customize the website like you want (see https://simplecss.org/demo for help):
-1. Add a link in `hello.html` that links to the HWR Berlin homepage
+1. Add a link in `hello.html` that points to the HWR Berlin homepage
 2. Add a footer with your name
 3. Add an image to the web page.
 4. Add a navigation menu to the web page, with three menu items: Home (the current hello page), Titanic (another internal page) and About (a link to your Github homepage)

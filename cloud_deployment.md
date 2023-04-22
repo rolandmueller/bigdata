@@ -7,7 +7,7 @@ There are many ways to deploy a Docker container. We will just discuss one examp
 
 You as a developer want to give the end user a URL (Uniform Resource Locator, that means a web adress), so the he or she can e.g. interacte with your nice web dashboard or use your API (Application Programming Interface). 
 
-If a user types in in your URL (e.g. www.example.com), the browser will look up in the Domain Name System (DNS) it Internet Protocol (IP) address. So DNS translates the URL (e.g. www.hwr-berlin.de) to a IP address (e.g. 194.94.22.19). If you copy 194.94.22.19 in the browser, you would also land at the web server of the HWR Berlin. However, the IP number is much harder to remember. The IP address is kind of the address of the server. If you create your one cloud server, this server would have an IP address, with which you can reach it.
+If a user types in in your URL (e.g. www.example.com), the browser will look up in the Domain Name System (DNS) its Internet Protocol (IP) address. So DNS translates the URL (e.g. www.hwr-berlin.de) to a IP address (e.g. 194.94.22.19). If you copy 194.94.22.19 in the browser, you would also land at the web server of the HWR Berlin. However, the IP number is much harder to remember. The IP address is kind of the address of the server. If you create your own cloud server, this server would have an IP address, with which you can reach it.
 
  The following diagram shows how CapRover works.
 
@@ -21,15 +21,17 @@ A web browser would use a URL and then the IP address and a port to interact wit
 
 CapRover helps you to deploy the Docker containers as a developer. It has a Command Line Interface (CLI) to deploy your code to the server with just one command (`caprover deploy`). It has also a web interface to access, manage, and monitor your server. Also there are many one-click apps (like Wordpress) available, that you can deploy in the web interface without any coding.
 
-To have a CapRover server, you need the following things:
+To be able to deploy to a CapRover server, you need the following things:
 
 1. A cloud server (Virtual Private Server, VPS). 
 
-    You can get them, e.g. from [Digitalocean](https://www.digitalocean.com/products/droplets) or [Hetzner](https://www.hetzner.com/cloud) or from any of the cloud hyperscalers (e.g., AWS, Azure, Google Cloud). Hetzner is a German cloud provider with very competitive pricing. If you get the GitHub Student Developer Pack, you get a Digitalocean $200 credit for 60 days. However, Hetzner has better prices than Digitalocean. [Digitalocean](https://marketplace.digitalocean.com/apps/docker) and [Hetzner](https://docs.hetzner.com/cloud/apps/list/docker-ce/) offer Docker CE apps, that means servers, where Docker is already pre-installed. When you create a VPS, you should select the Docker CE app, so that you do not have to install Docker on the server by yourself. Digitalocean has even a [CapRover app](https://marketplace.digitalocean.com/apps/caprover). After creating a VPS, write down the IP address and the root password of your VPS.
+    You can get them, e.g. from [Hetzner](https://www.hetzner.com/cloud) or [Digitalocean](https://www.digitalocean.com/products/droplets) or from any of the cloud hyperscalers (e.g., AWS, Azure, Google Cloud). Hetzner is a German cloud provider with very competitive pricing. If you get the GitHub Student Developer Pack, you get a Digitalocean $200 credit for 60 days. However, Hetzner has better prices than Digitalocean. 
+    
+    [Hetzner](https://docs.hetzner.com/cloud/apps/list/docker-ce/) and [Digitalocean](https://marketplace.digitalocean.com/apps/docker) offer Docker CE apps, that means servers, where Docker is already pre-installed. When you create a VPS, you should select the Docker CE app, so that you do not have to install Docker on the server by yourself. If you have a VPS without preinstalled Docker, you can follow this instruction. Digitalocean has even a [CapRover app](https://marketplace.digitalocean.com/apps/caprover). After creating a VPS, write down the IP address and the root password of your VPS.
 
 2. A domain name
 
-    You can get a .com or a .de domain from e.g. [Namecheap](https://www.namecheap.com/) for ~ 7 to 10€ per year. There are other top-level domains (TLD) that might be cheaper or more expensive, and there might be some special deals (e.g., for students or for the first year). However, it might be a good strategy to have a domain name for the long term. 
+    You can get a .com or a .de domain from e.g. [Namecheap](https://www.namecheap.com/) for ~ 7€ to 10€ per year. There are other top-level domains (TLD) that might be cheaper or more expensive, and there might be some special deals (e.g., for students or for the first year). However, it might be a good strategy to have your own domain name for the long term, to show some projects to potential employers. 
 
 3. Add a Wild Card entry at your Domain Name register
 
@@ -37,15 +39,15 @@ To have a CapRover server, you need the following things:
 
     Add a wildcard DNS entry for your VPS at your Domain Name register (e.g. namecheap.com).
 
-    Go to the domain name panel of your Domain Name register and add a A Record:
+    Go to the domain name panel of your Domain Name register and add an *A Record*:
     * Host should be a wild card for a subdomain, e.g. `*.dev`
     * Value (Points to) should be the IP Address of your VPS
 
-    Go to https://mxtoolbox.com/DNSLookup.aspx and check if you enter randomthing123.dev.mydomain.com (change mydomain.com to your domain) resolves to your IP address.
+    Go to https://mxtoolbox.com/DNSLookup.aspx and check if you enter your URL, i.e. randomthing123.dev.mydomain.com (change mydomain.com to your domain), it resolves to your IP address. DNS propagation might take some time, so the domain might not be available immidiately. 
 
 4. Install CapRover on the server
 
-    Log into your VPS with ssh. In the terminal, enter (change 123.123.123.123 with the IP-Address of your VPS):
+    Log into your VPS with ssh. In the terminal, enter (change 123.123.123.123 to the IP-Address of your VPS):
 
     ```bash
     ssh root@123.123.123.123
@@ -66,11 +68,11 @@ To have a CapRover server, you need the following things:
 
     Once install, go to http://[IP_OF_YOUR_SERVER]:3000 and login with the password `captain42`
 
+    This [CapRover tutorial](https://caprover.com/docs/get-started.html) might help if you are stuck.
+    
     If you use Hetzner and you used the Docker CE App, you can use [this tutorial](https://community.hetzner.com/tutorials/install-caprover) and skip step 1.
 
-    Also the [CapRover tutorial](https://caprover.com/docs/get-started.html) will help.
-
-    [This](https://www.youtube.com/watch?v=VPHEXPfsvyQ) and [this YouTube videos](https://www.youtube.com/watch?v=E16KymP6284) a good tutorials for the installation.
+    [This](https://www.youtube.com/watch?v=VPHEXPfsvyQ) and [this YouTube videos](https://www.youtube.com/watch?v=E16KymP6284) are also good tutorials for the installation.
 
 4. Install the CapRover CLI on you Laptop
 
@@ -104,18 +106,17 @@ To have a CapRover server, you need the following things:
 
     2. Your Flask Web app
 
-    On your web GUI of your CapRover, create a new app with the name `flask` (entering in the field). You do NOT need Persistent Data.
+    On your web GUI of your CapRover, create a new app with the name `flask` (entering in the field). You do NOT need Persistent Data. The counter data is stored in the Redis database.
 
     Click on the created `flask` and click on the `App Configs` tab. In the Environmental Variables, click `Add Key/Value Pair`: 
     Key:  REDIS_PASSWORD
-    Value: MyBIPMPassword
+    Value: MyBIPMPassword (or your password)
 
     Add another `Add Key/Value Pair`:
     Key:  REDIS_HOST
     Value: srv-captain--redis
 
     Click on `Save & Update`
- 
 
     Create a new file in the docker folder with the name `captain-definition` with the following content:
     ```json
