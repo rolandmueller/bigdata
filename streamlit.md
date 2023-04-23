@@ -49,6 +49,9 @@ COPY app/ /app
 # Make port 8501 available to the world outside this container
 EXPOSE 8501
 
+# Tells Docker how to test a Streamlit container to check that it is still working. 
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+
 # Run app.py when the container launches
 ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
 ```
@@ -181,7 +184,11 @@ Chose `gapminder` as the app and deploy your solution.
 
 8. In the CapRover Web GUI for the newly added domain (e.g. at http://gapminder.example.com), click `Enable HTTPS`. Test if you can reach your app with the https URL (e.g. at https://gapminder.example.com).
 
+9. In the CapRover Web GUI, enable `Force HTTPS by redirecting all HTTP traffic to HTTPS`. Enter your domain without https (e.g. at http://counter.example.com) and test if you get redirected to the https URL (e.g. to https://counter.example.com).
 
-## Deliverable
+10. Add a `README.md` file, with a short description and a link to the deployed prototype.
 
-1. Add your URL in the Moodle Asignment
+# Deliverables
+
+* Add the URL to the Github Repository 
+* and the URL to your deployed prototype in the Moodle
