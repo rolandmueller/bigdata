@@ -77,20 +77,21 @@ from pprint import pprint
 pprint(data)
 ```
 
-
+# Streamlit App
 
 25.	Create a small Streamlit application, that creates a dynamic website, that shows the total number of people in space as well as all the names of the people. The app should use the API to get the names and display the names. Add a descriptive title and a short description (you can use the Streamlit markdown method).
+
 26.	Add to your Streamlit app the following functionality:
 a.	Get the current location of the International Space Station (ISS)
 http://open-notify.org/Open-Notify-API/ISS-Location-Now/ 
 b.	Create a geographical map in you Streamlit app that visualizes the current ISS location. There are a lot of different Python packages for geo mapping. The easiest way in this scenario is to use the included map function in Streamlit: 
 https://docs.streamlit.io/library/api-reference/charts/st.map
 c.	Add a short description for your map
+
 27.	Deploy your Streamlit app with CapRover to your VPS.  Create for your application a new subdomain `iss` so that your URL is something like `iss.example.com`. Enable HTTPS
+
 28.	Copy-paste the URL of your deployed Streamlit app to Moodle
 
-
-29.	What we have not covered in this exercise is authentication:
-a.	A lot of Web APIs require a key for interacting with them (like OpenAI, Twitter, Facebook, …). You find at 
+29.	What we have not covered in this exercise is authentication: A lot of Web APIs require a key for interacting with them (like OpenAI, Twitter, Facebook, …). You find at 
 https://requests.readthedocs.io/en/latest/user/advanced
 more information for Authentication for Web APIs with the request package. 
