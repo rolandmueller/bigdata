@@ -6,15 +6,13 @@ The four main service integration styles are
 3.	Remote procedure invocation (Web API), and
 4.	Message Queue.
 
-
 This exercise shows how you can use a Web API with Python. Most Web APIs use a REST (REpresentational State Transfer) style, communicate over HTTP (Hypertext Transfer Protocol), and are using JSON (JavaScript Object Notation) as a message format. 
-
 
 1.	https://randomuser.me/ is a random user generator 
 2.	It has an API. Go to https://api.randomuser.me/ with your browser
 3.	You get a JSON back. A JSON is similar to a Python dictionary.  Refresh the browser
 4.	You can add query parameters. There are added to the URL with a ? . You then add the parameter with parameter=value. If you have more than one parameter, then the parameters are connected with a & e.g.
-	http://api.open-notify.org/iss-pass.json?lat=37.78&lon=-122.41
+	http://www.example.com/api?lat=37.78&lon=-122.41
 
 5.	Go the documentation https://randomuser.me/documentation and check how you can get multiple users and how to specify constraints on the output
 
@@ -27,29 +25,30 @@ curl -s https://api.randomuser.me/
 
 8.	Now we want to analyze this data with Python
 9.	Open a Jupyter Notebook and create a new notebook
-10.	Import the two libraries `requests` and `json`
-11.	You can find the documentation for the requests package here:
+10. Install the `requests` package: https://docs.python-requests.org/en/latest/user/install/ 
+11.	Import the two libraries `requests` and `json`
+12.	You can find the documentation for the requests package here:
  https://docs.python-requests.org/en/latest/index.html
-12.	With the requests package you can call a Web API with the URL and the method get
+13.	With the requests package you can call a Web API with the URL and the method get
 ```python
 response = requests.get("https://api.randomuser.me/")
 ```
-13.	Print the status code of the request
+14.	Print the status code of the request
 ```python
 print(response.status_code)
 ```
-14.	The meanings of the status codes are:
+15.	The meanings of the status codes are:
 •	200 – everything went okay, and the result has been returned (if any)
 •	301 – the server is redirecting you to a different endpoint. This can happen when a company switches domain names, or an endpoint name is changed.
 •	401 – the server thinks you’re not authenticated. This happens when you don’t send the right credentials to access an API.
 •	400 – the server thinks you made a bad request. This can happen when you don’t send along the right data, among other things.
 •	403 – the resource you’re trying to access is forbidden – you don’t have the right permissions to see it.
 •	404 – the resource you tried to access wasn’t found on the server.
-15.	Get with the request method 10 results of only males from the US. You can specify the query parameters with a Python dictionary like this:
+16.	Get with the request method 10 results of only males from the US. You can specify the query parameters with a Python dictionary like this:
 ```python
 parameters = {"lat": 37.78, "lon": -122.41}
 ```
-16.	And pass the parameter to the request like this
+17.	And pass the parameter to the request like this
 ```python
 response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters)
 ```
