@@ -312,11 +312,12 @@ Stop all other containers.
 
 ## Define a new Image
 
-Create a file with the name `Dockerfile` with the following content (e.g. with an IDE (integrated development environment) or editor like  Visual Studio Code or PyCharm).
-You might be able to open an editor from the terminal directly (might be configure before in the IDE).
+Create a file with the name `Dockerfile` with the following content (e.g. with an IDE (integrated development environment) or editor like  Visual Studio Code or PyCharm). A Dockerfile tells Docker [how to build a Docker image](https://docs.docker.com/engine/reference/builder/).
+You might be able to open an editor from the terminal directly (might be configure before in the IDE). 
 * For opening VS Code in the current folder you can type in the terminal: `code .`
 * For opening PyCharm type: `charm .` 
 * The `.`mean the current folder
+
 
 ```bash
 # Use an official Python runtime as a parent image
@@ -944,4 +945,10 @@ The final task is to customize the website like you want (see https://simplecss.
 4. Add a navigation menu to the web page, with three menu items: Home (the current hello page), Titanic (another internal page) and About (a link to your Github homepage)
 6. Create another page for the Titanic link (similar like the hello page). You have to add a new `titanic` function in `app.py`, but change the route to e.g. `/titanic`. This will tell what URL paths are mapped to this function.  Add a new `titanic.html` template. Add the CSV (comma seperated) file of the Titanic Dataset to your project. Use Pandas to load the CSV file and show the first 5 rows in the Titanic page. You can use the DataFrame method to_html https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_html.html 
 7. Add a bar chart to the Titanic page, that shows how many men and women survived.
-8. Create two screenshots of your web page (Home and Titanic) and upload them to Moodle
+8. Create in the `docker` folder (not in the `app` folder) a `README.md` file. The ending `.md` stands for [markdown](https://www.markdownguide.org/basic-syntax/) and is a simple markup language. Add a short description of the project. Github will show the `README.md` file for the repository.
+9. Push everything to Github.
+
+# Deliverables
+
+* Add the link to your Github repository to Moodle. 
+* Create two screenshots of your web page (Home and Titanic) and upload them to Moodle too.

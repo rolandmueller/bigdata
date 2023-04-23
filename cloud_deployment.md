@@ -126,6 +126,8 @@ To be able to deploy to a CapRover server, you need the following things:
     }
     ```
 
+    Add `captain-definition` to Git. Commit and push.
+
     Enter in the laptop in the docker folder in the terminal
     ```bash
     caprover login
@@ -153,4 +155,8 @@ To be able to deploy to a CapRover server, you need the following things:
 
 8. In the CapRover Web GUI for the newly added domain (e.g. at http://counter.example.com), click `Enable HTTPS`. Test if you can reach your app with the https URL (e.g. at https://counter.example.com).
 
-Add your URL in the Moodle Asignment.
+9. In the CapRover Web GUI, enable `Force HTTPS by redirecting all HTTP traffic to HTTPS`. Enter your domain without https (e.g. at http://counter.example.com) and test if you get redirected to the https URL (e.g. to https://counter.example.com).
+
+# Deliverables
+
+* Add your URL of the deployed web app in the Moodle
