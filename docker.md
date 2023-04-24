@@ -829,7 +829,7 @@ venv
 
 In VS Code, click on the Source Controll side icon (on the left side). Click on the button `Initialize Repository`.
 
-Now you should see at the Source Controll panel 9 files that are not yet checked in. Click on the `+` symbole next to Changes, to stage all files. Enter a Commit Message and commit the changes. Then publish the branch.
+Now you should see at the Source Controll panel 9 files that are not yet checked in. Click on the `+` symbole next to Changes, to stage all files. Enter a Commit Message and commit the changes. Then publish the branch to Github. Check on Github that the repository is now there.
 
 # Add a Password to the Database
 
