@@ -27,7 +27,7 @@ To be able to deploy to a CapRover server, you need the following things:
 
     You can get them, e.g. from [Hetzner](https://www.hetzner.com/cloud) or [Digitalocean](https://www.digitalocean.com/products/droplets) or from any of the cloud hyperscalers (e.g., AWS, Azure, Google Cloud). Hetzner is a German cloud provider with very competitive pricing. If you get the GitHub Student Developer Pack, you get a Digitalocean $200 credit for 60 days. However, Hetzner has better prices than Digitalocean. 
     
-    [Hetzner](https://docs.hetzner.com/cloud/apps/list/docker-ce/) and [Digitalocean](https://marketplace.digitalocean.com/apps/docker) offer Docker CE apps, that means servers, where Docker is already pre-installed. When you create a VPS, you should select the Docker CE app, so that you do not have to install Docker on the server by yourself. If you have a VPS without preinstalled Docker, you can follow this instruction. Digitalocean has even a [CapRover app](https://marketplace.digitalocean.com/apps/caprover). After creating a VPS, write down the IP address and the root password of your VPS.
+    [Hetzner](https://docs.hetzner.com/cloud/apps/list/docker-ce/) and [Digitalocean](https://marketplace.digitalocean.com/apps/docker) offer Docker CE apps, that means servers, where Docker is already pre-installed. When you create a VPS, you should select the Docker CE app, so that you do not have to install Docker on the server by yourself. If you have a VPS without preinstalled Docker, you can follow the installation instruction on the Docker website, e.g. for [installing Docker on a Ubuntu Server](https://docs.docker.com/engine/install/ubuntu/. Digitalocean has even a [CapRover app](https://marketplace.digitalocean.com/apps/caprover). After creating a VPS, write down the IP address and the root password of your VPS.
 
 2. A domain name
 
@@ -60,6 +60,7 @@ To be able to deploy to a CapRover server, you need the following things:
     ```
 
     Install CapRover on the server:
+    If you use a VPS app (droplet) with pre-installed Docker, go ahead and install CapRover (if not, you have to [first install Docker on the server ](https://docs.docker.com/engine/install/ubuntu/.)):
     https://caprover.com/docs/get-started.html#step-1-caprover-installation Run on the server:
 
     ```bash

@@ -938,7 +938,7 @@ If it works, cancel the service in the terminal (control+C). In VS Code, add all
 
 # Customize the Website
 
-The final task is to customize the website like you want (see https://simplecss.org/demo for help):
+The final task is to customize the website like you want (see https://simplecss.org/demo for help about Simplecss and http://flask.pocoo.org/ about Flask):
 1. Add a link in `hello.html` that points to the HWR Berlin homepage
 2. Add a footer with your name
 3. Add an image to the web page.
