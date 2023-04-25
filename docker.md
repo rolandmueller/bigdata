@@ -1,6 +1,6 @@
 # Docker
 
-Docker has manly three advantages:
+Docker has mainly three advantages:
 * Reproducibility of the working environment. A colleague can easily reproduce the exact context of the code.
 * Deployment of the work to the cloud 
 * Creating a solution that consist of multiple service. For example, a web server (like Flask) that stores data in a database (like PostgreSQL or Redis).
