@@ -44,6 +44,7 @@ print(response.status_code)
 •	400 – the server thinks you made a bad request. This can happen when you don’t send along the right data, among other things.
 •	403 – the resource you’re trying to access is forbidden – you don’t have the right permissions to see it.
 •	404 – the resource you tried to access wasn’t found on the server.
+
 16.	Get with the request method 10 results of only males from the US. You can specify the query parameters with a Python dictionary like this:
 ```python
 parameters = {"lat": 37.78, "lon": -122.41}

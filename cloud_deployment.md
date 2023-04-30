@@ -119,7 +119,7 @@ To be able to deploy to a CapRover server, you need the following things:
 
     Click on `Save & Update`
 
-    Create a new file in the docker folder with the name `captain-definition` with the following content:
+    Create a new file in the docker folder with the name `captain-definition` with the [following content](https://caprover.com/docs/captain-definition-file.html#use-dockerfile-in-captain-definition):
     ```json
     {
         "schemaVersion": 2,
