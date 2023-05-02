@@ -178,7 +178,7 @@ This line says, that the function now accept the POST method.
     data = request.get_json()
     name = data.get('name')
 ```
-Now we want to send the data as JSON. The first line uses again the request modul but this time get the sended JSON data with `get_json`. This is then saved as a Python dictonary `data`. `data.get('name', '')` just gets the item with the `name` key from the dictonary and returns the value.
+Now we want to send the data as JSON. The first line uses again the request modul but this time get the sended JSON data with `get_json`. This is then saved as a Python dictonary `data`. `data.get('name')` just gets the item with the `name` key from the dictonary and returns the value.
 
 In Insomnia, add `http://127.0.0.1/hello` and change to POST (from GET). Delete any Query parameters, if any were still there. Click on the drop-down menu next to `Body` and select `JSON`. Copy this JSON into it field:
 
