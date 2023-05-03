@@ -1,6 +1,6 @@
 # Creating a Web API with Python (Remote Procedure Invocation)
 
-In this exercise we will not just consume an API, but create one with Flask. The steps are prity similar to the Docker/Flask exercise. The main difference is, that we do not return a HTML page but a JSON document. This tutorial is partially based on [this page](https://www.statworx.com/en/content-hub/blog/how-to-build-a-machine-learning-api-with-python-and-flask/).
+In this exercise we will not just consume an API, but create one with Flask. The steps are pretty similar to the Docker/Flask exercise. The steps are very similar to the Docker/Flask exercise. The main difference is that we will return a JSON document instead of an HTML page. This tutorial is partially based on [this page](https://www.statworx.com/en/content-hub/blog/how-to-build-a-machine-learning-api-with-python-and-flask/).
 
 An alternative to Flask is [FastAPI](https://fastapi.tiangolo.com/ ), which is an elegant and fast library to create Web APIs with Python. FastAPI uses Python [type hints](https://docs.python.org/3/library/typing.html) to infer the structure of the API from the function’s parameters. FastAPI creates also beautiful documentations of your API automatically. 
 
