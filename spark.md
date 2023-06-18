@@ -63,3 +63,19 @@ We can use different data transformations like
 - drop (drops columns or rows)
 - create new columns
 
+### Create a new dataframe df_cut that calculates the average price per cut
+
+```python
+dimonds_cut = diamonds.groupBy("cut").avg("price")
+```
+
+### Display the result
+
+```python
+display(dimonds_cut)
+```
+
+Click on the '+' next to the table. Click on 'Visualization'. Visualization Type should be 'Bar'. Click on Save.
+
+
+
