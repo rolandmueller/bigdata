@@ -73,7 +73,19 @@ diamonds.describe("carat","price").show()
 display(diamonds.describe("carat","price"))
 ```
 
-### Select  the column "cut" and show the distinct values
+### Transformations 
+
+We can use different data transformations like
+- select
+- where / filter (like where in SQL)
+- grouBy
+- agregations like avg, sum, max, min, mean, count
+- limit 
+- join
+- drop (drops columns or rows)
+- create new columns
+
+### Select the column "cut" and show the distinct values
 
 display(diamonds.select('cut').distinct())
 
@@ -87,22 +99,11 @@ expensive_diamonds = diamonds.where(diamonds["price"] > 15000)
  
 #### TODO: Try it by yourself
 
-### Transformations 
-
-We can use different data transformations like
-- select
-- where / filter (like where in SQL)
-- grouBy
-- agregations like avg, sum, max, min, mean, count
-- limit 
-- join
-- drop (drops columns or rows)
-- create new columns
 
 ### Create a new dataframe df_cut that calculates the average price per cut
 
 ```python
-dimonds_cut = diamonds.groupBy("cut").avg("price")
+dimonds_cut = diamonds.select("cut", "price").groupBy("cut").avg("price")
 ```
 
 #### Display the result
@@ -113,9 +114,64 @@ display(dimonds_cut)
 
 Click on the '+' next to the table. Click on 'Visualization'. Visualization Type should be 'Bar'. Click on Save.
 
-The result looks strange. Why is the price of a 'very good' cut, lower than of a 
-### Create a new dataframe df_cut that calculates the average price per cut
+Why has the best cut ("ideal") not the best average price? 
 
+### Create a new dataframe df_color that calculates the average price per color, sorted by color
+
+#### TODO
+
+### Create a Visualization: Create a Bar plot
+
+#### TODO
+
+### Create a new dataframe dimonds_prices that calculates the average price per all 4 Cs (color, carat, cut, clarity)
+
+#### TODO
+
+### Create a Visualization: Create a Scatterplot, with 'carat' on the x-column, avg(price) on the y-column, and cut on the group by
+
+#### TODO
+
+### 
+
+# Use SQL in Spark Databricks
+
+Save the Dataframe in the Delta Lake
+```python
+diamonds.write.format("delta").mode("overwrite").save("/delta/diamonds")
+```
+
+Now we create a SQL table
+```python
+%sql
+DROP TABLE IF EXISTS diamonds;
+
+CREATE TABLE diamonds USING DELTA LOCATION '/delta/diamonds/'
+```
+
+try it out:
+```sql
+%sql
+SELECT * from diamonds
+```
+
+### Use SQL to select the color and price columns, averages the price, and groups and orders by color.
+
+#### TODO
+
+#### Create a bar chart
+
+#### TODO
+
+Create a screenshot of the notebook and upload it to Moodle
+
+# Further Information
+To find more tutorials, you can go for different topics:
+- Getting started: https://docs.databricks.com/getting-started/index.html
+- Data Engineering:  https://docs.databricks.com/workspace-index.html 
+- Machine Learning: https://docs.databricks.com/machine-learning/index.html
+- Data Warehousing and SQL: https://docs.databricks.com/sql/index.html
+- Delta Lake: https://docs.databricks.com/delta/index.html
 
 
 
