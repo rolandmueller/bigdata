@@ -8,13 +8,13 @@ Docu: https://mermaid.js.org/
 
 ```mermaid
 sequenceDiagram
-  actor User
-  User->>+Streamlit: Enter Company Name
+  actor Alice
+  Alice->>+Streamlit: Enter Company Name
   Streamlit->>+FianceAPI: Request Company Info
   FianceAPI->>-Streamlit: Get Company Info
   Streamlit->>+OpenAI: Request Summary of Company Info
   OpenAI->>-Streamlit: Summary
-  Streamlit->>-User: Result of Analysis
+  Streamlit->>-Alice: Result of Analysis
 ```
 
 Code:
