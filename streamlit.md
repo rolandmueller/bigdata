@@ -177,7 +177,7 @@ Chose `gapminder` as the app and deploy your solution.
 
 6. Go back to the CapRover Web GUI and check the URL of the `gapminder` app. Does it work?
 
-7. Create at your domain provider (e.g. Namecheap) a new subdomain (like `gapminder` (without a wild card (star) before)) and point it to the same IP-address of your VPS. In the CapRover Web GUI for the gapminder app, add the full domain (e.g. gapminder.example.com) and clock on `Connect New Domain`. Test if you can reach your app also to the new app (e.g. at http://gapminder.example.com).
+7. Create at your domain provider (e.g. Namecheap) a new subdomain (like `gapminder` (without a wild card (star) before)) and point it to the same IP-address of your VPS. In the CapRover Web GUI for the gapminder app, add the full domain (e.g. gapminder.example.com) and click on `Connect New Domain`. Test if you can reach your app also to the new app (e.g. at http://gapminder.example.com).
 
 8. In the CapRover Web GUI for the newly added domain (e.g. at http://gapminder.example.com), click `Enable HTTPS`. Test if you can reach your app with the https URL (e.g. at https://gapminder.example.com).
 
