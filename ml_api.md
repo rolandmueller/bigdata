@@ -151,7 +151,7 @@ You should now see on the right:
 
 Parameters in the URL are limited in size. Therefore it makes sense to use POST and JSON to also send data to the API.
 
-Update `app.py`_ 
+Update `app.py`: 
 ```python
 from flask import Flask, request
 
