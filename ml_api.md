@@ -192,23 +192,9 @@ Check the results on the right side.
 
 # Creating an API for a ML model
 
-Great. Now we will train a machine learning model and expose the train mode with an API.
+Great. Now we will train a machine learning model and expose the trained model with a Web API.
 
-Create a new file in the `mlapi` folder with the name `docker-compose_jupyter.yml`:
-
-```yaml
-services:
-  jupyter:
-    image: jupyter/base-notebook:latest
-    container_name: jupyter
-    ports:
-      - 8888:8888
-    volumes:
-      - ./:/home/jovyan
-    environment:
-      JUPYTER_ENABLE_LAB: "yes"
-      JUPYTER_TOKEN: "docker"
-```
+You can create a seperate Python envirnoment (but you can also use your globale Python enviroment in the next stepts).
 
 We will use the [Iris flower data set](https://en.wikipedia.org/wiki/Iris_flower_data_set). The data set consists of 150 samples from three species of Iris water lily flowers (Iris setosa, Iris virginica and Iris versicolor). The dataset has four features: the length and the width of the sepals and petals. Download the `iris.csv` file from Moodle. Create in the `mlapi` folder a new `dev` folder and save `iris.csv` in this folder.
 
@@ -220,21 +206,14 @@ scikit-learn
 joblib
 ```
 
-On the terminal, start the new docker compose file with
-```bash
-docker-compose -f docker-compose_jupyter.yml up
-```
+Create in the `dev` folder a Jupyter Notebook file `01-training.ipynb`. Open the Notebook file in VS Code.
 
-Open in the browser http://127.0.0.1:8888/  and if asked enter as the token "docker".
-
-On the left side in Jupyter Lab, open the `dev` folder and create a new notebook in this folder. Rename it to `01-training.ipynb`.
-
-The first cell should install the requirements:
+The first cell in the notebook should install the requirements (if there are not yet installed):
 ```bash
 %pip install -r ~/app/requirements.txt
 ```
 
-Then in the next cell we import the requireed functions:
+Then in the next cell, we import the required functions:
 ```python
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -281,7 +260,7 @@ We will use a Random Forest as the classifier:
 clf = RandomForestClassifier(random_state=23)
 ```
 
-The whole pipeline compines the preprocessing through the imputer and then the classifier:
+The whole pipeline combines the preprocessing through the imputer and then the classifier:
 
 ```python
 pipe = Pipeline([
@@ -295,7 +274,7 @@ Now we can train the pipeline:
 pipe.fit(X_train, y_train)
 ```
 
-To check the performance we will apply the trained pipeline to the test data and compare the prediction with the real results in the test data:
+To check the performance, we will apply the trained pipeline to the test data and compare the prediction with the real results in the test data:
 ```python
 y_pred = pipe.predict(X_test)
 print(metrics.classification_report(y_test, y_pred))
@@ -308,9 +287,7 @@ Save the model in the `app` folder:
 joblib.dump(pipe, '../app/iris.mdl')
 ```
 
-Stop the Docker compose and close the Jupyter Lab Browser
-
-Open VS Code and change the code of `app.py`:
+In VS Code, change the code of `app.py`:
 
 ```python
 from flask import Flask, request
@@ -355,7 +332,7 @@ We made the following changes:
 - With `pipe.predict(X_new)` we predict the species. Because we only have one row, we get the first row from the predictions: `pipe.predict(X_new)[0]`
 - Then we return the prediction as JSON with a HTTP code 200.
 
-In the command line, start you web server with:
+In the command line, start your web server with:
 
 ```bash
 docker-compose up 
@@ -412,9 +389,9 @@ What about when you have missing data:
 
 Now let us deploy it.
 
-In VS Code, click on the left on the Source Control icon. Click Initialize Repository. Click on the plus icon next to changes. Enter a commit message "Initial commit" and commit. Publish Branch.
+In VS Code, click on the left on the Source Control icon. Click Initialize Repository. Click on the plus icon next to changes. Enter a commit message "Initial commit" and commit. Publish the Branch.
 
-Go to the CapRover Web GUI and create a app with the name `iris`. 
+Go to the CapRover Web GUI and create an app with the name `iris`. 
 
 In you terminal, type 
 ```bash
@@ -425,8 +402,8 @@ Chose the `iris` app and follow the instruction.
 
 Go to the CapRover Web GUI and copy the app URL.
 
-Go to Insomnia and exchange `http://127.0.0.1/predict` your domain, e.g. 
+Go to Insomnia and exchange `http://127.0.0.1/predict` with your URL. with e.g. `http://iris.dev.example.com/predict` and try if it still works.
 
-with e.g. `http://iris.dev.example.com/predict` and try if it still works.
+You might have to wait some seconds after the deploy until your server is ready. Just retry.
 
-You might wait some seconds after the deploy until your server is ready. Just retry.
+Submit on Moodle the web URL and the GitHub Link of your repository
