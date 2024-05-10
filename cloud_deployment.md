@@ -64,7 +64,8 @@ To be able to deploy to a CapRover server, you need the following things:
     https://caprover.com/docs/get-started.html#step-1-caprover-installation Run on the server:
 
     ```bash
-docker run -p 80:80 -p 443:443 -p 3000:3000 -e ACCEPTED_TERMS=true -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain caprover/caprover    ```
+    docker run -p 80:80 -p 443:443 -p 3000:3000 -e ACCEPTED_TERMS=true -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain caprover/caprover
+    ```
 
     Once install, go to http://[IP_OF_YOUR_SERVER]:3000 and login with the password `captain42`
 
