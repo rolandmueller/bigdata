@@ -75,14 +75,14 @@ services:
       - ./app:/app
 ```
 
-Create a `app` folder in the `mlapi`. Create the following files:
+Create a folder `app`  in the folder `mlapi`. Create the following files:
 
-`requirements.txt` file:
+`requirements.txt` file with the content:
 ```bash
 Flask
 ```
 
-Create the `app.py` file in the `app` folder:
+Create the `app.py` file in the `app` folder with the content:
 ```python
 from flask import Flask
 
