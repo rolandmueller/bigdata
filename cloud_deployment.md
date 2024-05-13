@@ -152,11 +152,11 @@ To be able to deploy to a CapRover server, you need the following things:
     caprover deploy -d
     ```
 
-7. Create at your domain provider (e.g. Namecheap) a new subdomain (like `counter` (without a wild card (star) before)) and point it to the same IP-address of your VPS. In the CapRover Web GUI for the flask app, add the full domain (e.g. counter.example.com) and clock on `Connect New Domain`. Test if you can reach your app also to the new app (e.g. at http://counter.example.com).
+7. If you did not already have done, create at your domain provider (e.g. Namecheap) a new subdomain (like `flask` (without a wild card (star) before)) and point it to the same IP-address of your VPS. In the CapRover Web GUI for the flask app, add the full domain (e.g. flask.example.com) and clock on `Connect New Domain`. Test if you can reach your app also to the new app (e.g. at http://flask.example.com).
 
-8. In the CapRover Web GUI for the newly added domain (e.g. at http://counter.example.com), click `Enable HTTPS`. Test if you can reach your app with the https URL (e.g. at https://counter.example.com).
+8. In the CapRover Web GUI for the newly added domain (e.g. at http://flask.example.com), click `Enable HTTPS`. Test if you can reach your app with the https URL (e.g. at https://flask.example.com).
 
-9. In the CapRover Web GUI, enable `Force HTTPS by redirecting all HTTP traffic to HTTPS`. Enter your domain without https (e.g. at http://counter.example.com) and test if you get redirected to the https URL (e.g. to https://counter.example.com).
+9. In the CapRover Web GUI, enable `Force HTTPS by redirecting all HTTP traffic to HTTPS`. Enter your domain without https (e.g. at http://flask.example.com) and test if you get redirected to the https URL (e.g. to https://flask.example.com).
 
 # Deliverables
 
