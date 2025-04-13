@@ -25,9 +25,9 @@ To be able to deploy to a CapRover server, you need the following things:
 
 1. A cloud server (Virtual Private Server, VPS). 
 
-    You can get them, e.g. from [Hetzner](https://www.hetzner.com/cloud) or [Digitalocean](https://www.digitalocean.com/products/droplets) or from any of the cloud hyperscalers (e.g., AWS, Azure, Google Cloud). Hetzner is a German cloud provider with very competitive pricing. If you get the GitHub Student Developer Pack, you get a Digitalocean $200 credit for 60 days. However, Hetzner has better prices than Digitalocean. 
+    You can get them, e.g. from [Hetzner](https://www.hetzner.com/cloud) or [Digitalocean](https://www.digitalocean.com/products/droplets) or from any of the cloud hyperscalers (e.g., AWS, Azure, Google Cloud). There is also a quite generous [free tier from Oracle](https://www.oracle.com/cloud/free/) that you might want to check out. Hetzner is a German cloud provider with very competitive pricing. If you get the GitHub Student Developer Pack, you get a Digitalocean $200 credit for 60 days. However, Hetzner has better prices than Digitalocean. GitHub Student Developer Pack also includes $100 Microsoft Azure credit.  
     
-    [Hetzner](https://docs.hetzner.com/cloud/apps/list/docker-ce/) and [Digitalocean](https://marketplace.digitalocean.com/apps/docker) offer Docker CE apps, that means servers, where Docker is already pre-installed. When you create a VPS, you should select the Docker CE app, so that you do not have to install Docker on the server by yourself. If you have a VPS without preinstalled Docker, you can follow the installation instruction on the Docker website, e.g. for [installing Docker on a Ubuntu Server](https://docs.docker.com/engine/install/ubuntu/. Digitalocean has even a [CapRover app](https://marketplace.digitalocean.com/apps/caprover). After creating a VPS, write down the IP address and the root password of your VPS.
+    [Hetzner](https://docs.hetzner.com/cloud/apps/list/docker-ce/) and [Digitalocean](https://marketplace.digitalocean.com/apps/docker) offer Docker CE apps, that means servers, where Docker is already pre-installed. When you create a VPS, you should select the Docker CE app, so that you do not have to install Docker on the server by yourself. If you have a VPS without preinstalled Docker, you can follow the installation instruction on the Docker website, e.g. for [installing Docker on a Ubuntu Server](https://docs.docker.com/engine/install/ubuntu/). Digitalocean has even a [CapRover app](https://marketplace.digitalocean.com/apps/caprover). After creating a VPS, write down the IP address and the root password of your VPS.
 
 2. A domain name
 
@@ -64,7 +64,7 @@ To be able to deploy to a CapRover server, you need the following things:
     https://caprover.com/docs/get-started.html#step-1-caprover-installation Run on the server:
 
     ```bash
-    docker run -p 80:80 -p 443:443 -p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain caprover/caprover
+    docker run -p 80:80 -p 443:443 -p 3000:3000 -e ACCEPTED_TERMS=true -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain caprover/caprover
     ```
 
     Once install, go to http://[IP_OF_YOUR_SERVER]:3000 and login with the password `captain42`
@@ -152,11 +152,11 @@ To be able to deploy to a CapRover server, you need the following things:
     caprover deploy -d
     ```
 
-7. Create at your domain provider (e.g. Namecheap) a new subdomain (like `counter` (without a wild card (star) before)) and point it to the same IP-address of your VPS. In the CapRover Web GUI for the flask app, add the full domain (e.g. counter.example.com) and clock on `Connect New Domain`. Test if you can reach your app also to the new app (e.g. at http://counter.example.com).
+7. If you did not already have done, create at your domain provider (e.g. Namecheap) a new subdomain (like `flask` (without a wild card (star) before)) and point it to the same IP-address of your VPS. In the CapRover Web GUI for the flask app, add the full domain (e.g. flask.example.com) and clock on `Connect New Domain`. Test if you can reach your app also to the new app (e.g. at http://flask.example.com).
 
-8. In the CapRover Web GUI for the newly added domain (e.g. at http://counter.example.com), click `Enable HTTPS`. Test if you can reach your app with the https URL (e.g. at https://counter.example.com).
+8. In the CapRover Web GUI for the newly added domain (e.g. at http://flask.example.com), click `Enable HTTPS`. Test if you can reach your app with the https URL (e.g. at https://flask.example.com).
 
-9. In the CapRover Web GUI, enable `Force HTTPS by redirecting all HTTP traffic to HTTPS`. Enter your domain without https (e.g. at http://counter.example.com) and test if you get redirected to the https URL (e.g. to https://counter.example.com).
+9. In the CapRover Web GUI, enable `Force HTTPS by redirecting all HTTP traffic to HTTPS`. Enter your domain without https (e.g. at http://flask.example.com) and test if you get redirected to the https URL (e.g. to https://flask.example.com).
 
 # Deliverables
 
