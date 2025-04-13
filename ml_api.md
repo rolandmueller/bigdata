@@ -1,6 +1,6 @@
 # Creating a Web API with Python (Remote Procedure Invocation)
 
-In this exercise we will not just consume an API, but create one with Flask. The steps are prity similar to the Docker/Flask exercise. The main difference is, that we do not return a HTML page but a JSON document. This tutorial is partially based on [this page](https://www.statworx.com/en/content-hub/blog/how-to-build-a-machine-learning-api-with-python-and-flask/).
+In this exercise, we will not only consume an API, but create one with Flask. The steps are very similar to the Docker/Flask exercise. The main difference is that we will return a JSON document instead of an HTML page. This tutorial is partially based on [that site](https://www.statworx.com/en/content-hub/blog/how-to-build-a-machine-learning-api-with-python-and-flask/).
 
 An alternative to Flask is [FastAPI](https://fastapi.tiangolo.com/ ), which is an elegant and fast library to create Web APIs with Python. FastAPI uses Python [type hints](https://docs.python.org/3/library/typing.html) to infer the structure of the API from the function’s parameters. FastAPI creates also beautiful documentations of your API automatically. 
 
@@ -425,8 +425,12 @@ Chose the `iris` app and follow the instruction.
 
 Go to the CapRover Web GUI and copy the app URL.
 
-Go to Insomnia and exchange `http://127.0.0.1/predict` your domain, e.g. 
-
-with e.g. `http://iris.dev.example.com/predict` and try if it still works.
+Go to Insomnia and exchange `http://127.0.0.1/predict` with your app URL and add the `/predict` path at the end, e.g. `http://iris.dev.example.com/predict` and try in Insomnia if it still works.
 
 You might wait some seconds after the deploy until your server is ready. Just retry.
+
+Switch on HTTPS in the CapRover Web GUI. Test in Insomnia the URL with http, e.g. `https://iris.dev.example.com/predict`
+
+# Deliverables
+
+Add the URL of your deployed Web API to Moodle
