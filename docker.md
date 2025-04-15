@@ -5,6 +5,14 @@ Docker has mainly three advantages:
 * Deployment of the work to the cloud 
 * Create a solution that consists of multiple services. For example, a web server (like Flask) that stores data in a database (like PostgreSQL or Redis).
 
+## Create VS Code and a folder
+
+* Open VS Code
+
+* In VS Code: Go to extensions tab, search for Docker and install the Docker extension
+* Create a new project with a new folder called `docker`
+* Open in VS Code a Terminal (command line) 
+
 ## Install and Login
 
 * [Install Docker Desktop](https://docs.docker.com/desktop/)
@@ -17,13 +25,6 @@ Docker has mainly three advantages:
 docker login
 ```
 
-## Create a folder
-
-Create a folder for the experiments and change into the folder:
-```bash
-mkdir docker
-cd docker
-```
 
 ## Check if Docker is running
 
