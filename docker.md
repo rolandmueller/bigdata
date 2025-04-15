@@ -808,6 +808,7 @@ Create a `.gitignore` file (with `.` at the beginning) with the following conten
 ```sh
 .env
 venv
+.venv
 .idea
 .ipynb_checkpoints
 .vscode
@@ -820,6 +821,7 @@ Create a `.dockerignore` file with the following content:
 ```sh
 .env
 venv
+.venv
 .idea
 .ipynb_checkpoints
 .vscode
