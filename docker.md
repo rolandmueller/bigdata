@@ -7,7 +7,7 @@ Docker has mainly three advantages:
 
 ## Install and Login
 
-* [Install docker](https://docs.docker.com/engine/install/)
+* [Install Docker Desktop](https://docs.docker.com/desktop/)
 * Create a Login at Docker Hub
 * Start your Docker Program on your computer
 * Login in Docker locally
