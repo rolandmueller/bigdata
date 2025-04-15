@@ -322,7 +322,7 @@ You might be able to open an editor from the terminal directly (might be configu
 
 ```bash
 # Use an official Python runtime as a parent image
-FROM python:3.10-slim-buster
+FROM python:3
 
 # Set the working directory to /app
 WORKDIR /app
@@ -564,7 +564,7 @@ Change the `Dockerfile` file:
 
 ```dockerfile
 # Use an official Python runtime as a parent image
-FROM python:3.10-slim-buster
+FROM python:3
 
 # Set the working directory to /app
 WORKDIR /app
