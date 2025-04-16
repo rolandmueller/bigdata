@@ -313,16 +313,11 @@ Stop all other containers.
 
 ## Define a new Image
 
-Create a file with the name `Dockerfile` with the following content (e.g. with an IDE (integrated development environment) or editor like  Visual Studio Code or PyCharm). A Dockerfile tells Docker [how to build a Docker image](https://docs.docker.com/engine/reference/builder/).
-You might be able to open an editor from the terminal directly (might be configure before in the IDE). 
-* For opening VS Code in the current folder you can type in the terminal: `code .`
-* For opening PyCharm type: `charm .` 
-* The `.`mean the current folder
-
+Create a file in VS Code with the name `Dockerfile` with the following content. A Dockerfile tells Docker [how to build a Docker image](https://docs.docker.com/engine/reference/builder/).
 
 ```bash
 # Use an official Python runtime as a parent image
-FROM python:3
+FROM python:3.12-slim-bookworm
 
 # Set the working directory to /app
 WORKDIR /app
@@ -564,7 +559,7 @@ Change the `Dockerfile` file:
 
 ```dockerfile
 # Use an official Python runtime as a parent image
-FROM python:3
+FROM python:3.12-slim-bookworm
 
 # Set the working directory to /app
 WORKDIR /app
