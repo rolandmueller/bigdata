@@ -248,11 +248,9 @@ In VS Code, go to the Docker Tab. There you also see your containers.
 
 <img width="374" alt="Screenshot 2025-04-18 at 12 29 48" src="https://github.com/user-attachments/assets/1050ba9a-97af-43e1-bead-273e62de4362" />
 
-You see that one container is running (green play button). Click on in, click on Files, and scroll down to root and click on it. There you find you file `iwashere.txt` again:
+You see that one container is running (green play button). Click on it, click on Files, scroll down to root, and click on root. There you find you file `iwashere.txt` again:
 
 <img width="371" alt="Screenshot 2025-04-18 at 12 34 05" src="https://github.com/user-attachments/assets/30b25069-d93a-42dc-b11d-2e5023e0ca7a" />
-
-
 
 ## Deleting Containers
 
@@ -283,7 +281,9 @@ docker container ls -a
 ```
 Everything gone.
 
-### Containers and images
+## Containers and Images
+
+
 
 Let us start three different containers from the same image. 
 Meaning of the parameters:
@@ -307,6 +307,9 @@ Check if all three containers running:
 ```bash
 docker container ls
 ```
+
+In VS Code you can open multiple Terminals and switch between them.
+<img width="523" alt="Screenshot 2025-04-18 at 13 02 21" src="https://github.com/user-attachments/assets/3fe82ce4-2105-4b9d-9b30-8c37966bca87" />
 
 Start three more terminals, so that in total you have four terminals open.
 
