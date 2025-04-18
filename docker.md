@@ -674,10 +674,21 @@ Open in your browser http://localhost:4000/
 
 Stop it with Control-C
 
+Refresh in your browser http://localhost:4000/
+
+
 Running it with detached mode:
 ```bash
 docker run -d -p 4000:80 bipm_hello
 ```
+
+Refresh in your browser http://localhost:4000/
+
+You can see the running containers in in VS Code with the Docker extension. You can stop the running container with right-click (Mac control+click) and then stop:
+
+<img width="378" alt="Screenshot 2025-04-18 at 14 18 48" src="https://github.com/user-attachments/assets/8dc6e7e8-8ec2-47a3-86f5-6610be68a7f7" />
+
+You can also stop it from the Terminal:
 
 The container is still running:
 ```bash
@@ -706,8 +717,7 @@ Real world applications are build with multiple services that are interacting. F
 
 We will enhance our little web application with a visitor counter. The count of visitors will be stored in Redis (https://redis.io/). Redis is a NoSQL database. Redis is an in-memory key-value database, used often as a cache or as part of a message broker.
 
-Create in your `docker` folder a
-`docker-compose.yml` file:
+Create a `docker-compose.yml` file in the project root (not in the app folder but in the docker folder):
 
 ```yaml
 services:
@@ -737,10 +747,18 @@ services:
 * The web service starts after the Redis service, because it `depends_on` Redis.
 * `restart: always`: Restarts the Web Server if it crashes or if the content of the app is changing. Restarts also the Redis Database after a crash.
 
-Change the `requirements.txt` file in the `app` folder:
+Change the `requirements.in` file in the `app` folder:
 ```bash
 Flask
 Redis
+python-dotenv
+```
+
+python-dotenv [python-dotenv](https://pypi.org/project/python-dotenv/) allows either using environment variables or hidden files (`.env`) for things like passwords or other secrets that you do not want to have in the source code.
+
+and compile if
+```bash
+uv pip compile app/requirements.in > app/requirements.txt
 ```
 
 Change the `app.py` file in the `app` folder:
@@ -779,7 +797,7 @@ if __name__ == "__main__":
 
 Run
 ```bash
-docker-compose up
+docker compose up
 ```
 
 Open http://localhost:4000/
@@ -831,8 +849,8 @@ import time
 import redis
 from flask import Flask, render_template
 
-app = Flask(__name__)
 cache = redis.Redis(host='redis', port=6379)
+app = Flask(__name__)
 
 def get_hit_count():
     retries = 5
@@ -901,17 +919,17 @@ venv
 .gitignore
 ```
 
-In VS Code, click on the Source Controll side icon (on the left side). Click on the button `Initialize Repository`.
+In VS Code, click on the Source Control side icon (on the left side). Click on the button `Initialize Repository`.
 
-Now you should see at the Source Controll panel 9 files that are not yet checked in. Click on the `+` symbole next to Changes, to stage all files. Enter a Commit Message and commit the changes. Then publish the branch to Github. Check on Github that the repository is now there.
+Now you should see at the Source Control panel 9 files that are not yet checked in. Click on the `+` symbole next to Changes, to stage all files. Enter the Commit Message 'Initial commit' and commit the changes. Then publish the branch to Github. Check on Github that the repository is now there.
 
 # Add a Password to the Database
 
-Right now Redis is not secured through a password. This is right now not a problem, because everything is running on the laptop and we do not have any sensible data in the database. However, when we will deploy the app to a cloud provider, it is better to use a password for accessing the database.
+Right now Redis is not secured through a password. This is right now not a problem, because everything is running on the laptop and we do not have any sensible data in the database. However, when we deploy the app to a cloud provider, it is better to use a password for accessing the database.
 
-Typically we do not want any plain-text password in the source code. The alternative is using environment variables (variables from the operation systems) or password files that we do not add into the source repository (often hidden files (that start with a `.` in the file name) with the name `.env`).
+Typically, we do not want any plain-text passwords in the source code. The alternative is using environment variables (variables from the operating systems) or password files that we do not add into the source repository (often hidden files (that start with a `.` in the file name) with the name `.env`).
 
-Create a new file in the docker folder (not in the app folder) with the name `.env` (with a `.` at the beginning), with the following content (you should use your own secrete password):
+Create a new file in the docker folder (not in the app folder) with the name `.env` (with a `.` at the beginning), with the following content (you should use your own secret password):
 
 ```bash
 REDIS_PASSWORD=MyBIPMPassword
@@ -942,22 +960,15 @@ services:
 
 `${REDIS_PASSWORD}` and `${REDIS_HOST}` will read the environment variables from the `.env` file.
 
-Change the `requirements.txt` file by adding one more Python package [python-dotenv](https://pypi.org/project/python-dotenv/). 
-```
-Flask
-Redis
-python-dotenv
-```
 
-python-dotenv allows to either use environment variables or hidden files (`.env`) for things like passwords.
-
-Change the `app.py` file.  Add the following lines:
+Change the `app.py` file.  Add the following lines at:
 ```python
-from dotenv import load_dotenv
+from dotenv import load_dotenv # <- new
 
-load_dotenv() 
-cache = redis.Redis(host=os.getenv('REDIS_HOST'), port=6379,  password=os.getenv('REDIS_PASSWORD'))
+load_dotenv()  <- new 
+cache = redis.Redis(host=os.getenv('REDIS_HOST'), port=6379,  password=os.getenv('REDIS_PASSWORD')) <- changed
 ```
+
 
 This loads the environments and with `os.getenv('REDIS_HOST')` and `os.getenv('REDIS_PASSWORD')` we can use the host name and the password in the Python code.
 
@@ -997,13 +1008,13 @@ if __name__ == "__main__":
 Try it out with 
 
 ```bash
-docker-compose build   
+docker compose build   
 ```
 
 and then
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 and open the project in a web browser.
