@@ -20,7 +20,7 @@ Docker has mainly three advantages:
 * Create a new project with a new folder called `docker`
 * Open in VS Code a Terminal (command line) (menu Terminal | New Terminal)
 * Login in Docker locally
-* In the command line
+* Open in the Terminal of VS Code:
 
 ```bash
 docker login
@@ -29,7 +29,7 @@ docker login
 
 ## Check if Docker is running
 
-Check if docker is installed. Enter in the command line (or power shell):
+Check if Docker is installed. Enter in the Terminal in VS Code
 
 ```bash
 docker --version
@@ -44,6 +44,11 @@ More info about your Docker:
 ```bash
 docker info
 ```
+
+In VS Code, click on the Docker icon (Whale) at the bottom right.
+
+<img width="336" alt="Screenshot 2025-04-18 at 11 52 59" src="https://github.com/user-attachments/assets/4a3f0d57-3018-449a-8eb8-2cd36be019d8" />
+
 
 ## Pulling an Image from Docker Hub
 
