@@ -29,6 +29,63 @@ venv
 .gitignore
 ```
 
+Create an `app` folder inside the `gapminder` folder.
+
+In the `app` folder, create the following files with the content:
+
+`requirements.in`:
+```txt
+streamlit
+pandas
+plotly
+matplotlib
+seaborn
+```
+
+As always, create an environment
+```bash
+uv venv
+```
+
+Activate the environment
+
+On Mac:
+```
+source .venv/bin/activate
+```
+
+On Windows:
+Depends on your shell (follow uv instruction).
+
+For PowerShell on Windows:
+```
+.venv\Scripts\Activate.ps1
+```
+Compile and sync
+```bash
+uv pip compile app/requirements.in > app/requirements.txt
+uv pip sync app/requirements.txt
+```
+
+Create an app.py file in the app folder
+`app.py`:
+```python
+import streamlit as st
+import pandas as pd
+
+st.title('Gapminder')
+```
+
+In the Terminal you can start Streamlit
+
+```bash
+streamlit run app/app.py
+```
+
+Either a web browser is opened automatically or open it manually and copy the URL
+
+# Create a Docker environment 
+
 `Dockerfile`:
 ```dockerfile
 # Use an official Python runtime as a parent image
@@ -61,30 +118,14 @@ ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.addres
 }
 ```
 
-Create an `app` folder inside the `gapminder` folder.
 
-In the `app` folder, create the following files with the content:
-
-`requirements.txt`:
-```txt
-streamlit
-pandas
-```
-
-`app.py`:
-```python
-import streamlit as st
-import pandas as pd
-
-st.title('Gapminder')
-```
 
 Now we will build the Docker image. Run in the terminal:
 ```bash
 docker build -t gapminder .
 ```
 
-On the comand line, we will run the Docker container and attach the `app` folder as a volume. With this trick, we can change the source code of the `app.py` file and just refresh the browser and see the change, without rebuilding the Docker image.
+On the command line, we will run the Docker container and attach the `app` folder as a volume. With this trick, we can change the source code of the `app.py` file and just refresh the browser and see the change, without rebuilding the Docker image.
 
 In the terminal, run
 
