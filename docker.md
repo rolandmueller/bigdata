@@ -564,11 +564,36 @@ exit
 
 # Create a small Flask Web App
 
-We will build a web application with `Flask` (https://flask.palletsprojects.com/en/2.3.x/) (Partially based on https://docs.docker.com/compose/gettingstarted/). 
+We will build a web application with `Flask` (https://flask.palletsprojects.com/en/stable/) (Partially based on https://docs.docker.com/compose/gettingstarted/). 
 
-Create a `requirements.txt` file in the `app` folder. Here we can specify all python `pip` packages that we need. Add in the first line in the `requirements.txt` file:
+Create a `requirements.in`
+
+Create a `requirements.in` file in the `app` folder. Here we can specify all Python `pip` packages that we need. Add in the first line in the `requirements.in` file:
 ```bash
 Flask
+```
+
+Create a local virtual Python environment with uv. In the Terminal:
+```bash
+uv venv
+```
+
+Activate the environment:
+
+On Mac:
+```bash
+source .venv/bin/activate
+```
+
+On Windows  (Power shell)
+```bash
+.venv\Scripts\Activate.ps1
+```
+
+Compile and sync
+```bash
+uv pip compile app/requirements.in > app/requirements.txt
+uv pip sync app/requirements.txt
 ```
 
 Create the `app.py` file in the `app` folder:
@@ -585,12 +610,24 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80, debug=True)
 ```
 
-This mini Flask app creates a dynamic web applications:
+This mini Flask app creates a dynamic web application:
 * `from flask import Flask`: Imports the Flask class
-*  `app = Flask(__name__)`: Creates the Flask object `app` that represent the main application
-* @app.route('/'): This is a Python decorator. Python decorators (starting with `@`) are functions that change the behavior of other functions (https://realpython.com/primer-on-python-decorators/). Python decorators are  useful for example for logging or monitoring a function or calling a function via a web interface. Here we specify the web routing, that means what URL-path should call what function. Here we want, that the root URL (e.g. http://localhost/) should call the hello function. We could also link the function to any other URL-path like "/hello" so that the URL would be e.g. http://localhost/hello.
+*  `app = Flask(__name__)`: Creates the Flask object `app` that represents the main application
+* @app.route('/'): This is a Python decorator. Python decorators (starting with `@`) are functions that change the behaviour of other functions (https://realpython.com/primer-on-python-decorators/). Python decorators are  useful for example for logging or monitoring a function or calling a function via a web interface. Here we specify the web routing, that means, what URL-path should call what function. Here we want, that the root URL (e.g. http://localhost/) should call the hello function. We could also link the function to any other URL-path like "/hello" so that the URL would be e.g. http://localhost/hello.
 * `if __name__ == "__main__":` If we call a Python file with e.g. `python app.py`, the Python interpreter will assign the string `"__main__"` to the variable `__name__`. That means that this if statement will only be executed if it is run directly (and not if Python code is e.g. loaded as a module in another code).
-* `app.run(host="0.0.0.0", port=80, debug=True)`: The Flask server starts and listens to port 80 and the debug mode is turned on.
+* `app.run(host="0.0.0.0", port=80, debug=True)`: The Flask server starts and listens to port 80, and the debug mode is turned on.
+
+# Running Flask without Docker
+
+In the Terminal run 
+
+```bash
+python app/app.py
+```
+
+In the Terminal cmd-click on http://127.0.0.1:80 or open a web browser and open http://127.0.0.1:80
+
+Stop the Flask server again in the Terminal with the shortcut Ctrl + C
 
 # Running Flask with Docker
 
