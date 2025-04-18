@@ -1008,7 +1008,6 @@ Try it out with
 docker compose down -v  
 docker compose up --build
 ```
-```
 
 and open the project in a web browser.
 
