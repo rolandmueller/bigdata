@@ -375,6 +375,11 @@ my_list = [i**2 for i in range(10)]
 
 print(my_list)
 ```
+Do not forget to save all files (short key cmd+s)
+
+Explorer view in VS Code should now look like this:
+
+<img width="776" alt="Screenshot 2025-04-18 at 13 07 01" src="https://github.com/user-attachments/assets/1d356b65-9893-4c5d-ab8d-4c3f6edaa8b8" />
 
 ## Build a new Image
 
