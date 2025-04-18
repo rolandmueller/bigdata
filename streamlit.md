@@ -84,70 +84,13 @@ streamlit run app/app.py
 
 Either a web browser is opened automatically or open it manually and copy the URL
 
-# Create a Docker environment 
-
-`Dockerfile`:
-```dockerfile
-# Use an official Python runtime as a parent image
-FROM python:3.10-slim-buster
-
-# Set the working directory to /app
-WORKDIR /app
-
-# Copy requirements.txt into the container at /app
-COPY app/requirements.txt requirements.txt
-
-# Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
-
-# Copy the current directory contents into the container at /app
-COPY app/ /app
-
-# Make port 8501 available to the world outside this container
-EXPOSE 8501
-
-# Run app.py when the container launches
-ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
-```
-
-`captain-definition`:
-```json
-{
-    "schemaVersion": 2,
-    "dockerfilePath": "./Dockerfile"
-}
-```
-
-
-
-Now we will build the Docker image. Run in the terminal:
-```bash
-docker build -t gapminder .
-```
-
-On the command line, we will run the Docker container and attach the `app` folder as a volume. With this trick, we can change the source code of the `app.py` file and just refresh the browser and see the change, without rebuilding the Docker image.
-
-In the terminal, run
-
-```bash
-pwd
-```
-
-This will show the absolute path. (e.g. `/Users/rolandmueller/Documents/source/gapminder`) In the next step you have to use the abolute path of the `app` folder, that means in my case `/Users/rolandmueller/Documents/source/gapminder/app` and map it to the Docker folder `/app`. Change this folder in the next command based on your path:
-
-```bash
-docker run -p 8501:8501 -v /Users/rolandmueller/Documents/source/gapminder/app:/app gapminder
-```
-
-Open the URL http://0.0.0.0:8501
-
 Let the terminal running and change the `app.py` file by adding at the end the following line:
 
 ```py
 st.write("Unlocking Lifetimes: Visualizing Progress in Longevity and Poverty Eradication")
 ```
 
-Refresh the browser to show the changes. You do not have to rebuild the Docker image, because the app folder is mounted as an external volume. 
+Refresh the browser.
 
 You can find the meaning of the different Streamlit methods here: https://docs.streamlit.io/library/api-reference 
 
@@ -198,7 +141,75 @@ You can use different Python charting libraries in Streamlit, like Streamlit's o
 
 https://docs.streamlit.io/library/api-reference/charts
 
-When you have finished the app according to the requirements, you should push it to Github and deploy it to a cloud server. 
+When you have finished the app according to the requirements, you should create a Docker environment, deploy it to a cloud server, and should push it to Github. 
+
+# Create a Docker environment 
+
+`Dockerfile`:
+```dockerfile
+# Use an official Python runtime as a parent image
+FROM python:3.10-slim-buster
+
+# Set the working directory to /app
+WORKDIR /app
+
+# Copy requirements.txt into the container at /app
+COPY app/requirements.txt requirements.txt
+
+# Install any needed packages specified in requirements.txt
+RUN pip install -r requirements.txt
+
+# Copy the current directory contents into the container at /app
+COPY app/ /app
+
+# Make port 8501 available to the world outside this container
+EXPOSE 8501
+
+# Run app.py when the container launches
+ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+```
+
+`captain-definition`:
+```json
+{
+    "schemaVersion": 2,
+    "dockerfilePath": "./Dockerfile"
+}
+```
+
+
+Now we will build the Docker image. Run in the terminal:
+```bash
+docker build -t gapminder .
+```
+
+On the command line, we will run the Docker container and attach the `app` folder as a volume. With this trick, we can change the source code of the `app.py` file and just refresh the browser and see the change, without rebuilding the Docker image.
+
+In the terminal, run
+
+```bash
+pwd
+```
+
+This will show the absolute path. (e.g. `/Users/rolandmueller/Documents/source/gapminder`) In the next step you have to use the abolute path of the `app` folder, that means in my case `/Users/rolandmueller/Documents/source/gapminder/app` and map it to the Docker folder `/app`. Change this folder in the next command based on your path:
+
+```bash
+docker run -p 8501:8501 -v /Users/rolandmueller/Documents/source/gapminder/app:/app gapminder
+```
+
+Open the URL http://0.0.0.0:8501
+
+Let the terminal running and change the `app.py` file by changinging at the following line:
+
+```py
+st.write("BIPM Project - Unlocking Lifetimes: Visualizing Progress in Longevity and Poverty Eradication ")
+```
+
+Refresh the browser to show the changes. You do not have to rebuild the Docker image, because the app folder is mounted as an external volume. 
+
+You can find the meaning of the different Streamlit methods here: https://docs.streamlit.io/library/api-reference 
+
+If it runs in Docker stop the container.
 
 # Adding code to Git and Github
 
