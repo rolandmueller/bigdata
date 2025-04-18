@@ -51,7 +51,7 @@ In VS Code, click on the Docker icon (Whale) at the bottom right.
 
 There you see also the hello-world container, which you just ran. The red symbol indicates that it stoped.
 
-## Got to the Docker Desktop Application
+## Go to the Docker Desktop Application
 
 Click on the container tab and there you can also the the hello-world container:
 
@@ -60,10 +60,10 @@ Click on the container tab and there you can also the the hello-world container:
 
 ## Pulling an Image from Docker Hub
 
-* Go to http://hub.docker.com/
+* Go to http://hub.docker.com/ in you web browser
 * login
 * search for Ubuntu
-* What is the last version of Ubuntu?
+* What is the latest version of Ubuntu?
 
 So let us pull it from Dock Hub and bring it to your computer.
 
@@ -73,10 +73,11 @@ docker pull ubuntu
 ```
 In VS Code go to the Docker tab and click on the Images tab. There you should see ubuntu.
 
-Also if you go to Docker Desktop, and click on the Images tab, you you should see ubuntu as well.
+Also, if you go to Docker Desktop, and click on the Images tab, you you should see ubuntu as well.
 
 ## List all Images
 
+In the Terminal in VS Code:
 ```bash
 docker image ls
 ```
@@ -173,8 +174,12 @@ a4cf0a5f41e7        ubuntu                             "bash"                   
 22863f7d24c0        ubuntu                             "bash"                   3 minutes ago        Exited (0) 3 minutes ago                            condescending_elgamal
 ```
 
+
+
+
 The most right columnn you find `NAMES`. These names are automatically created. If we use the parameter `--name` we can name the container also by yourselfs.
 You can also use the `CONTAINER ID` (first column) to identify a container  (e.g. a4cf0a5f41e7). There you do not have to write out the whole container ID but only use as many digits that are needed for identifying the container (normally two digits are sufficient)
+
 
 Look not for the last but the the second last container (in this example `angry_goldstine` as NAME or `94cb0399ba60` as CONTAINER ID)
 
@@ -237,14 +242,25 @@ Check if the container is still running:
 ```bash
 docker container ls
 ```
+# Interacting with Containers in VS Code
+
+In VS Code, go to the Docker Tab. There you also see your containers.
+
+<img width="374" alt="Screenshot 2025-04-18 at 12 29 48" src="https://github.com/user-attachments/assets/1050ba9a-97af-43e1-bead-273e62de4362" />
+
+You see that one container is running (green play button). Click on in, click on Files, and scroll down to root and click on it. There you find you file `iwashere.txt` again:
+
+<img width="371" alt="Screenshot 2025-04-18 at 12 34 05" src="https://github.com/user-attachments/assets/30b25069-d93a-42dc-b11d-2e5023e0ca7a" />
+
+
 
 ## Deleting Containers
 
-Check all containers:
+In the Terminal, check all containers:
 ```bash
 docker container ls -a
 ```
-Containers that you do not need anymore can be delete. This will delete all data on the container (change 94cb0399ba60 to your container ID)
+Containers that you do not need anymore can be deleted. This will delete all data on the container (change 94cb0399ba60 to your container ID)
 ```bash
 docker container rm 94cb0399ba60
 ```
@@ -253,6 +269,8 @@ Check all containers:
 ```bash
 docker container ls -a
 ```
+
+You can also delete containers in VS Code, with 
 
 You can delete all containers with
 ```bash
