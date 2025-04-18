@@ -367,10 +367,7 @@ COPY app/ /app
 CMD ["python", "computation.py"]
 ```
 
-Create the `app` folder and change into the folder
-```bash
-mkdir app
-```
+In VS Code create an `app` folder.
 
 Create the `computation.py` file in the `app` folder:
 ```python
@@ -378,7 +375,6 @@ my_list = [i**2 for i in range(10)]
 
 print(my_list)
 ```
-
 
 ## Build a new Image
 
