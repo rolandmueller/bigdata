@@ -65,12 +65,15 @@ Click on the container tab and there you can also the the hello-world container:
 * search for Ubuntu
 * What is the last version of Ubuntu?
 
-So let us pull it from Dock Hub to your computer.
+So let us pull it from Dock Hub and bring it to your computer.
 
-On you command line:
+On your command line in VS Code:
 ```bash
 docker pull ubuntu
 ```
+In VS Code go to the Docker tab and click on the Images tab. There you should see ubuntu.
+
+Also if you go to Docker Desktop, and click on the Images tab, you you should see ubuntu as well.
 
 ## List all Images
 
@@ -90,7 +93,7 @@ List all containers:
 docker container ls -a
 ```
 
-## Running, stoping, and Attaching an Image
+## Running, stopping, and attaching an Image
 
 Starts Docker container and ends it right away:
 ```bash
@@ -102,7 +105,7 @@ If you check the running containers, you see that there is no running container:
 docker container ls
 ```
 
-Starts Docker container and executes echo command:
+Starts Docker container and executes the echo command:
 ```bash
 docker run ubuntu echo "Hello BIPM"
 ```
