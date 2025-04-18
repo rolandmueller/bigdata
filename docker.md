@@ -49,6 +49,14 @@ In VS Code, click on the Docker icon (Whale) at the bottom right.
 
 <img width="336" alt="Screenshot 2025-04-18 at 11 52 59" src="https://github.com/user-attachments/assets/4a3f0d57-3018-449a-8eb8-2cd36be019d8" />
 
+There you see also the hello-world container, which you just ran. The red symbol indicates that it stoped.
+
+## Got to the Docker Desktop Application
+
+Click on the container tab and there you can also the the hello-world container:
+
+<img width="1137" alt="Screenshot 2025-04-18 at 11 59 04" src="https://github.com/user-attachments/assets/10206f13-5a40-470a-9ac9-b9de86076a43" />
+
 
 ## Pulling an Image from Docker Hub
 
