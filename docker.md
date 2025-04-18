@@ -797,7 +797,7 @@ if __name__ == "__main__":
 
 Run
 ```bash
-docker compose up
+docker compose up --build
 ```
 
 Open http://localhost:4000/
@@ -881,11 +881,8 @@ Refresh the page a couple of times.
 
 If you change the image or if you are not using a mounted volume, you have to rebuild the images and rerun Docker compose: 
 ```bash
-docker-compose build
-```
-and then  
-```bash
-docker-compose up
+docker compose down -v  
+docker compose up --build
 ```
 
 # Source controll with Git and Github
@@ -1008,13 +1005,9 @@ if __name__ == "__main__":
 Try it out with 
 
 ```bash
-docker compose build   
+docker compose down -v  
+docker compose up --build
 ```
-
-and then
-
-```bash
-docker compose up
 ```
 
 and open the project in a web browser.
@@ -1023,10 +1016,10 @@ If it works, cancel the service in the terminal (control+C). In VS Code, add all
 
 # Customize the Website
 
-The final task is to customize the website like you want (see https://simplecss.org/demo for help about Simplecss and https://flask.palletsprojects.com/en/2.3.x/ about Flask):
+The final task is to customize the website like you want (see https://simplecss.org/demo for help about Simplecss and https://flask.palletsprojects.com/en/stable/ about Flask):
 1. Add a link in `hello.html` that points to the HWR Berlin homepage
 2. Add a footer with your name
-3. Add an image to the web page. You can serve static files like images or CSS files with Flask: https://flask.palletsprojects.com/en/2.3.x/quickstart/#static-files
+3. Add an image to the web page. You can serve static files like images or CSS files with Flask: https://flask.palletsprojects.com/en/stable/quickstart/#static-files
 4. Add a navigation menu to the web page, with three menu items: Home (the current hello page), Titanic (another internal page) and About (a link to your Github homepage)
 6. Create another page for the Titanic link (similar like the hello page). You have to add a new `titanic` function in `app.py`, but change the route to e.g. `/titanic`. This will tell what URL paths are mapped to this function.  Add a new `titanic.html` template. Add the CSV (comma seperated) file of the Titanic Dataset to your project. Use Pandas to load the CSV file and show the first 5 rows in the Titanic page. You can use the DataFrame method to_html https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_html.html 
 7. Add a bar chart to the Titanic page, that shows how many men and women survived.
