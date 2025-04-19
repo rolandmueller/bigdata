@@ -5,11 +5,12 @@ You task is to create an interactive bubble chart with Streamlit, similar to Gap
 
 # Docker Working Environment
 
-Create a folder `gapminder`. Open this folder in VS Code (e.g. type in the folder in the terminal `code .`). Create in VS Code the following files with the content:
+Open VS Code. Create new project with a new folder `gapminder`. Create in VS Code the following files in the project folder with the content:
 
 `.gitignore`: 
 ```bash
 .env
+.venv
 venv
 .idea
 .ipynb_checkpoints
@@ -20,6 +21,7 @@ venv
 `.dockerignore`: 
 ```bash
 .env
+.venv
 venv
 .idea
 .ipynb_checkpoints
@@ -64,11 +66,13 @@ For PowerShell on Windows:
 Compile and sync
 ```bash
 uv pip compile app/requirements.in > app/requirements.txt
+```
+
+```bash
 uv pip sync app/requirements.txt
 ```
 
-Create an app.py file in the app folder
-`app.py`:
+In the `app` folder create a file called `app.py`:
 ```python
 import streamlit as st
 import pandas as pd
@@ -82,9 +86,9 @@ In the Terminal you can start Streamlit
 streamlit run app/app.py
 ```
 
-Either a web browser is opened automatically or open it manually and copy the URL
+Either a web browser is opened automatically or open a web browser manually and open the URL http://localhost:8501/
 
-Let the terminal running and change the `app.py` file by adding at the end the following line:
+Let the terminal run and change the `app.py` file by adding at the following line:
 
 ```py
 st.write("Unlocking Lifetimes: Visualizing Progress in Longevity and Poverty Eradication")
@@ -96,19 +100,19 @@ You can find the meaning of the different Streamlit methods here: https://docs.s
 
 # Adding code to Git and Github
 
-In VS Code, click on the Source Control side icon (on the left side). Click on the button `Initialize Repository`. Now you should see at the Source Control panel files that are not yet checked in. Click on the `+` symbol next to Changes to stage all files. Enter a Commit Message and commit the changes. Then, publish the branch to GitHub.
+In VS Code, click on the Source Control side icon (on the left side). Click on the button `Initialize Repository`. Now you should see at the Source Control panel files that are not yet checked in. Click on the `+` symbol next to Changes to stage all files. Enter the commit message "Ini and commit the changes. Then, publish the branch to GitHub. You should regularly commit your changes during this project.
 
 
 # Requirements
 
 The dashboard should have the following interactive widgets:
-1. a year slider to control the year (only one year will be displayed)
-2. a multiselect widget for selecting one or more countries
+1. A year slider to control the year (only one year will be displayed)
+2. A multi-select widget for selecting one or more countries
 
 The dashboard does **NOT** to have to be animated (like the Gapminder one).
 
 The bubble chart should show the following KPIs:
-1. On the x-axis: the **logarithmic** Gross Natition Income (GNI) per captia (inflation-adjusted and converted to $ based on purchasing power parity (PPP)). The maximal x value should be **constant** independent what you select, so that you can more easily compare the charts.
+1. On the x-axis: the **logarithmic** Gross National Income (GNI) per capita (inflation-adjusted and converted to $ based on purchasing power parity (PPP)). The maximal x value should be **constant** independent of what you select, so that you can more easily compare the charts.
 2. On the y-axis: Life expectancy
 3. Size of the bubble: population
 4. Color: Country
@@ -120,7 +124,7 @@ Download the data here: https://www.gapminder.org/data/
 Go to "Choose individual indicators", choose the KPIs and download the CSV, for each KPI
 1. Population
 2. Life expectancy
-3. GNI per captia (PPP, current international $) (Gross National Income per capita based on Purchasing Power Parity in current international dollars (inflation adjusted).)
+3. GNI per capita (PPP, current international $) (Gross National Income per capita based on Purchasing Power Parity in current international dollars (inflation adjusted).)
 
 You have then 3 CSV files.
 
@@ -131,13 +135,13 @@ There are three things you have to do before building the dashboard.
 2. For each CSV, transform the dataframe into a so called "tidy data format" (see e.g. https://en.wikipedia.org/wiki/Tidy_data). Each dataframe then should have only three columns: (1) country, (2) year, (3) the KPI (that means either a) life expectancy, b) population, or 3) GNI per capita)
 4. You have to merge all three CVS.  Merge the three dataframe into one dataframe, that just has 5 columns (country, year and all three KPIs from the three dataframes)
 
-The data loading and preprocessing should be cached. https://docs.streamlit.io/library/api-reference/performance/st.cache_data 
+The data loading and preprocessing should be cached. https://docs.streamlit.io/develop/api-reference/caching-and-state/st.cache_data
 
 ### Streamlit Docs
 
 Based on the requirements, create a Streamlit App
 
-You can find more about Streamlit in this sources:
+You can find more about Streamlit in these sources:
 - https://docs.streamlit.io/
 - https://docs.streamlit.io/library/api-reference
 - https://calmcode.io/streamlit/hello-world.html
@@ -149,6 +153,8 @@ https://docs.streamlit.io/library/api-reference/charts
 When you have finished the app according to the requirements, you should create a Docker environment, deploy it to a cloud server, and push it to GitHub. 
 
 # Create a Docker environment 
+
+Create a new file with the name `Dockerfile`:
 
 `Dockerfile`:
 ```dockerfile
@@ -173,6 +179,8 @@ EXPOSE 8501
 # Run app.py when the container launches
 ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
 ```
+
+Create a `captain-definition` file:
 
 `captain-definition`:
 ```json
@@ -212,8 +220,6 @@ st.write("BIPM Project - Unlocking Lifetimes: Visualizing Progress in Longevity 
 
 Refresh the browser to show the changes. You do not have to rebuild the Docker image, because the app folder is mounted as an external volume. 
 
-You can find the meaning of the different Streamlit methods here: https://docs.streamlit.io/library/api-reference 
-
 If it runs in Docker stop the container.
 
 
@@ -238,6 +244,7 @@ Chose `gapminder` as the app and deploy your solution.
 9. In the CapRover Web GUI, enable `Force HTTPS by redirecting all HTTP traffic to HTTPS`. Enter your domain without https (e.g. at http://counter.example.com) and test if you get redirected to the https URL (e.g. to https://counter.example.com).
 
 10. Add a `README.md` file, with a short description and a link to the deployed prototype.
+
 
 # Deliverables
 
