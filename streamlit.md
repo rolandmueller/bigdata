@@ -94,6 +94,11 @@ Refresh the browser.
 
 You can find the meaning of the different Streamlit methods here: https://docs.streamlit.io/library/api-reference 
 
+# Adding code to Git and Github
+
+In VS Code, click on the Source Control side icon (on the left side). Click on the button `Initialize Repository`. Now you should see at the Source Control panel files that are not yet checked in. Click on the `+` symbol next to Changes to stage all files. Enter a Commit Message and commit the changes. Then, publish the branch to GitHub.
+
+
 # Requirements
 
 The dashboard should have the following interactive widgets:
@@ -121,8 +126,8 @@ You have then 3 CSV files.
 
 ## Data Preprocessing
 
-There are three things, you have to do, before building the dashboard. 
-1. The data contains missing values. For all three CSVs, use forward filling for imputing the missing data. Forward filling uses earlier values of the country for filling later ones (tip: there exist a Pandas function for that)
+There are three things you have to do before building the dashboard. 
+1. The data contains missing values. For all three CSVs, use forward filling for imputing the missing data. Forward filling uses earlier values of the country for filling later ones (tip: there exists a Pandas function for that)
 2. For each CSV, transform the dataframe into a so called "tidy data format" (see e.g. https://en.wikipedia.org/wiki/Tidy_data). Each dataframe then should have only three columns: (1) country, (2) year, (3) the KPI (that means either a) life expectancy, b) population, or 3) GNI per capita)
 4. You have to merge all three CVS.  Merge the three dataframe into one dataframe, that just has 5 columns (country, year and all three KPIs from the three dataframes)
 
@@ -141,14 +146,14 @@ You can use different Python charting libraries in Streamlit, like Streamlit's o
 
 https://docs.streamlit.io/library/api-reference/charts
 
-When you have finished the app according to the requirements, you should create a Docker environment, deploy it to a cloud server, and should push it to Github. 
+When you have finished the app according to the requirements, you should create a Docker environment, deploy it to a cloud server, and push it to GitHub. 
 
 # Create a Docker environment 
 
 `Dockerfile`:
 ```dockerfile
 # Use an official Python runtime as a parent image
-FROM python:3.10-slim-buster
+FROM python:3.12-slim   
 
 # Set the working directory to /app
 WORKDIR /app
@@ -211,9 +216,6 @@ You can find the meaning of the different Streamlit methods here: https://docs.s
 
 If it runs in Docker stop the container.
 
-# Adding code to Git and Github
-
-In VS Code, click on the Source Controll side icon (on the left side). Click on the button `Initialize Repository`. Now you should see at the Source Controll panel files that are not yet checked in. Click on the `+` symbole next to Changes, to stage all files. Enter a Commit Message and commit the changes. Then publish the branch to Github.
 
 # Deployment of your Streamlit app to CapRover
 
@@ -239,5 +241,5 @@ Chose `gapminder` as the app and deploy your solution.
 
 # Deliverables
 
-* Add the URL to the Github Repository 
+* Add the URL to the GitHub Repository 
 * and the URL to your deployed prototype in the Moodle
