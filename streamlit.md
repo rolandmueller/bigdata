@@ -39,9 +39,7 @@ In the `app` folder, create the following files with the content:
 ```txt
 streamlit
 pandas
-plotly
-matplotlib
-seaborn
+plotly[express]
 ```
 
 As always, create an environment
@@ -107,9 +105,8 @@ In VS Code, click on the Source Control side icon (on the left side). Click on t
 
 The dashboard should have the following interactive widgets:
 1. A year slider to control the year (only one year will be displayed)
-2. A multi-select widget for selecting one or more countries
-
-The dashboard does **NOT** to have to be animated (like the Gapminder one).
+2. The slider should have a play button so that the chart can be animated (like the Gapminder one).
+3. A multi-select widget for selecting one or more countries
 
 The bubble chart should show the following KPIs:
 1. On the x-axis: the **logarithmic** Gross National Income (GNI) per capita (inflation-adjusted and converted to $ based on purchasing power parity (PPP)). The maximal x value should be **constant** independent of what you select, so that you can more easily compare the charts.
@@ -146,9 +143,7 @@ You can find more about Streamlit in these sources:
 - https://docs.streamlit.io/library/api-reference
 - https://calmcode.io/streamlit/hello-world.html
 
-You can use different Python charting libraries in Streamlit, like Streamlit's own charting library, but also other Python packages like Matplotlib, Seaborn, Plotly or Bokeh. 
-
-https://docs.streamlit.io/library/api-reference/charts
+You can use Plotly https://plotly.com/python/ or Plotly Express https://plotly.com/python/plotly-express/ as the charting engine
 
 When you have finished the app according to the requirements, you should create a Docker environment, deploy it to a cloud server, and push it to GitHub. 
 
