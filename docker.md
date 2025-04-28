@@ -958,12 +958,13 @@ services:
 `${REDIS_PASSWORD}` and `${REDIS_HOST}` will read the environment variables from the `.env` file.
 
 
-Change the `app.py` file.  Add the following lines at:
+Change the `app.py` file.  Add the following new lines and change one line:
 ```python
-from dotenv import load_dotenv # <- new
+import os   # <- new
+from dotenv import load_dotenv   # <- new
 
-load_dotenv()  <- new 
-cache = redis.Redis(host=os.getenv('REDIS_HOST'), port=6379,  password=os.getenv('REDIS_PASSWORD')) <- changed
+load_dotenv()  # <- new 
+cache = redis.Redis(host=os.getenv('REDIS_HOST'), port=6379,  password=os.getenv('REDIS_PASSWORD')) # <- changed
 ```
 
 
