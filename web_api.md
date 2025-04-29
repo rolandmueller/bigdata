@@ -24,19 +24,19 @@ jupyterlab
 requests
 ```
 12.	Install the packages in your Python environment
-16.	Open a Jupyter Notebook and create a new notebook
-17.	Import the two libraries `requests` in your notebook
-18.	You can find the documentation for the requests package here:
+13.	Open a Jupyter Notebook and create a new notebook
+14.	Import the two libraries `requests` in your notebook
+15.	You can find the documentation for the requests package here:
  https://docs.python-requests.org/en/latest/index.html
-19.	With the requests package, you can call a Web API with the URL and the method get
+16.	With the requests package, you can call a Web API with the URL and the method get
 ```python
 response = requests.get("https://api.randomuser.me/")
 ```
-14.	Print the status code of the request
+17.	Print the status code of the request
 ```python
 print(response.status_code)
 ```
-15.	The meanings of the status codes are:
+18.	The meanings of the status codes are:
 •	200 – everything went okay, and the result has been returned (if any)
 •	301 – the server is redirecting you to a different endpoint. This can happen when a company switches domain names, or an endpoint name is changed.
 •	401 – the server thinks you’re not authenticated. This happens when you don’t send the right credentials to access an API.
@@ -44,11 +44,11 @@ print(response.status_code)
 •	403 – the resource you’re trying to access is forbidden – you don’t have the right permissions to see it.
 •	404 – the resource you tried to access wasn’t found on the server.
 
-16.	Get with the request method 10 results of only males from the US. You can specify the query parameters with a Python dictionary like this:
+19.	Get with the request method 10 results of only males from the US. You can specify the query parameters with a Python dictionary like this:
 ```python
 parameters = {"lat": 37.78, "lon": -122.41}
 ```
-17.	And pass the parameter to the request like this
+20.	And pass the parameter to the request like this
 ```python
 response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters)
 ```
@@ -58,20 +58,20 @@ response = requests.get("http://api.open-notify.org/iss-pass.json?lat=37.78&lon=
 ```
 Alternatively, you could also build the URL also by yourself
 
-18.	You can show the result of the request with the method text as a text (often good if the return is HTML, like for a website)
+21.	You can show the result of the request with the method text as a text (often good if the return is HTML, like for a website)
 ```python
 response.text
 ```
-19.	For a Web API, the return is most often JSON. You can convert the data from JSON to a Python dictionary with this:
+22.	For a Web API, the return is most often JSON. You can convert the data from JSON to a Python dictionary with this:
 ```python
 data = response.json()
 ```
-20.	Check the type of variable data
-21.	Loop through the dictionary and print all first names
-22.	Print out all the names of the astronauts who are right now in space. You get the information about the Web APU from here  
-http://open-notify.org/Open-Notify-API/People-In-Space/ 
-23.	Print the number of people that are right now in space
+23.	Check the type of variable data
 24.	Loop through the dictionary and print all first names
+25.	Print out all the names of the astronauts who are right now in space. You get the information about the Web APU from here  
+http://open-notify.org/Open-Notify-API/People-In-Space/ 
+26.	Print the number of people that are right now in space
+27.	Loop through the dictionary and print all first names
 Use *pretty-print* (pprint). pprint prints complex data structures like a dictionary prettier.  https://docs.python.org/3/library/pprint.html 
 ```python
 from pprint import pprint
@@ -80,19 +80,19 @@ pprint(data)
 
 # Streamlit App
 
-25.	Create a small Streamlit application that creates a dynamic website that shows the total number of people in space as well as all the names of the people. The app should use the API to get the names and display them. Add a descriptive title and a short description (you can use the Streamlit markdown method).
+28.	Create a small Streamlit application that creates a dynamic website that shows the total number of people in space as well as all the names of the people. The app should use the API to get the names and display them. Add a descriptive title and a short description (you can use the Streamlit markdown method).
 
-26.	Add to your Streamlit app the following functionality:
+29.	Add to your Streamlit app the following functionality:
 a.	Get the current location of the International Space Station (ISS)
 http://open-notify.org/Open-Notify-API/ISS-Location-Now/ 
 b.	Create a geographical map in your Streamlit app that visualizes the current ISS location. There are a lot of different Python packages for geo-mapping. The easiest way in this scenario is to use the included map function in Streamlit: 
 https://docs.streamlit.io/library/api-reference/charts/st.map
 c.	Add a short description for your map
 
-27.	Deploy your Streamlit app with CapRover to your VPS.  Create for your application a new subdomain `iss` so that your URL is something like `iss.example.com`. Enable HTTPS
+30.	Deploy your Streamlit app with CapRover to your VPS.  Create for your application a new subdomain `iss` so that your URL is something like `iss.example.com`. Enable HTTPS
 
-28.	Copy-paste the URL of your deployed Streamlit app to Moodle
+31.	Copy-paste the URL of your deployed Streamlit app to Moodle
 
-29.	What we have not covered in this exercise is authentication: A lot of Web APIs require a key for interacting with them (like OpenAI, Twitter, Facebook, …). You find at 
+32.	What we have not covered in this exercise is authentication: A lot of Web APIs require a key for interacting with them (like OpenAI, Twitter, Facebook, …). You find at 
 https://requests.readthedocs.io/en/latest/user/advanced
 more information for Authentication for Web APIs with the request package. 
