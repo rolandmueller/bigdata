@@ -16,6 +16,7 @@ pandas
 scikit-learn
 joblib
 request
+jupyterlab
 ```
 
 4. Use uv to compile and install the Python package into your environment 
@@ -29,6 +30,7 @@ Create a `.gitignore` file (with `.` at the beginning) with the following conten
 ```sh
 .env
 venv
+.venv
 .idea
 .ipynb_checkpoints
 .vscode
@@ -56,7 +58,7 @@ venv
 .jupyter
 ```
 
-Create a folder `app`  in the folder `mlapi`. 
+Create a folder `app`  in the project folder. 
 
 Create the `app.py` file in the `app` folder with the content:
 ```python
@@ -111,7 +113,7 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80, debug=True)
 ```
 
-We import additionally the `request` module from the Flask package in the first line. Then we use the  `args` function to get the parameter arguments with:
+We additionally import the `request` module from the Flask package in the first line. Then we use the `args` function to get the parameter arguments with:
 ```python
 name = request.args.get('name')
 ```
@@ -172,17 +174,7 @@ Great. Now we will train a machine learning model and expose the trained model w
 
 We will use the [Iris flower data set](https://en.wikipedia.org/wiki/Iris_flower_data_set). The data set consists of 150 samples from three species of Iris water lily flowers (Iris setosa, Iris virginica and Iris versicolor). The dataset has four features: the length and the width of the sepals and petals. Download the `iris.csv` file from Moodle. Create in the `mlapi` folder a new `dev` folder and save `iris.csv` in this folder.
 
-Change the content of `requirements.txt` (in the `app` folder):
-```bash
-Flask
-pandas
-scikit-learn
-joblib
-```
-
 Create a Jupyter Notebook file `01-training.ipynb` in the' dev' folder. Open the Notebook file in VS Code.
-
-
 
 We import the required functions:
 ```python
@@ -360,7 +352,15 @@ What about when you have missing data:
 
 # Use Docker
 
-Add the two files:
+Add these files:
+
+We do not need JupyterLab for the deployed service. Therefore, we create an extra `requirements.txt` in the `app` folder with the following content:
+```bash
+Flask
+pandas
+scikit-learn
+joblib
+```
 
 `Dockerfile`:
 ```dockerfile
