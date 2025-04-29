@@ -12,19 +12,18 @@ This exercise shows how you can use a Web API with Python. Most Web APIs use a R
 2.	It has an API. Go to https://api.randomuser.me/ with your browser
 3.	You get a JSON back. A JSON is similar to a Python dictionary.  Refresh the browser
 4.	You can add query parameters. They are added to the URL with a ? . You then add the parameter with parameter=value. If you have more than one parameter, then the parameters are connected with a & e.g.
-	http://www.example.com/api?lat=37.78&lon=-122.41
-
+	```http://www.example.com/api?lat=37.78&lon=-122.41```
 5.	Go to the documentation https://randomuser.me/documentation and check how you can get multiple users and how to specify constraints on the output
 6.	Go to your browser and add parameters to https://api.randomuser.me/ so that you get five results of only males from the US
 8.	Now we want to analyze this data with Python
 9.	Create in VS Code a new project
 10.	Create a Python environment with uv and activate it
-12.	Add a requirements.in file with the following packages:
+11.	Add a requirements.in file with the following packages:
 ```
 jupyterlab
 requests
 ```
-15.	Install the packages in your Python environment
+12.	Install the packages in your Python environment
 16.	Open a Jupyter Notebook and create a new notebook
 17.	Import the two libraries `requests` in your notebook
 18.	You can find the documentation for the requests package here:
