@@ -81,7 +81,7 @@ Returns first a Python dictionary `{'message': 'Hello World'}`, which Flask is r
 
 Run
 ```bash
-python mlapi/app/app.py
+python app/app.py
 ```
 
 Download and install Insomnia https://insomnia.rest/download
@@ -306,7 +306,7 @@ We made the following changes:
 In the command line, start your web server with:
 
 ```bash
-python mlapi/app/app.py
+python app/app.py
 ```
 
 Open Insomnia.
