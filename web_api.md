@@ -15,14 +15,7 @@ This exercise shows how you can use a Web API with Python. Most Web APIs use a R
 	http://www.example.com/api?lat=37.78&lon=-122.41
 
 5.	Go to the documentation https://randomuser.me/documentation and check how you can get multiple users and how to specify constraints on the output
-
 6.	Go to your browser and add parameters to https://api.randomuser.me/ so that you get five results of only males from the US
-7.	You can also get the data from the command line. Open the command line and write
-
-```bash
-curl -s https://api.randomuser.me/
-```
-
 8.	Now we want to analyze this data with Python
 9.	Create in VS Code a new project
 10.	Create a Python environment with uv and activate it
