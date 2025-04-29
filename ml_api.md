@@ -6,32 +6,23 @@ In this exercise, we will not just consume an API, but create one with Flask. Th
 An alternative to Flask is [FastAPI](https://fastapi.tiangolo.com/ ), which is an elegant and fast library to create Web APIs with Python. FastAPI uses Python [type hints](https://docs.python.org/3/library/typing.html) to infer the structure of the API from the function’s parameters. FastAPI also creates beautiful documentation of your API automatically. However, because we already know some Flask, and starting with Flask is easier, we use Flask.
 
 1. Create a folder `mlapi`, work inside the folder, and open the folder in VS Code.
+   
+2. Create with uv an environment and activate it
 
-2. We create a simple Flask API first. This is very similar to the Docker exercise. The difference is that this Flask application will return JSON, not HTML.
+3. Create a `requirements.in` file with the content:
+```bash
+Flask
+pandas
+scikit-learn
+joblib
+request
+```
+
+4. Use uv to compile and install the Python package into your environment 
+
+5. We will create a simple Flask API first. This is very similar to the Docker exercise. The difference is that this Flask application will return JSON, not HTML.
 
 We create the following files (exactly the same we as in the Flask example):
-`Dockerfile`:
-```dockerfile
-# Use an official Python runtime as a parent image
-FROM python:3.10-slim-buster
-
-# Set the working directory to /app
-WORKDIR /app
-
-COPY app/requirements.txt requirements.txt
-
-# Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
-
-# Copy the current directory contents into the container at /app
-COPY app/ /app
-
-# Make port 80 available to the world outside this container
-EXPOSE 80
-
-# Run app.py when the container launches
-CMD ["python", "app.py"]
-```
 
 Create a `.gitignore` file (with `.` at the beginning) with the following content:
 
@@ -52,6 +43,7 @@ Create a `.dockerignore` file with the following content:
 ```sh
 .env
 venv
+.venv
 .idea
 .ipynb_checkpoints
 .vscode
@@ -64,24 +56,7 @@ venv
 .jupyter
 ```
 
-`docker-compose.yml` file:
-```yaml
-services:
-  web:
-    build: .
-    stop_signal: SIGINT
-    ports:
-      - '80:80'
-    volumes:
-      - ./app:/app
-```
-
-Create a folder `app`  in the folder `mlapi`. Create the following files:
-
-`requirements.txt` file with the content:
-```bash
-Flask
-```
+Create a folder `app`  in the folder `mlapi`. 
 
 Create the `app.py` file in the `app` folder with the content:
 ```python
@@ -97,16 +72,16 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80, debug=True)
 ```
 
-The only difference to the Flask app from the former exercise, is that we return JSON. The line:
+The only difference from the Flask app to the former exercise is that we return JSON. The line:
 ```python
     return {'message': 'Hello World'}, 200
 ```
 
-Returns first a Python dictonary `{'message': 'Hello World'}`, that Flask is returning as JSON. The second value (`200`) is the HTTP return value, that means, everything went okay, and the result has been returned.
+Returns first a Python dictionary `{'message': 'Hello World'}`, which Flask is returning as JSON. The second value (`200`) is the HTTP return value, which means everything went okay, and the result has been returned.
 
 Run
 ```bash
-docker-compose up
+python mlapi/app/app.py
 ```
 
 Download and install Insomnia https://insomnia.rest/download
@@ -179,9 +154,9 @@ This line says, that the function now accept the POST method.
     data = request.get_json()
     name = data.get('name')
 ```
-Now we want to send the data as JSON. The first line uses again the request modul but this time get the sended JSON data with `get_json`. This is then saved as a Python dictonary `data`. `data.get('name')` just gets the item with the `name` key from the dictonary and returns the value.
+Now we want to send the data as JSON. The first line uses again the request module but this time get the sended JSON data with `get_json`. This is then saved as a Python dictionary `data`. `data.get('name')` just gets the item with the `name` key from the dictionary and returns the value.
 
-In Insomnia, add `http://127.0.0.1/hello` and change to POST (from GET). Delete any Query parameters, if any were still there. Click on the drop-down menu next to `Body` and select `JSON`. Copy this JSON into it field:
+In Insomnia, add `http://127.0.0.1/hello` and change to POST (from GET). Delete any query parameters, if any are still there. Click on the drop-down menu next to `Body` and select `JSON`. Copy this JSON into the field:
 
 ```json
 {
@@ -191,11 +166,9 @@ In Insomnia, add `http://127.0.0.1/hello` and change to POST (from GET). Delete 
 
 Check the results on the right side.
 
-# Creating an API for a ML model
+# Creating an API for the ML model
 
 Great. Now we will train a machine learning model and expose the trained model with a Web API.
-
-You can create a seperate Python envirnoment (but you can also use your globale Python enviroment in the next stepts).
 
 We will use the [Iris flower data set](https://en.wikipedia.org/wiki/Iris_flower_data_set). The data set consists of 150 samples from three species of Iris water lily flowers (Iris setosa, Iris virginica and Iris versicolor). The dataset has four features: the length and the width of the sepals and petals. Download the `iris.csv` file from Moodle. Create in the `mlapi` folder a new `dev` folder and save `iris.csv` in this folder.
 
@@ -207,14 +180,11 @@ scikit-learn
 joblib
 ```
 
-Create in the `dev` folder a Jupyter Notebook file `01-training.ipynb`. Open the Notebook file in VS Code.
+Create a Jupyter Notebook file `01-training.ipynb` in the' dev' folder. Open the Notebook file in VS Code.
 
-The first cell in the notebook should install the requirements (if there are not yet installed):
-```bash
-%pip install -r ~/app/requirements.txt
-```
 
-Then in the next cell, we import the required functions:
+
+We import the required functions:
 ```python
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -252,7 +222,7 @@ We create a simple imputer that uses the median value of the column for missing 
 imp = SimpleImputer(strategy='median')
 ```
 
-We apply this imputer on all columns:
+We apply this imputer to all columns:
 ```python
 ct = ColumnTransformer([('imputer', imp, column_names)])
 ```
@@ -336,7 +306,7 @@ We made the following changes:
 In the command line, start your web server with:
 
 ```bash
-docker-compose up
+python mlapi/app/app.py
 ```
 
 Open Insomnia.
@@ -388,9 +358,57 @@ What about when you have missing data:
 }
 ```
 
+# Use Docker
+
+Add the two files:
+
+`Dockerfile`:
+```dockerfile
+# Use an official Python runtime as a parent image
+FROM python:3.10-slim-buster
+
+# Set the working directory to /app
+WORKDIR /app
+
+COPY app/requirements.txt requirements.txt
+
+# Install any needed packages specified in requirements.txt
+RUN pip install -r requirements.txt
+
+# Copy the current directory contents into the container at /app
+COPY app/ /app
+
+# Make port 80 available to the world outside this container
+EXPOSE 80
+
+# Run app.py when the container launches
+CMD ["python", "app.py"]
+```
+
+`docker-compose.yml` file:
+```yaml
+services:
+  web:
+    build: .
+    stop_signal: SIGINT
+    ports:
+      - '80:80'
+    volumes:
+      - ./app:/app
+```
+
+Run
+```bash
+docker-compose up
+```
+
+Test it in Insomnia
+
+# Deployment with CapRove
+
 Now let us deploy it.
 
-In VS Code, click on the left on the Source Control icon. Click Initialize Repository. Click on the plus icon next to changes. Enter a commit message "Initial commit" and commit. Publish the Branch.
+In VS Code, click on the left side of the Source Control icon. Click Initialize Repository. Click on the plus icon next to changes. Enter a commit message "Initial commit" and commit. Publish the Branch.
 
 Go to the CapRover Web GUI and create an app with the name `iris`.
 
@@ -399,13 +417,13 @@ In you terminal, type
 caprover deploy
 ```
 
-Chose the `iris` app and follow the instruction.
+Choose the `iris` app and follow the instructions.
 
 Go to the CapRover Web GUI and copy the app URL.
 
 Go to Insomnia and exchange `http://127.0.0.1/predict` with your app URL and add the `/predict` path at the end, e.g. `http://iris.dev.example.com/predict` and try in Insomnia if it still works.
 
-You might wait some seconds after the deploy until your server is ready. Just retry.
+You might wait for some seconds after the deploy until your server is ready. Just retry.
 
 Switch on HTTPS in the CapRover Web GUI. Test in Insomnia the URL with http, e.g. `https://iris.dev.example.com/predict`
 
