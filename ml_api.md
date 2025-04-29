@@ -1,13 +1,13 @@
 # Creating a Web API with Python (Remote Procedure Invocation)
 
 
-In this exercise we will not just consume an API, but create one with Flask. The steps are very similar to the Docker/Flask exercise. The main difference is that we will return a JSON document instead of an HTML page. This tutorial is partially based on [this page](https://www.statworx.com/en/content-hub/blog/how-to-build-a-machine-learning-api-with-python-and-flask/).
+In this exercise, we will not just consume an API, but create one with Flask. The steps are very similar to the Docker/Flask exercise. The main difference is that we will return a JSON document instead of an HTML page. This tutorial is partially based on [this page](https://www.statworx.com/en/content-hub/blog/how-to-build-a-machine-learning-api-with-python-and-flask/).
 
-An alternative to Flask is [FastAPI](https://fastapi.tiangolo.com/ ), which is an elegant and fast library to create Web APIs with Python. FastAPI uses Python [type hints](https://docs.python.org/3/library/typing.html) to infer the structure of the API from the function’s parameters. FastAPI creates also beautiful documentations of your API automatically. However, because we already know some Flask, and starting with Flask is easier, we use Flask.
+An alternative to Flask is [FastAPI](https://fastapi.tiangolo.com/ ), which is an elegant and fast library to create Web APIs with Python. FastAPI uses Python [type hints](https://docs.python.org/3/library/typing.html) to infer the structure of the API from the function’s parameters. FastAPI also creates beautiful documentation of your API automatically. However, because we already know some Flask, and starting with Flask is easier, we use Flask.
 
-1. Create a folder `mlapi`, work inside the folder and open the folder in VS Code.
+1. Create a folder `mlapi`, work inside the folder, and open the folder in VS Code.
 
-2. We create a simple Flask API first. This is very similar to the Docker exercise. The difference is, that this Flask application will return JSON, not HTML.
+2. We create a simple Flask API first. This is very similar to the Docker exercise. The difference is that this Flask application will return JSON, not HTML.
 
 We create the following files (exactly the same we as in the Flask example):
 `Dockerfile`:
@@ -150,7 +150,7 @@ You should now see on the right:
 }
 ```
 
-Parameters in the URL are limited in size. Therefore it makes sense to use POST and JSON to also send data to the API.
+Parameters in the URL are limited in size. Therefore, it makes sense to use POST and JSON to also send data to the API.
 
 Update `app.py`:
 ```python
