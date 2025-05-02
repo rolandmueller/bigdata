@@ -25,7 +25,7 @@ requests
 ```
 12.	Install the packages in your Python environment
 13.	Open a Jupyter Notebook and create a new notebook
-14.	Import the two libraries `requests` in your notebook
+14.	Import the library `requests` in your notebook
 15.	You can find the documentation for the requests package here:
  https://docs.python-requests.org/en/latest/index.html
 16.	With the requests package, you can call a Web API with the URL and the method get
@@ -80,14 +80,14 @@ pprint(data)
 
 # Streamlit App
 
-28.	Create a small Streamlit application that creates a dynamic website that shows the total number of people in space as well as all the names of the people. The app should use the API to get the names and display them. Add a descriptive title and a short description (you can use the Streamlit markdown method).
+28.	Create a small Streamlit application that creates a dynamic website that shows the total number of people in space as well as all the names of the people. The app should use the API to get the names and display them. Add a descriptive title and a short description (you can use the Streamlit Markdown method).
 
 29.	Add to your Streamlit app the following functionality:
 a.	Get the current location of the International Space Station (ISS)
 http://open-notify.org/Open-Notify-API/ISS-Location-Now/ 
 b.	Create a geographical map in your Streamlit app that visualizes the current ISS location. There are a lot of different Python packages for geo-mapping. The easiest way in this scenario is to use the included map function in Streamlit: 
-https://docs.streamlit.io/library/api-reference/charts/st.map
-c.	Add a short description for your map
+https://docs.streamlit.io/develop/api-reference/charts/st.map 
+c.	Add a short description to your map
 
 30.	Deploy your Streamlit app with CapRover to your VPS.  Create for your application a new subdomain `iss` so that your URL is something like `iss.example.com`. Enable HTTPS
 
