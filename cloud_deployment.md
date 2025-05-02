@@ -27,13 +27,17 @@ To be able to deploy to a CapRover server, you need the following things:
 
     You can get them, e.g. from [Hetzner](https://www.hetzner.com/cloud) or [Digitalocean](https://www.digitalocean.com/products/droplets) or from any of the cloud hyperscalers (e.g., AWS, Azure, Google Cloud). There is also a quite generous [free tier from Oracle](https://www.oracle.com/cloud/free/) that you might want to check out. Hetzner is a German cloud provider with very competitive pricing. If you get the GitHub Student Developer Pack, you get a Digitalocean $200 credit for 60 days. However, Hetzner has better prices than Digitalocean. GitHub Student Developer Pack also includes $100 Microsoft Azure credit.  
     
-    [Hetzner](https://docs.hetzner.com/cloud/apps/list/docker-ce/) and [Digitalocean](https://marketplace.digitalocean.com/apps/docker) offer Docker CE apps, that means servers, where Docker is already pre-installed. When you create a VPS, you should select the Docker CE app, so that you do not have to install Docker on the server by yourself. If you have a VPS without preinstalled Docker, you can follow the installation instruction on the Docker website, e.g. for [installing Docker on a Ubuntu Server](https://docs.docker.com/engine/install/ubuntu/). Digitalocean has even a [CapRover app](https://marketplace.digitalocean.com/apps/caprover). After creating a VPS, write down the IP address and the root password of your VPS.
+    [Hetzner](https://docs.hetzner.com/cloud/apps/list/docker-ce/) and [Digitalocean](https://marketplace.digitalocean.com/apps/docker) offer Docker CE apps, that means servers, where Docker is already pre-installed. When you create a VPS, you should select the Docker CE app, so that you do not have to install Docker on the server by yourself. If you have a VPS without preinstalled Docker, you can follow the installation instruction on the Docker website, e.g. for [installing Docker on a Ubuntu Server](https://docs.docker.com/engine/install/ubuntu/). Digitalocean has even a [CapRover app](https://marketplace.digitalocean.com/apps/caprover).
+   
+   CapRover source code is compatible with any CPU architecture and the Docker build available on Docker Hub is built for AMD64 (X86), ARM64, and ARMV7 CPUs. Recommened operation system is Ubuntu. Minimum RAM: 1GB RAM.
 
-2. A domain name
+    After creating a VPS, write down the IP address and the root password of your VPS. 
+
+3. A domain name
 
     You can get a .com or a .de domain from e.g. [Namecheap](https://www.namecheap.com/) for ~ 7€ to 10€ per year. There are other top-level domains (TLD) that might be cheaper or more expensive, and there might be some special deals (e.g., for students or for the first year). However, it might be a good strategy to have your own domain name for the long term, to show some projects to potential employers. 
 
-3. Add a Wild Card entry at your Domain Name register
+4. Add a Wild Card entry at your Domain Name register
 
     https://caprover.com/docs/get-started.html#step-2-connect-root-domain
 
@@ -45,7 +49,7 @@ To be able to deploy to a CapRover server, you need the following things:
 
     Go to https://mxtoolbox.com/DNSLookup.aspx and check if you enter your URL, i.e. randomthing123.dev.mydomain.com (change mydomain.com to your domain), it resolves to your IP address. DNS propagation might take some time, so the domain might not be available immidiately. 
 
-4. Install CapRover on the server
+5. Install CapRover on the server
 
     Log into your VPS with ssh. In the terminal, enter (change 123.123.123.123 to the IP-Address of your VPS):
 

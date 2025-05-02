@@ -1,33 +1,35 @@
 # Docker
 
 Docker has mainly three advantages:
-* Reproducibility of the working environment. A colleague can easily reproduce the exact context of the code.
+* Reproducibility of the working environment. A colleague can easily reproduce the exact context of the code. Partially, this can also be done with Python virtual environments
 * Deployment of the work to the cloud 
 * Create a solution that consists of multiple services. For example, a web server (like Flask) that stores data in a database (like PostgreSQL or Redis).
 
-## Install and Login
+## Install Docker
 
-* [Install docker](https://docs.docker.com/engine/install/)
+* [Install Docker Desktop](https://docs.docker.com/desktop/)
 * Create a Login at Docker Hub
 * Start your Docker Program on your computer
+* You might have to login
+  
+##  VS Code: Extension, creating a project and a folder
+
+* Open VS Code
+
+* In VS Code: Go to the extensions tab, search for Docker (from Microsoft) and install the Docker extension
+* Create a new project with a new folder called `docker`
+* Open in VS Code a Terminal (command line) (menu Terminal | New Terminal)
 * Login in Docker locally
-* In the command line
+* Open in the Terminal of VS Code:
 
 ```bash
 docker login
 ```
 
-## Create a folder
-
-Create a folder for the experiments and change into the folder:
-```bash
-mkdir docker
-cd docker
-```
 
 ## Check if Docker is running
 
-Check if docker is installed. Enter in the command line (or power shell):
+Check if Docker is installed. Enter in the Terminal in VS Code
 
 ```bash
 docker --version
@@ -43,22 +45,39 @@ More info about your Docker:
 docker info
 ```
 
+In VS Code, click on the Docker icon (Whale) at the bottom right.
+
+<img width="336" alt="Screenshot 2025-04-18 at 11 52 59" src="https://github.com/user-attachments/assets/4a3f0d57-3018-449a-8eb8-2cd36be019d8" />
+
+There you see also the hello-world container, which you just ran. The red symbol indicates that it stoped.
+
+## Go to the Docker Desktop Application
+
+Click on the container tab and there you can also the the hello-world container:
+
+<img width="1137" alt="Screenshot 2025-04-18 at 11 59 04" src="https://github.com/user-attachments/assets/10206f13-5a40-470a-9ac9-b9de86076a43" />
+
+
 ## Pulling an Image from Docker Hub
 
-* Go to http://hub.docker.com/
+* Go to http://hub.docker.com/ in you web browser
 * login
 * search for Ubuntu
-* What is the last version of Ubuntu?
+* What is the latest version of Ubuntu?
 
-So let us pull it from Dock Hub to your computer.
+So let us pull it from Dock Hub and bring it to your computer.
 
-On you command line:
+On your command line in VS Code:
 ```bash
 docker pull ubuntu
 ```
+In VS Code go to the Docker tab and click on the Images tab. There you should see ubuntu.
+
+Also, if you go to Docker Desktop, and click on the Images tab, you you should see ubuntu as well.
 
 ## List all Images
 
+In the Terminal in VS Code:
 ```bash
 docker image ls
 ```
@@ -75,7 +94,7 @@ List all containers:
 docker container ls -a
 ```
 
-## Running, stoping, and Attaching an Image
+## Running, stopping, and attaching an Image
 
 Starts Docker container and ends it right away:
 ```bash
@@ -87,7 +106,7 @@ If you check the running containers, you see that there is no running container:
 docker container ls
 ```
 
-Starts Docker container and executes echo command:
+Starts Docker container and executes the echo command:
 ```bash
 docker run ubuntu echo "Hello BIPM"
 ```
@@ -155,8 +174,12 @@ a4cf0a5f41e7        ubuntu                             "bash"                   
 22863f7d24c0        ubuntu                             "bash"                   3 minutes ago        Exited (0) 3 minutes ago                            condescending_elgamal
 ```
 
+
+
+
 The most right columnn you find `NAMES`. These names are automatically created. If we use the parameter `--name` we can name the container also by yourselfs.
 You can also use the `CONTAINER ID` (first column) to identify a container  (e.g. a4cf0a5f41e7). There you do not have to write out the whole container ID but only use as many digits that are needed for identifying the container (normally two digits are sufficient)
+
 
 Look not for the last but the the second last container (in this example `angry_goldstine` as NAME or `94cb0399ba60` as CONTAINER ID)
 
@@ -219,14 +242,23 @@ Check if the container is still running:
 ```bash
 docker container ls
 ```
+# Interacting with Containers in VS Code
+
+In VS Code, go to the Docker Tab. There you also see your containers.
+
+<img width="374" alt="Screenshot 2025-04-18 at 12 29 48" src="https://github.com/user-attachments/assets/1050ba9a-97af-43e1-bead-273e62de4362" />
+
+You see that one container is running (green play button). Click on it, click on Files, scroll down to root, and click on root. There you find you file `iwashere.txt` again:
+
+<img width="371" alt="Screenshot 2025-04-18 at 12 34 05" src="https://github.com/user-attachments/assets/30b25069-d93a-42dc-b11d-2e5023e0ca7a" />
 
 ## Deleting Containers
 
-Check all containers:
+In the Terminal, check all containers:
 ```bash
 docker container ls -a
 ```
-Containers that you do not need anymore can be delete. This will delete all data on the container (change 94cb0399ba60 to your container ID)
+Containers that you do not need anymore can be deleted. This will delete all data on the container (change 94cb0399ba60 to your container ID)
 ```bash
 docker container rm 94cb0399ba60
 ```
@@ -235,6 +267,8 @@ Check all containers:
 ```bash
 docker container ls -a
 ```
+
+You can also delete containers in VS Code, with 
 
 You can delete all containers with
 ```bash
@@ -247,7 +281,9 @@ docker container ls -a
 ```
 Everything gone.
 
-### Containers and images
+## Containers and Images
+
+
 
 Let us start three different containers from the same image. 
 Meaning of the parameters:
@@ -271,6 +307,9 @@ Check if all three containers running:
 ```bash
 docker container ls
 ```
+
+In VS Code you can open multiple Terminals and switch between them.
+<img width="523" alt="Screenshot 2025-04-18 at 13 02 21" src="https://github.com/user-attachments/assets/3fe82ce4-2105-4b9d-9b30-8c37966bca87" />
 
 Start three more terminals, so that in total you have four terminals open.
 
@@ -312,16 +351,11 @@ Stop all other containers.
 
 ## Define a new Image
 
-Create a file with the name `Dockerfile` with the following content (e.g. with an IDE (integrated development environment) or editor like  Visual Studio Code or PyCharm). A Dockerfile tells Docker [how to build a Docker image](https://docs.docker.com/engine/reference/builder/).
-You might be able to open an editor from the terminal directly (might be configure before in the IDE). 
-* For opening VS Code in the current folder you can type in the terminal: `code .`
-* For opening PyCharm type: `charm .` 
-* The `.`mean the current folder
-
+Create a file in VS Code with the name `Dockerfile` with the following content. A Dockerfile tells Docker [how to build a Docker image](https://docs.docker.com/engine/reference/builder/).
 
 ```bash
 # Use an official Python runtime as a parent image
-FROM python:3.10-slim-buster
+FROM python:3.12-slim-bookworm
 
 # Set the working directory to /app
 WORKDIR /app
@@ -333,10 +367,7 @@ COPY app/ /app
 CMD ["python", "computation.py"]
 ```
 
-Create the `app` folder and change into the folder
-```bash
-mkdir app
-```
+In VS Code create an `app` folder.
 
 Create the `computation.py` file in the `app` folder:
 ```python
@@ -344,7 +375,11 @@ my_list = [i**2 for i in range(10)]
 
 print(my_list)
 ```
+Do not forget to save all files (short key cmd+s)
 
+Explorer view in VS Code should now look like this:
+
+<img width="776" alt="Screenshot 2025-04-18 at 13 07 01" src="https://github.com/user-attachments/assets/1d356b65-9893-4c5d-ab8d-4c3f6edaa8b8" />
 
 ## Build a new Image
 
@@ -529,11 +564,36 @@ exit
 
 # Create a small Flask Web App
 
-We will build a web application with `Flask` (https://flask.palletsprojects.com/en/2.3.x/) (Partially based on https://docs.docker.com/compose/gettingstarted/). 
+We will build a web application with `Flask` (https://flask.palletsprojects.com/en/stable/) (Partially based on https://docs.docker.com/compose/gettingstarted/). 
 
-Create a `requirements.txt` file in the `app` folder. Here we can specify all python `pip` packages that we need. Add in the first line in the `requirements.txt` file:
+Create a `requirements.in`
+
+Create a `requirements.in` file in the `app` folder. Here we can specify all Python `pip` packages that we need. Add in the first line in the `requirements.in` file:
 ```bash
 Flask
+```
+
+Create a local virtual Python environment with uv. In the Terminal:
+```bash
+uv venv
+```
+
+Activate the environment:
+
+On Mac:
+```bash
+source .venv/bin/activate
+```
+
+On Windows  (Power shell)
+```bash
+.venv\Scripts\Activate.ps1
+```
+
+Compile and sync
+```bash
+uv pip compile app/requirements.in > app/requirements.txt
+uv pip sync app/requirements.txt
 ```
 
 Create the `app.py` file in the `app` folder:
@@ -550,12 +610,24 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=80, debug=True)
 ```
 
-This mini Flask app creates a dynamic web applications:
+This mini Flask app creates a dynamic web application:
 * `from flask import Flask`: Imports the Flask class
-*  `app = Flask(__name__)`: Creates the Flask object `app` that represent the main application
-* @app.route('/'): This is a Python decorator. Python decorators (starting with `@`) are functions that change the behavior of other functions (https://realpython.com/primer-on-python-decorators/). Python decorators are  useful for example for logging or monitoring a function or calling a function via a web interface. Here we specify the web routing, that means what URL-path should call what function. Here we want, that the root URL (e.g. http://localhost/) should call the hello function. We could also link the function to any other URL-path like "/hello" so that the URL would be e.g. http://localhost/hello.
+*  `app = Flask(__name__)`: Creates the Flask object `app` that represents the main application
+* `@app.route('/')`: This is a Python decorator. Python decorators (starting with `@`) change the behaviour of other functions (https://realpython.com/primer-on-python-decorators/). Python decorators are useful, for example, for logging or monitoring a function or calling a function via a web interface. Here we specify the web routing, that means, what URL-path should call what function. Here we want, that the root URL (e.g. http://localhost/) should call the hello function. We could also link the function to any other URL-path like "/hello" so that the URL would be e.g. http://localhost/hello.
 * `if __name__ == "__main__":` If we call a Python file with e.g. `python app.py`, the Python interpreter will assign the string `"__main__"` to the variable `__name__`. That means that this if statement will only be executed if it is run directly (and not if Python code is e.g. loaded as a module in another code).
-* `app.run(host="0.0.0.0", port=80, debug=True)`: The Flask server starts and listens to port 80 and the debug mode is turned on.
+* `app.run(host="0.0.0.0", port=80, debug=True)`: The Flask server starts and listens to port 80, and the debug mode is turned on.
+
+# Running Flask without Docker
+
+In the Terminal run 
+
+```bash
+python app/app.py
+```
+
+In the Terminal cmd-click on http://127.0.0.1:80 or open a web browser and open http://127.0.0.1:80
+
+Stop the Flask server again in the Terminal with the shortcut Ctrl + C
 
 # Running Flask with Docker
 
@@ -563,7 +635,7 @@ Change the `Dockerfile` file:
 
 ```dockerfile
 # Use an official Python runtime as a parent image
-FROM python:3.10-slim-buster
+FROM python:3.12-slim-bookworm
 
 # Set the working directory to /app
 WORKDIR /app
@@ -602,10 +674,21 @@ Open in your browser http://localhost:4000/
 
 Stop it with Control-C
 
+Refresh in your browser http://localhost:4000/
+
+
 Running it with detached mode:
 ```bash
 docker run -d -p 4000:80 bipm_hello
 ```
+
+Refresh in your browser http://localhost:4000/
+
+You can see the running containers in in VS Code with the Docker extension. You can stop the running container with right-click (Mac control+click) and then stop:
+
+<img width="378" alt="Screenshot 2025-04-18 at 14 18 48" src="https://github.com/user-attachments/assets/8dc6e7e8-8ec2-47a3-86f5-6610be68a7f7" />
+
+You can also stop it from the Terminal:
 
 The container is still running:
 ```bash
@@ -634,8 +717,7 @@ Real world applications are build with multiple services that are interacting. F
 
 We will enhance our little web application with a visitor counter. The count of visitors will be stored in Redis (https://redis.io/). Redis is a NoSQL database. Redis is an in-memory key-value database, used often as a cache or as part of a message broker.
 
-Create in your `docker` folder a
-`docker-compose.yml` file:
+Create a `docker-compose.yml` file in the project root (not in the app folder but in the docker folder):
 
 ```yaml
 services:
@@ -665,10 +747,18 @@ services:
 * The web service starts after the Redis service, because it `depends_on` Redis.
 * `restart: always`: Restarts the Web Server if it crashes or if the content of the app is changing. Restarts also the Redis Database after a crash.
 
-Change the `requirements.txt` file in the `app` folder:
+Change the `requirements.in` file in the `app` folder:
 ```bash
 Flask
 Redis
+python-dotenv
+```
+
+python-dotenv [python-dotenv](https://pypi.org/project/python-dotenv/) allows either using environment variables or hidden files (`.env`) for things like passwords or other secrets that you do not want to have in the source code.
+
+and compile if
+```bash
+uv pip compile app/requirements.in > app/requirements.txt
 ```
 
 Change the `app.py` file in the `app` folder:
@@ -707,7 +797,7 @@ if __name__ == "__main__":
 
 Run
 ```bash
-docker-compose up
+docker compose up --build
 ```
 
 Open http://localhost:4000/
@@ -759,8 +849,8 @@ import time
 import redis
 from flask import Flask, render_template
 
-app = Flask(__name__)
 cache = redis.Redis(host='redis', port=6379)
+app = Flask(__name__)
 
 def get_hit_count():
     retries = 5
@@ -791,11 +881,8 @@ Refresh the page a couple of times.
 
 If you change the image or if you are not using a mounted volume, you have to rebuild the images and rerun Docker compose: 
 ```bash
-docker-compose build
-```
-and then  
-```bash
-docker-compose up
+docker compose down -v  
+docker compose up --build
 ```
 
 # Source controll with Git and Github
@@ -807,6 +894,7 @@ Create a `.gitignore` file (with `.` at the beginning) with the following conten
 ```sh
 .env
 venv
+.venv
 .idea
 .ipynb_checkpoints
 .vscode
@@ -819,6 +907,7 @@ Create a `.dockerignore` file with the following content:
 ```sh
 .env
 venv
+.venv
 .idea
 .ipynb_checkpoints
 .vscode
@@ -827,17 +916,17 @@ venv
 .gitignore
 ```
 
-In VS Code, click on the Source Controll side icon (on the left side). Click on the button `Initialize Repository`.
+In VS Code, click on the Source Control side icon (on the left side). Click on the button `Initialize Repository`.
 
-Now you should see at the Source Controll panel 9 files that are not yet checked in. Click on the `+` symbole next to Changes, to stage all files. Enter a Commit Message and commit the changes. Then publish the branch to Github. Check on Github that the repository is now there.
+Now you should see at the Source Control panel 9 files that are not yet checked in. Click on the `+` symbole next to Changes, to stage all files. Enter the Commit Message 'Initial commit' and commit the changes. Then publish the branch to Github. Check on Github that the repository is now there.
 
 # Add a Password to the Database
 
-Right now Redis is not secured through a password. This is right now not a problem, because everything is running on the laptop and we do not have any sensible data in the database. However, when we will deploy the app to a cloud provider, it is better to use a password for accessing the database.
+Right now Redis is not secured through a password. This is right now not a problem, because everything is running on the laptop and we do not have any sensible data in the database. However, when we deploy the app to a cloud provider, it is better to use a password for accessing the database.
 
-Typically we do not want any plain-text password in the source code. The alternative is using environment variables (variables from the operation systems) or password files that we do not add into the source repository (often hidden files (that start with a `.` in the file name) with the name `.env`).
+Typically, we do not want any plain-text passwords in the source code. The alternative is using environment variables (variables from the operating systems) or password files that we do not add into the source repository (often hidden files (that start with a `.` in the file name) with the name `.env`).
 
-Create a new file in the docker folder (not in the app folder) with the name `.env` (with a `.` at the beginning), with the following content (you should use your own secrete password):
+Create a new file in the docker folder (not in the app folder) with the name `.env` (with a `.` at the beginning), with the following content (you should use your own secret password):
 
 ```bash
 REDIS_PASSWORD=MyBIPMPassword
@@ -868,22 +957,16 @@ services:
 
 `${REDIS_PASSWORD}` and `${REDIS_HOST}` will read the environment variables from the `.env` file.
 
-Change the `requirements.txt` file by adding one more Python package [python-dotenv](https://pypi.org/project/python-dotenv/). 
-```
-Flask
-Redis
-python-dotenv
-```
 
-python-dotenv allows to either use environment variables or hidden files (`.env`) for things like passwords.
-
-Change the `app.py` file.  Add the following lines:
+Change the `app.py` file.  Add the following new lines and change one line:
 ```python
-from dotenv import load_dotenv
+import os   # <- new
+from dotenv import load_dotenv   # <- new
 
-load_dotenv() 
-cache = redis.Redis(host=os.getenv('REDIS_HOST'), port=6379,  password=os.getenv('REDIS_PASSWORD'))
+load_dotenv()  # <- new 
+cache = redis.Redis(host=os.getenv('REDIS_HOST'), port=6379,  password=os.getenv('REDIS_PASSWORD')) # <- changed
 ```
+
 
 This loads the environments and with `os.getenv('REDIS_HOST')` and `os.getenv('REDIS_PASSWORD')` we can use the host name and the password in the Python code.
 
@@ -923,13 +1006,8 @@ if __name__ == "__main__":
 Try it out with 
 
 ```bash
-docker-compose build   
-```
-
-and then
-
-```bash
-docker-compose up
+docker compose down -v  
+docker compose up --build
 ```
 
 and open the project in a web browser.
@@ -938,10 +1016,10 @@ If it works, cancel the service in the terminal (control+C). In VS Code, add all
 
 # Customize the Website
 
-The final task is to customize the website like you want (see https://simplecss.org/demo for help about Simplecss and https://flask.palletsprojects.com/en/2.3.x/ about Flask):
+The final task is to customize the website like you want (see https://simplecss.org/demo for help about Simplecss and https://flask.palletsprojects.com/en/stable/ about Flask):
 1. Add a link in `hello.html` that points to the HWR Berlin homepage
 2. Add a footer with your name
-3. Add an image to the web page. You can serve static files like images or CSS files with Flask: https://flask.palletsprojects.com/en/2.3.x/quickstart/#static-files
+3. Add an image to the web page. You can serve static files like images or CSS files with Flask: https://flask.palletsprojects.com/en/stable/quickstart/#static-files
 4. Add a navigation menu to the web page, with three menu items: Home (the current hello page), Titanic (another internal page) and About (a link to your Github homepage)
 6. Create another page for the Titanic link (similar like the hello page). You have to add a new `titanic` function in `app.py`, but change the route to e.g. `/titanic`. This will tell what URL paths are mapped to this function.  Add a new `titanic.html` template. Add the CSV (comma seperated) file of the Titanic Dataset to your project. Use Pandas to load the CSV file and show the first 5 rows in the Titanic page. You can use the DataFrame method to_html https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_html.html 
 7. Add a bar chart to the Titanic page, that shows how many men and women survived.
