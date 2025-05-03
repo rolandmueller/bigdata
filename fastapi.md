@@ -31,8 +31,11 @@ Activate Windows:
 Create a `requirements.in` file:
 
 ```txt
-fastapi
+fastapi[all]
+pydantic
 uvicorn
+httpx
+pytest
 pandas
 scikit-learn
 joblib
@@ -226,7 +229,7 @@ from pydantic import BaseModel
 app = FastAPI(
     title="Hello API",
     description="A simple FastAPI service that returns a greeting message based on the user's name.",
-    version="1.0.0"
+    version="0.1.0"
 )
 
 class NameRequest(BaseModel):
@@ -252,6 +255,63 @@ def hello(data: NameRequest):
 Open the automatically generates interactive documentation (Swagger UI). Open http://127.0.0.1:80/docs
 
 You can even try out the API through the documents. Try it out.
+
+### 3.4 Adding Automatic Tests with pytest
+
+Tests are automated checks to verify that the code works as expected. Instead of manually checking if the system is still working as intended, we write a code the check the actual result with the expected result. [Pytest](https://docs.pytest.org) is a powerful and easy-to-use testing framework for Python that supports simple unit tests as well as complex functional testing.
+
+Create a folder `tests` with a file `test_hello.py`. Python file for pytest MUST start with `test` or `test_`. Pytest will automatically detect these files and run all test in them.
+
+`test_hello.py`
+
+```python
+from fastapi.testclient import TestClient
+from app.main import app
+
+client = TestClient(app)
+
+def test_hello_with_valid_name():
+    response = client.post("/hello", json={"name": "John"})
+    assert response.status_code == 200      # All OK
+    assert response.json() == {"message": "Hello John"}
+```
+
+* `from fastapi.testclient import TestClient` - Imports FastAPI’s built-in test client for simulating HTTP requests in tests.
+* `from app.main import app` - Imports the FastAPI application instance from your main.py file inside the app directory.
+* `client = TestClient(app)` - Creates a test client that can interact with your FastAPI app as if it were a real HTTP client.
+* `def test_hello_with_valid_name()` – Defines a test function that will be automatically discovered and run by pytest. Test functions MUST start with `test` or `test_`.
+* `response = client.post("/hello", json={"name": "John"})` – Sends a POST request to the /hello endpoint with JSON data containing the name "John".
+* `assert response.status_code == 200` – Asserts that the response has HTTP status code 200, meaning the request was successful. The `assert` statement in Python is used to check if a condition is true, and if it’s not, it raises an AssertionError, which helps detect bugs during testing or development.
+* `assert response.json() == {"message": "Hello John"}` – Asserts that the returned JSON matches the expected greeting message.
+
+run pytest in the Terminal with
+```bash
+pytest
+```
+
+Add three more tests in `test_hello.py`
+
+```python
+def test_hello_with_empty_name():
+    response = client.post("/hello", json={"name": ""})
+    assert response.status_code == 200
+    assert response.json() == {"message": "Hello "}
+
+def test_hello_missing_name_field():
+    response = client.post("/hello", json={})
+    assert response.status_code == 422
+
+def test_hello_with_non_string_name():
+    response = client.post("/hello", json={"name": 123})
+    assert response.status_code == 422
+```
+
+* `assert response.status_code == 422` - checks that the HTTP response returned a 422 Unprocessable Entity status code, which means the server understood the request but couldn’t process it due to invalid or missing input data (typically from failed validation in FastAPI).
+
+run pytest in the Terminal with
+```bash
+pytest
+```
 
 ## 4. Train and Save the ML Model
 
@@ -323,8 +383,7 @@ Update `app/main.py` by creating a new POST endpoint `/predict` that:
   * Convert the incoming request data (JSON) into a Pandas DataFrame. You can get the data as an dict with `data.dict()`
   * Use the loaded model to make a prediction.
   * Return the prediction as a JSON response.
-  * Add a docsting as a comment and for the auto-generated documentation of the Web API.
-
+  * Add a docsting as a comment and for the auto-generated documentation of the Web API. Also change the name, description, and version number of the overall app to reflect the new machine learning functionality.
 
 ### 5.1 Test in Insomnia
 
@@ -381,6 +440,15 @@ Send also text instead of float into the endpoint. Check the results or errors.
 ```
 
 Check the documentation: Open http://127.0.0.1:80/docs
+
+### 5.2 Create a Unit Test for the new API
+
+create in `tests` a new file `test_api.py` and include unit tests for the machine learning API. Use the same input as in section 5.1 for the automatic tests.
+
+Run all unit test in the Terminal with
+```bash
+pytest
+```
 
 ## 6. Dockerize the FastAPI App
 
@@ -451,6 +519,12 @@ Select the app name and follow instructions.
 Once deployed:
 * Visit https://iris.yourdomain.com/predict and test it in Insomnia
 
+Check the documentation: https://iris.yourdomain.com/docs
+
+## 7.3 README.md
+
+Add a README.md file with a short description and a link to the deployed API and a link to the deployed API docs. Add the README.md file to Git and Commit and Push it to GitHub.
+
 ## Deliverables
 
-Submit your deployed FastAPI API URL on Moodle.
+Submit your GitHub URL to Moodle.
