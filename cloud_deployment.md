@@ -45,9 +45,9 @@ https://caprover.com/docs/get-started.html#step-2-connect-root-domain
 
 Add a wildcard DNS entry for your VPS at your Domain Name register (e.g. namecheap.com).
 
-Go to the domain name panel of your Domain Name register and add an *A Record*:
-* Host should be a wild card for a subdomain, e.g. `*.dev`
-* Value (Points to) should be the IP Address of your VPS
+Go to the domain name panel of your Domain Name register and add an **A Record**:
+* Host should be a wild card for a subdomain: `*.dev`
+* Value (Points to) should be the **IP Address** of your VPS
 
 Go to https://mxtoolbox.com/DNSLookup.aspx and check if you enter your URL, i.e. randomthing123.dev.mydomain.com (change mydomain.com to your domain), it resolves to your IP address. DNS propagation might take some time, so the domain might not be available immidiately.
 
@@ -85,9 +85,7 @@ If you use Hetzner and you used the Docker CE App, you can use [this tutorial](h
 
 With the CapRover CLI (Command Line Interface) you can type in your terminal on your laptop `caprover deploy` and your local project will deployed to your server.
 
-Before installing the CapRover CLI, you have to install Node.js. Just dowload the installer and follow this instruction: https://kinsta.com/blog/how-to-install-node-js/
-
-Then continue with installing the CapRover CLI: https://caprover.com/docs/get-started.html#step-3-install-caprover-cli
+Before installing the CapRover CLI, you have to install Node.js. Just dowload the installer on your laptop and follow this instruction: https://kinsta.com/blog/how-to-install-node-js/
 
 Installing CapRover CLI. Run on your laptop:
 ```bash
@@ -102,6 +100,7 @@ caprover serversetup
 Follow the steps and login to your CapRover instance. When prompted to enter the root domain, enter dev.mydomain.com (change mydomain.com to your URL) assuming that you set *.dev.mydomain.com to point to your IP address in step #2. Now you can access your CapRover from the URL captain.dev.mydomain.com.
 
 ## 6. Deploy the Docker example from the last exercise.
+
 
 The Docker example had two components:
 
@@ -144,12 +143,16 @@ caprover login
 
 Now we can use the [CapRover CLI](https://caprover.com/docs/cli-commands.html) to deploy the app.
 
+IMPORTANT: When you run caprover deploy, the current git commit will be sent over to your server. Uncommitted files and files in gitignore WILL NOT be sent to the server.
+
 Enter in the terminal
 ```bash
 caprover deploy
 ```
 
 and select the information of your server and deploy to the flask app.
+
+First time build takes about two minutes. After build is completed, visit flask.dev.mydomain.com where dev.mydomain.com is your root domain. CONGRATS! Your app is live!!
 
 On the CapRover web GUI you can find the public URL, under "Your app is publicly available at:"
 
