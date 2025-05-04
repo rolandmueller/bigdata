@@ -5,7 +5,7 @@ In the Docker exercise, you could open your solution on your laptop by entering 
 
 There are many ways to deploy a Docker container. We will just discuss one example: [Caprover](https://caprover.com/). CapRover helps deploying Docker containers to a Virtual Private Server (VPS).
 
-You as a developer want to give the end user a URL (Uniform Resource Locator, that means a web address), so that he or she can, e.g., interact with your nice web dashboard or use your API (Application Programming Interface). 
+You as a developer want to give the end user a URL (Uniform Resource Locator, that means a web address), so that he or she can, e.g., interact with your nice web dashboard or use your API (Application Programming Interface).
 
 If a user types in in your URL (e.g. www.example.com), the browser will look up in the Domain Name System (DNS) its Internet Protocol (IP) address. So DNS translates the URL (e.g. www.hwr-berlin.de) to a IP address (e.g. 194.94.22.19). If you copy 194.94.22.19 in the browser, you would also land at the web server of the HWR Berlin. However, the IP number is much harder to remember. The IP address is kind of the address of the server. If you create your own cloud server, this server would have an IP address, with which you can reach it.
 
@@ -17,25 +17,25 @@ CapRover will run one or more Docker container for you and will allow you to man
 
 A web browser would use a URL and then the IP address and a port to interact with your server. Port 80 is the standard for non-encripted HTTP (Hypertext Transfer Protocol) traffic. If it is encripted, that means it is secure, then it would use Hypertext transfer protocol secure (HTTPS) on part 443. For using HTTPS you need a digital certificate. However, [Let's Encrypt](https://en.wikipedia.org/wiki/Let%27s_Encrypt) will provide you one for free. CapRover will automatically communicate with Let's Encrypt to get a digital certificate for you, so it is very easy to have https URL.
 
-[Nginx](https://en.wikipedia.org/wiki/Nginx) is a web server, that acts as an [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy). Nginx will map an incoming call from a web browser to the right Docker container. You can map different URLs to different Docker containers. That means, you can point multiple URLs to the same IP address (the same server), but depending on the URL, Nginx will forward the traffic to the right Docker container. With CapRover you can manage this mapping of Nginx and the Docker containers. 
+[Nginx](https://en.wikipedia.org/wiki/Nginx) is a web server, that acts as an [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy). Nginx will map an incoming call from a web browser to the right Docker container. You can map different URLs to different Docker containers. That means, you can point multiple URLs to the same IP address (the same server), but depending on the URL, Nginx will forward the traffic to the right Docker container. With CapRover you can manage this mapping of Nginx and the Docker containers.
 
 CapRover helps you to deploy the Docker containers as a developer. It has a Command Line Interface (CLI) to deploy your code to the server with just one command (`caprover deploy`). It has also a web interface to access, manage, and monitor your server. Also there are many one-click apps (like Wordpress) available, that you can deploy in the web interface without any coding.
 
 To be able to deploy to a CapRover server, you need the following things:
 
-## 1. Get a cloud server (Virtual Private Server, VPS). 
+## 1. Get a cloud server (Virtual Private Server or VPS).
 
-You can get them, e.g. from [Hetzner](https://www.hetzner.com/cloud) or [Digitalocean](https://www.digitalocean.com/products/droplets) or from any of the cloud hyperscalers (e.g., AWS, Azure, Google Cloud). There is also a quite generous [free tier from Oracle](https://www.oracle.com/cloud/free/) that you might want to check out. Hetzner is a German cloud provider with very competitive pricing. If you get the GitHub Student Developer Pack, you get a Digitalocean $200 credit for 60 days. However, Hetzner has better prices than Digitalocean. GitHub Student Developer Pack also includes $100 Microsoft Azure credit.  
-    
+You can get them, e.g. from [Hetzner](https://www.hetzner.com/cloud) or [Digitalocean](https://www.digitalocean.com/products/droplets) or from any of the cloud hyperscalers (e.g., AWS, Azure, Google Cloud). There is also a quite generous [free tier from Oracle](https://www.oracle.com/cloud/free/) that you might want to check out. Hetzner is a German cloud provider with very competitive pricing. If you get the GitHub Student Developer Pack, you get a DigitalOcean $200 credit for 60 days. However, Hetzner has better prices than DigitalOcean. GitHub Student Developer Pack also includes $100 Microsoft Azure credit.
+
 [Hetzner](https://docs.hetzner.com/cloud/apps/list/docker-ce/) and [Digitalocean](https://marketplace.digitalocean.com/apps/docker) offer Docker CE apps, that means servers, where Docker is already pre-installed. When you create a VPS, you should select the Docker CE app, so that you do not have to install Docker on the server by yourself. If you have a VPS without preinstalled Docker, you can follow the installation instruction on the Docker website, e.g. for [installing Docker on a Ubuntu Server](https://docs.docker.com/engine/install/ubuntu/). Digitalocean has even a [CapRover app](https://marketplace.digitalocean.com/apps/caprover).
-   
-CapRover source code is compatible with any CPU architecture and the Docker build available on Docker Hub is built for AMD64 (X86), ARM64, and ARMV7 CPUs. Recommended operating system is Ubuntu. The minimum RAM for CapRover is 1 GB RAM, but it is better to have 2 GB RAM.
 
-After creating a VPS, write down the IP address and the root password of your VPS. 
+CapRover source code is compatible with any CPU architecture and the Docker build available on Docker Hub is built for AMD64 (X86), ARM64, and ARMV7 CPUs. Recommended operating system is Ubuntu. I would recommend 2 GB RAM (1 GB RAM might also work). At Hetzner you can get a VPS with 4 GB RAM and 2 virtual CPUs for around 4.50 EUR per month https://www.hetzner.com/cloud/. At DigitalOcean a VPS (droplet) with 2 GB RAM and 1 virual CPU costs 12.00 USD per month and with 1 GB and 1 virtual CPU costs 6.00 USD https://www.digitalocean.com/pricing/droplets.
+
+After creating a VPS, write down the IP address and the root password of your VPS.
 
 ## 2. Get a domain name
 
-You can get a .com or a .de domain from e.g. [Namecheap](https://www.namecheap.com/) for ~ 7€ to 10€ per year. There are other top-level domains (TLD) that might be cheaper or more expensive, and there might be some special deals (e.g., for students or for the first year). However, it might be a good strategy to have your own domain name for the long term, to show some projects to potential employers. 
+You can get a .com or a .de domain from e.g. [Namecheap](https://www.namecheap.com/) for ~ 7€ to 10€ per year. There are other top-level domains (TLD) that might be cheaper or more expensive, and there might be some special deals (e.g., for students or for the first year). However, it might be a good strategy to have your own domain name for the long term, to show some projects to potential employers.
 
 ## 3. Configure the DNS Entry
 
@@ -49,7 +49,7 @@ Go to the domain name panel of your Domain Name register and add an *A Record*:
 * Host should be a wild card for a subdomain, e.g. `*.dev`
 * Value (Points to) should be the IP Address of your VPS
 
-Go to https://mxtoolbox.com/DNSLookup.aspx and check if you enter your URL, i.e. randomthing123.dev.mydomain.com (change mydomain.com to your domain), it resolves to your IP address. DNS propagation might take some time, so the domain might not be available immidiately. 
+Go to https://mxtoolbox.com/DNSLookup.aspx and check if you enter your URL, i.e. randomthing123.dev.mydomain.com (change mydomain.com to your domain), it resolves to your IP address. DNS propagation might take some time, so the domain might not be available immidiately.
 
 ## 4. Install CapRover on the server
 
@@ -83,11 +83,11 @@ If you use Hetzner and you used the Docker CE App, you can use [this tutorial](h
 
 ## 5. Install the CapRover CLI (Command Line Interface) on your Laptop
 
-With the CapRover CLI (Command Line Interface) you can type in your terminal on your laptop `caprover deploy` and your local project will deployed to your server. 
+With the CapRover CLI (Command Line Interface) you can type in your terminal on your laptop `caprover deploy` and your local project will deployed to your server.
 
 Before installing the CapRover CLI, you have to install Node.js. Just dowload the installer and follow this instruction: https://kinsta.com/blog/how-to-install-node-js/
 
-Then continue with installing the CapRover CLI: https://caprover.com/docs/get-started.html#step-3-install-caprover-cli 
+Then continue with installing the CapRover CLI: https://caprover.com/docs/get-started.html#step-3-install-caprover-cli
 
 Installing CapRover CLI. Run on your laptop:
 ```bash
@@ -99,7 +99,7 @@ Configure the CapRover server. Run on your laptop:
 caprover serversetup
 ```
 
-Follow the steps and login to your CapRover instance. When prompted to enter the root domain, enter dev.mydomain.com (change mydomain.com to your URL) assuming that you set *.dev.mydomain.com to point to your IP address in step #2. Now you can access your CapRover from the URL captain.dev.mydomain.com. 
+Follow the steps and login to your CapRover instance. When prompted to enter the root domain, enter dev.mydomain.com (change mydomain.com to your URL) assuming that you set *.dev.mydomain.com to point to your IP address in step #2. Now you can access your CapRover from the URL captain.dev.mydomain.com.
 
 ## 6. Deploy the Docker example from the last exercise.
 
@@ -107,17 +107,17 @@ The Docker example had two components:
 
 A. The Redis Database
 
-You can reach now your web GUI with captain.dev.mydomain.com (change the URL to your domain). You can install Redis as a one-click app in the web GUI of your CapRover. 
+You can reach now your web GUI with captain.dev.mydomain.com (change the URL to your domain). You can install Redis as a one-click app in the web GUI of your CapRover.
 
 If you go to the Redis app, you can see that the internal name of the app is `srv-captain--redis`. Through this name, other Docker containers on the CapRover server can use this Redis database.
 
-Under the side menu `Apps`, click on the button `One Click-Apps / Databases` and search for Redis. Name the app `redis`. Add in the password field the same password from the Docker exercise (e.g., `MyBIPMPassword`). 
+Under the side menu `Apps`, click on the button `One Click-Apps / Databases` and search for Redis. Name the app `redis`. Add in the password field the same password from the Docker exercise (e.g., `MyBIPMPassword`).
 
 B. Your Flask Web app
 
 On your web GUI of your CapRover, create a new app with the name `flask` (entering in the field). You do NOT need Persistent Data. The counter data is stored in the Redis database.
 
-Click on the created `flask` and click on the `App Configs` tab. In the Environmental Variables, click `Add Key/Value Pair`: 
+Click on the created `flask` and click on the `App Configs` tab. In the Environmental Variables, click `Add Key/Value Pair`:
 Key:  REDIS_PASSWORD
 Value: MyBIPMPassword (or your password)
 
@@ -135,7 +135,7 @@ On you laptop, create a new file in the docker folder with the name `captain-def
 }
 ```
 
-Add `captain-definition` to Git. Commit and push. You have to always use git with CapRover. 
+Add `captain-definition` to Git. Commit and push. You have to always use git with CapRover.
 
 Enter from your the laptop in the docker folder in the terminal
 ```bash
@@ -144,7 +144,7 @@ caprover login
 
 Now we can use the [CapRover CLI](https://caprover.com/docs/cli-commands.html) to deploy the app.
 
-Enter in the terminal 
+Enter in the terminal
 ```bash
 caprover deploy
 ```

@@ -1,4 +1,4 @@
-# Creating a Web API with FastAPI (Remote Procedure Invocation)
+# Creating a Web API with FastAPI
 
 In this tutorial, you will create your own machine learning-powered Web API using [FastAPI](https://fastapi.tiangolo.com), a modern and high-performance framework for building APIs with Python. FastAPI replaces Flask from the previous GitHub and Docker examples, taking advantage of FastAPI’s data validation, automatic docs, and async support. FastAPI is the most common Python solution for exposing the backend. Alternatives are Flask and Django.
 
@@ -457,6 +457,7 @@ pytest
 ```
 fastapi
 uvicorn
+pydantic
 pandas
 scikit-learn
 joblib
