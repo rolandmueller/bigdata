@@ -5,7 +5,7 @@ In the Docker exercise, you could open your solution on your laptop by entering 
 
 There are many ways to deploy a Docker container. We will just discuss one example: [Caprover](https://caprover.com/). CapRover helps deploying Docker containers to a Virtual Private Server (VPS).
 
-You as a developer want to give the end user a URL (Uniform Resource Locator, that means a web adress), so the he or she can e.g. interacte with your nice web dashboard or use your API (Application Programming Interface). 
+You as a developer want to give the end user a URL (Uniform Resource Locator, that means a web address), so that he or she can, e.g., interact with your nice web dashboard or use your API (Application Programming Interface). 
 
 If a user types in in your URL (e.g. www.example.com), the browser will look up in the Domain Name System (DNS) its Internet Protocol (IP) address. So DNS translates the URL (e.g. www.hwr-berlin.de) to a IP address (e.g. 194.94.22.19). If you copy 194.94.22.19 in the browser, you would also land at the web server of the HWR Berlin. However, the IP number is much harder to remember. The IP address is kind of the address of the server. If you create your own cloud server, this server would have an IP address, with which you can reach it.
 
@@ -29,7 +29,7 @@ You can get them, e.g. from [Hetzner](https://www.hetzner.com/cloud) or [Digital
     
 [Hetzner](https://docs.hetzner.com/cloud/apps/list/docker-ce/) and [Digitalocean](https://marketplace.digitalocean.com/apps/docker) offer Docker CE apps, that means servers, where Docker is already pre-installed. When you create a VPS, you should select the Docker CE app, so that you do not have to install Docker on the server by yourself. If you have a VPS without preinstalled Docker, you can follow the installation instruction on the Docker website, e.g. for [installing Docker on a Ubuntu Server](https://docs.docker.com/engine/install/ubuntu/). Digitalocean has even a [CapRover app](https://marketplace.digitalocean.com/apps/caprover).
    
-CapRover source code is compatible with any CPU architecture and the Docker build available on Docker Hub is built for AMD64 (X86), ARM64, and ARMV7 CPUs. Recommended operating system is Ubuntu. The minimum RAM is 1 GB RAM, but it is better to have 2 GB RAM.
+CapRover source code is compatible with any CPU architecture and the Docker build available on Docker Hub is built for AMD64 (X86), ARM64, and ARMV7 CPUs. Recommended operating system is Ubuntu. The minimum RAM for CapRover is 1 GB RAM, but it is better to have 2 GB RAM.
 
 After creating a VPS, write down the IP address and the root password of your VPS. 
 
