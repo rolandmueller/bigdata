@@ -247,7 +247,7 @@ Chose `gapminder` as the app and deploy your solution.
 
 4. In the CapRover Web GUI, enable `Force HTTPS by redirecting all HTTP traffic to HTTPS`. Enter your domain without https (e.g. at http://gapminder.example.com) and test if you get redirected to the https URL (e.g. to https://gapminder.example.com).
 
-5.  Add a `README.md` file, with a short description and a link to the deployed prototype (URL).
+5.  Add a `README.md` file, with a short description and a link to the deployed prototype (URL). Add and Commit the file and push it to GitHub.
 
 
 # Deliverables in Moodle
