@@ -99,13 +99,15 @@ Configure the CapRover server. Run on your laptop:
 caprover serversetup
 ```
 
+Follow the steps and login to your CapRover instance. When prompted to enter the root domain, enter dev.mydomain.com (change mydomain.com to your URL) assuming that you set *.dev.mydomain.com to point to your IP address in step #2. Now you can access your CapRover from the URL captain.dev.mydomain.com. 
+
 ## 6. Deploy the Docker example from the last exercise.
 
 The Docker example had two components:
 
 A. The Redis Database
 
-You can install Redis as a one-click app in the web GUI of your CapRover. 
+You can reach now your web GUI with captain.dev.mydomain.com (change the URL to your domain). You can install Redis as a one-click app in the web GUI of your CapRover. 
 
 If you go to the Redis app, you can see that the internal name of the app is `srv-captain--redis`. Through this name, other Docker containers on the CapRover server can use this Redis database.
 
@@ -125,7 +127,7 @@ Value: srv-captain--redis
 
 Click on `Save & Update`
 
-Create a new file in the docker folder with the name `captain-definition` with the [following content](https://caprover.com/docs/captain-definition-file.html#use-dockerfile-in-captain-definition):
+On you laptop, create a new file in the docker folder with the name `captain-definition` with the [following content](https://caprover.com/docs/captain-definition-file.html#use-dockerfile-in-captain-definition):
 ```json
 {
     "schemaVersion": 2,
@@ -133,7 +135,7 @@ Create a new file in the docker folder with the name `captain-definition` with t
 }
 ```
 
-Add `captain-definition` to Git. Commit and push.
+Add `captain-definition` to Git. Commit and push. You have to always use git with CapRover. 
 
 Enter from your the laptop in the docker folder in the terminal
 ```bash
