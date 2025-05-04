@@ -226,7 +226,7 @@ Refresh the browser to show the changes. You do not have to rebuild the Docker i
 If it runs in Docker stop the container.
 
 
-# Deployment of your Streamlit app to CapRover
+# Deploy your Streamlit app with CapRover
 
 1. Create at the CapRover Web GUI a new app with the name `gapminder`
 2. Enter for the app, at `Container HTTP Port`: 8501  (The Streamlit Docker container exposes Port 8501)
