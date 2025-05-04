@@ -27,6 +27,8 @@ For PowerShell on Windows:
 .venv\Scripts\Activate.ps1
 ```
 
+## Add .gitignore and .dockerignore
+
 Create in VS Code the following files in the project folder with the content:
 
 `.gitignore`:
@@ -53,6 +55,8 @@ venv
 .gitignore
 ```
 
+## Add app folder and requirements
+
 Create an `app` folder inside the `gapminder` folder.
 
 In the `app` folder, create the following files with the content:
@@ -72,6 +76,8 @@ uv pip compile app/requirements.in > app/requirements.txt
 ```bash
 uv pip sync app/requirements.txt
 ```
+
+## Add app.py with Streamlit app
 
 In the `app` folder create a file called `app.py`:
 ```python
@@ -99,7 +105,7 @@ Refresh the browser.
 
 You can find the different Streamlit methods here: https://docs.streamlit.io/library/api-reference
 
-## Adding code to Git and Github
+## Add code to Git and Github
 
 In VS Code, click on the Source Control side icon (on the left side). Click on the button `Initialize Repository`. Now you should see at the Source Control panel files that are not yet checked in. Click on the `+` symbol next to Changes to stage all files. Enter the commit message "Initial Commit" and commit the changes to the main branch. Then, publish the branch to GitHub. You should regularly commit your changes during this project.
 
