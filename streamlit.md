@@ -77,7 +77,7 @@ uv pip compile app/requirements.in > app/requirements.txt
 uv pip sync app/requirements.txt
 ```
 
-## Add app.py with Streamlit app
+## Add app.py with a Streamlit app
 
 In the `app` folder create a file called `app.py`:
 ```python
