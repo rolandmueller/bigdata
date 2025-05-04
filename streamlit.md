@@ -245,7 +245,7 @@ Chose `gapminder` as the app and deploy your solution.
 
 3. In the CapRover Web GUI for the newly added domain (e.g. at http://gapminder.example.com), click `Enable HTTPS`. Test if you can reach your app with the https URL (e.g. at https://gapminder.example.com).
 
-4. In the CapRover Web GUI, enable `Force HTTPS by redirecting all HTTP traffic to HTTPS`. Enter your domain without https (e.g. at http://counter.example.com) and test if you get redirected to the https URL (e.g. to https://counter.example.com).
+4. In the CapRover Web GUI, enable `Force HTTPS by redirecting all HTTP traffic to HTTPS`. Enter your domain without https (e.g. at http://gapminder.example.com) and test if you get redirected to the https URL (e.g. to https://gapminder.example.com).
 
 5.  Add a `README.md` file, with a short description and a link to the deployed prototype (URL).
 
