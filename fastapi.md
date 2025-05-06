@@ -159,7 +159,7 @@ def hello(name: str = ""):
     return {"message": f"Hello {name}"}
 ```
 
-* `def hello(name: str = ""):`: Now this function has a paramter `name` with a default value of an empty string `""`. Interesting is the so-called [**type hint**](https://docs.python.org/3.11/library/typing.html) `name: str`. Type hint is a standard why in Python to indicate (or hint) what data type a variable might have.  Type hints in Python are optional (compared to language like Java). `name: str` says that the input parameter should be a string. FastAPI is using type hints heavely for data validation and automatic type casting (transforming the input data type into the desired data type).
+* `def hello(name: str = ""):`: Now this function has a paramter `name` with a default value of an empty string `""`. Interesting is the so-called [**type hint**](https://docs.python.org/3.11/library/typing.html) `name: str`. Type hint is a standard way in Python to indicate (or hint) what data type a variable might have. Type hints in Python are optional (compared to languages like Java). `name: str` says that the input parameter should be a string. FastAPI is using type hints heavely for data validation and automatic type casting (transforming the input data type into the desired data type).
 
 Open a browser or use Insomnia to test:
 * GET http://127.0.0.1/hello?name=BIPM
