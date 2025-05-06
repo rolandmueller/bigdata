@@ -175,7 +175,7 @@ The return value should be
 
 ### 3.1 Modify main.py to use POST
 
-In web development, GET and POST are two commonly used HTTP methods for client-server communication. A GET request is used to retrieve data from a server and typically includes parameters in the URL. The GET method is limited by URL length restrictions and cannot include a request body, which makes it unsuitable for sending large or complex data. Additionally, because data is exposed in the URL, GET is not secure for transmitting sensitive information. A POST request is used to send data to the server (usually in the request body), often for creating or processing resources.
+In web development, GET and POST are two commonly used HTTP methods for client-server communication. A GET request is used to retrieve data from a server and typically includes parameters in the URL. The GET method is limited by URL length restrictions and cannot include a request body, which makes it unsuitable for sending large or complex data. Also a POST request is used to send data to the server. It can contain complex data like JSON or images.
 
 ```python
 from fastapi import FastAPI
@@ -198,13 +198,13 @@ class NameRequest(BaseModel):
     name: str
 ```
 
-  This defines a Pydantic model NameRequest that expects a JSON object with a name field of type string.
+This defines a Pydantic model NameRequest that expects a JSON object with a name field of type string.
 
 * `@app.post("/hello")`: registers a POST endpoint at the path `/hello` in the FastAPI application
 * `def hello(data: NameRequest):`: defines a function `hello` that takes a `NameRequest` object (parsed from incoming JSON) as input.
 * `return {"message": f"Hello {data.name}"}`: returns a JSON response containing a personalized greeting using the name from the input data
 
-### 3.2 Test with Insomnia
+### 3.2 Manually test with Insomnia
 
 * POST to http://127.0.0.1/hello
 * Body → JSON:
@@ -217,7 +217,7 @@ class NameRequest(BaseModel):
 
 → Response: {"message": "Hello BIPM"}
 
-### 3.3 Adding Documentation
+### 3.3 Add Documentation
 
 You can add **docstrings** (https://peps.python.org/pep-0257/) to the functions, data types and web API endpoints. FastAPI uses this comments to auto-generate API docs.
 
@@ -257,11 +257,11 @@ Open the automatically generates interactive documentation (Swagger UI). Open ht
 
 You can even try out the API through the documents. Try it out.
 
-### 3.4 Adding Automatic Tests with pytest
+### 3.4 Add Automatic Tests with pytest
 
-Tests are automated checks to verify that the code works as expected. Instead of manually checking if the system is still working as intended, we write a code the check the actual result with the expected result. [Pytest](https://docs.pytest.org) is a powerful and easy-to-use testing framework for Python that supports simple unit tests as well as complex functional testing.
+Tests are automated checks to verify that the code works as expected. Instead of manually checking if the system is still working as intended, we write code the check the actual result with the expected result. [Pytest](https://docs.pytest.org) is a powerful and easy-to-use testing framework for Python that supports simple unit tests as well as complex functional testing.
 
-Create a folder `tests` with a file `test_hello.py`. Python file for pytest MUST start with `test` or `test_`. Pytest will automatically detect these files and run all test in them.
+Create a folder `tests` with a file `test_hello.py`. A Python file for pytest MUST start with `test` or `test_`. Pytest will automatically detect these files and run all test in them.
 
 `test_hello.py`
 
@@ -363,7 +363,7 @@ joblib.dump(pipe, '../app/iris.mdl')
 
 Check how good the accuracy, precision, recall, and F1 score is?
 
-## 5. Add a Prediction Endpoint to Your FastAPI App
+## 5. Add a Prediction Endpoint to your FastAPI App
 
 In this exercise, you will extend your FastAPI application by creating a new endpoint that accepts input data for an iris flower and returns a machine learning prediction of the species.
 
@@ -444,7 +444,7 @@ Check the documentation: Open http://127.0.0.1:80/docs
 
 ### 5.2 Create a Unit Test for the new API
 
-create in `tests` a new file `test_api.py` and include unit tests for the machine learning API. Use the same input as in section 5.1 for the automatic tests.
+Create in `tests` a new file `test_api.py` and include unit tests for the machine learning API. Use the same input as in section 5.1 for the automatic tests.
 
 Run all unit test in the Terminal with
 ```bash
@@ -453,7 +453,7 @@ pytest
 
 ## 5.3 Create an Authentification Token for the predict service
 
-Create a `.env` file with the content (change DEMO)
+Create a `.env` file with the content (change DEMO to your secret)
 ```
 API_TOKEN=DEMO
 ```
@@ -476,7 +476,6 @@ Change the predict function to:
 async def predict(features: IrisFeatures, x_api_token: str = Header(...)):
 ```
 * `x_api_token`: This is a parameter name in the predict function that corresponds to a custom HTTP header called X-API-Token. It’s how the API expects clients to send the token.
-
 * `Header(...)`: This is a dependency injection function from FastAPI that tells it to:
   * Extract the value of the X-API-Token HTTP header.
   * Inject it into the x_api_token variable.
@@ -492,17 +491,18 @@ if x_api_token != API_TOKEN:
 This code performs a basic security check to enforce API token authentication:
 * x_api_token is the value sent by the client in the X-API-Token HTTP header
 * API_TOKEN is the expected secret value loaded from your environment via `.env`.
+* If they are not equal we will throw an exception and return status_code=401 ("Unauthorized").
 
-Open Open http://127.0.0.1:80/docs and test it with the correct and not correct token
+Open Open http://127.0.0.1:80/docs and test the predict endpoint with the correct and not correct tokens.
 
-## 5.4 Update the Test
+## 5.4 Update the Tests
 
 Check if the test still run
 ```bash
 pytest
 ```
 
-Of course they are not working anymore, because they assume to security check.
+Of course they are not working anymore. So let us update the tests to reflect the new authentication logic.
 
 Add in the test file at the top
 
@@ -511,7 +511,9 @@ Add in the test file at the top
 os.environ["API_TOKEN"] = "test-secret"
 ```
 
-In the test, we just pretent that the API_TOKEN is "test-secret". In the test you can give the token to the header like that:
+In the test, we just pretent that the API_TOKEN is "test-secret".
+
+You have to update the `client.post` parameters and send the API token as a header (`headers={"X-API-Token": "test-secret"}`). Change your testing code similar to this:
 
 ```python
 valid_payload = {
@@ -542,6 +544,10 @@ def test_predict_invalid_token():
 
 * `headers={"X-API-Token": "test-secret"}`: Adds a custom header with the API token, required for authentication.
 
+Check if the test are now running
+```bash
+pytest
+```
 
 ## 6. Dockerize the FastAPI App
 
