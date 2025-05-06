@@ -6,9 +6,9 @@ The four main service integration styles are
 3.	Remote procedure invocation (Web API), and
 4.	Message Queue.
 
-This exercise shows how you can use a Web API with Python. Most Web APIs use a REST (REpresentational State Transfer) style, communicate over HTTP (Hypertext Transfer Protocol), and use JSON (JavaScript Object Notation) as a message format. 
+This exercise shows how you can use a Web API with Python. Most Web APIs use a REST (REpresentational State Transfer) style, communicate over HTTP (Hypertext Transfer Protocol), and use JSON (JavaScript Object Notation) as a message format.
 
-1.	https://randomuser.me/ is a random user generator 
+1.	https://randomuser.me/ is a random user generator
 2.	It has an API. Go to https://api.randomuser.me/ with your browser
 3.	You get a JSON back. A JSON is similar to a Python dictionary.  Refresh the browser
 4.	You can add query parameters. They are added to the URL with a ? . You then add the parameter with parameter=value. If you have more than one parameter, then the parameters are connected with a & e.g.
@@ -20,10 +20,24 @@ This exercise shows how you can use a Web API with Python. Most Web APIs use a R
 10.	Create a Python environment with uv and activate it
 11.	Add a requirements.in file with the following packages:
 ```
+pandas
+matplotlib
+python-dotenv
 jupyterlab
+streamlit
 requests
 ```
 12.	Install the packages in your Python environment
+13. Create a `.gitignore` file (with `.` at the beginning) with the following content:
+```sh
+.env
+venv
+.venv
+.idea
+.ipynb_checkpoints
+.vscode
+.DS_Store
+```
 13.	Open a Jupyter Notebook and create a new notebook
 14.	Import the library `requests` in your notebook
 15.	You can find the documentation for the requests package here:
@@ -52,7 +66,7 @@ parameters = {"lat": 37.78, "lon": -122.41}
 ```python
 response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters)
 ```
-This is the same as 
+This is the same as
 ```python
 response = requests.get("http://api.open-notify.org/iss-pass.json?lat=37.78&lon=-122.41")
 ```
@@ -68,15 +82,102 @@ data = response.json()
 ```
 23.	Check the type of variable data
 24.	Loop through the dictionary and print all first names
-25.	Print out all the names of the astronauts who are right now in space. You get the information about the Web APU from here  
-http://open-notify.org/Open-Notify-API/People-In-Space/ 
+25.	Print out all the names of the astronauts who are right now in space. You get the information about the Web APU from here
+http://open-notify.org/Open-Notify-API/People-In-Space/
 26.	Print the number of people that are right now in space
 27.	Loop through the dictionary and print all first names
-Use *pretty-print* (pprint). pprint prints complex data structures like a dictionary prettier.  https://docs.python.org/3/library/pprint.html 
+Use *pretty-print* (pprint). pprint prints complex data structures like a dictionary prettier.  https://docs.python.org/3/library/pprint.html
 ```python
 from pprint import pprint
 pprint(data)
 ```
+
+# Financial Data with an API
+
+Very often you need some kind of authentification for using an API (like for OpenAI, Twitter, Facebook, Payments, …). There are many different ways for authentification. One quite simple one is getting an API access token. This is kind of a password for accessing the service. You should not put any access tokens or passwords into your git source control. We will use again python-dotenv [python-dotenv](https://pypi.org/project/python-dotenv/) for managing the secretes and an `.env` file for storing the token
+
+1. We will use Alpha Vantage https://www.alphavantage.co for getting some financial information.
+2. Go to https://www.alphavantage.co/support/#api-key and get a free API key.
+3. Create a new `.env` with the following content (change `DEMO` with your Alpha Vantage API Token that you got)
+```bash
+AV_TOKEN=DEMO
+```
+
+Add in your Jupyter Notebook a new cell for loading the Alpha Vantage API Token:
+
+```python
+import os
+import requests
+from dotenv import load_dotenv
+import pandas as pd
+
+load_dotenv()
+av_token = os.getenv('AV_TOKEN')
+```
+
+Create a new cell in Jupyter Notebook for getting the Income Statement of a company as a JSON (Python dictonary)
+
+```python
+# Stock Ticker Symbol
+symbol = 'AAPL'
+
+url = f'https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol={symbol}&apikey={av_token}'
+r = requests.get(url)
+data = r.json()
+data
+```
+Let us create out of the JSON a Pandas DataFrame
+
+```python
+income_df = pd.DataFrame(data['annualReports'])
+income_df
+```
+
+Then we will do some preprocessin (extracting the year, changing the data type from string to float, and sorting it by year)
+```python
+income_df['fiscalDateEnding'] = pd.to_datetime(income_df['fiscalDateEnding'])
+income_df['fiscalYear'] = income_df['fiscalDateEnding'].dt.year
+cols_to_float = ['grossProfit', 'totalRevenue',
+       'costOfRevenue', 'costofGoodsAndServicesSold', 'operatingIncome',
+       'sellingGeneralAndAdministrative', 'researchAndDevelopment',
+       'operatingExpenses', 'investmentIncomeNet', 'netInterestIncome',
+       'interestIncome', 'interestExpense', 'nonInterestIncome',
+       'otherNonOperatingIncome', 'depreciation',
+       'depreciationAndAmortization', 'incomeBeforeTax', 'incomeTaxExpense',
+       'interestAndDebtExpense', 'netIncomeFromContinuingOperations',
+       'comprehensiveIncomeNetOfTax', 'ebit', 'ebitda', 'netIncome']
+
+income_df[cols_to_float] = income_df[cols_to_float].apply(pd.to_numeric, errors='coerce')
+income_df = income_df.sort_values(by='fiscalYear', ascending=True)
+income_df
+```
+
+Then we can create a nice figure
+
+
+```go
+plt.style.use('fivethirtyeight')
+fig, ax = plt.subplots(figsize=(10, 6))
+income_df.plot(
+    x='fiscalYear',
+    y='totalRevenue',
+    kind='bar',
+    ax=ax,
+    title=f'Revenue of {symbol}',
+    ylabel='Revenue (Billion USD)',
+    xlabel='Fiscal Year',
+    legend=False
+)
+
+# Format y-axis to billions
+ax.yaxis.set_major_formatter(FuncFormatter(lambda x, _: f'{x/1e9:.0f}'))
+
+plt.tight_layout()
+plt.show()
+```
+
+Go up and change the symbol to 'META' and 'GOOG' and see how their revenue changed over the years.
+
 
 # Streamlit App
 
@@ -84,15 +185,12 @@ pprint(data)
 
 29.	Add to your Streamlit app the following functionality:
 a.	Get the current location of the International Space Station (ISS)
-http://open-notify.org/Open-Notify-API/ISS-Location-Now/ 
-b.	Create a geographical map in your Streamlit app that visualizes the current ISS location. There are a lot of different Python packages for geo-mapping. The easiest way in this scenario is to use the included map function in Streamlit: 
-https://docs.streamlit.io/develop/api-reference/charts/st.map 
+http://open-notify.org/Open-Notify-API/ISS-Location-Now/
+b.	Create a geographical map in your Streamlit app that visualizes the current ISS location. There are a lot of different Python packages for geo-mapping. The easiest way in this scenario is to use the included map function in Streamlit:
+https://docs.streamlit.io/develop/api-reference/charts/st.map
 c.	Add a short description to your map
 
 30.	Deploy your Streamlit app with CapRover to your VPS.  Create for your application a new subdomain `iss` so that your URL is something like `iss.example.com`. Enable HTTPS
 
-31.	Copy-paste the URL of your deployed Streamlit app to Moodle
+31.	Copy-paste the URL of your deployed Streamlit app as well as the GitHub link to Moodle
 
-32.	What we have not covered in this exercise is authentication: A lot of Web APIs require a key for interacting with them (like OpenAI, Twitter, Facebook, …). You find at 
-https://requests.readthedocs.io/en/latest/user/advanced
-more information for Authentication for Web APIs with the request package. 
