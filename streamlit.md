@@ -1,11 +1,10 @@
 # Create a Streamlit App similar to Gapminder
 
-You task is to create an interactive bubble chart with Streamlit, similar to Gapminder https://www.gapminder.org/tools/ and deploy it to the cloud.
-
+Your task is to create an interactive bubble chart with Streamlit, similar to Gapminder https://www.gapminder.org/tools/ and deploy it to the cloud.
 
 ## Create Project
 
-Open VS Code. Create new project with a new folder `gapminder`.
+Open VS Code. Create a new project with a new folder `gapminder`.
 
 As always, create an environment
 ```bash
@@ -87,7 +86,7 @@ import pandas as pd
 st.title('Gapminder')
 ```
 
-In the Terminal you can start Streamlit
+In the Terminal, you can start Streamlit
 
 ```bash
 streamlit run app/app.py
