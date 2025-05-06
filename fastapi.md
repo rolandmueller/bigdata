@@ -41,6 +41,7 @@ scikit-learn
 joblib
 requests
 jupyterlab
+python-dotenv
 ```
 
 Then compile and install it with:
@@ -450,17 +451,110 @@ Run all unit test in the Terminal with
 pytest
 ```
 
+## 5.3 Create an Authentification Token for the predict service
+
+Create a `.env` file with the content (change DEMO)
+```
+API_TOKEN=DEMO
+```
+
+Add these lines in your code to load the value from the `.env` file
+
+```python
+from fastapi import FastAPI, Header, HTTPException
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+API_TOKEN = os.getenv("API_TOKEN")
+```
+
+Change the predict function to:
+
+```python
+@app.post("/predict")
+async def predict(features: IrisFeatures, x_api_token: str = Header(...)):
+```
+* `x_api_token`: This is a parameter name in the predict function that corresponds to a custom HTTP header called X-API-Token. It’s how the API expects clients to send the token.
+
+* `Header(...)`: This is a dependency injection function from FastAPI that tells it to:
+  * Extract the value of the X-API-Token HTTP header.
+  * Inject it into the x_api_token variable.
+  * The ellipsis `...` means this header is required.
+
+Include in the predict function the following lines at the beginning:
+
+```python
+if x_api_token != API_TOKEN:
+    raise HTTPException(status_code=401, detail="Unauthorized")
+```
+
+This code performs a basic security check to enforce API token authentication:
+* x_api_token is the value sent by the client in the X-API-Token HTTP header
+* API_TOKEN is the expected secret value loaded from your environment via `.env`.
+
+Open Open http://127.0.0.1:80/docs and test it with the correct and not correct token
+
+## 5.4 Update the Test
+
+Check if the test still run
+```bash
+pytest
+```
+
+Of course they are not working anymore, because they assume to security check.
+
+Add in the test file at the top
+
+```python
+# Set up environment variable for testing
+os.environ["API_TOKEN"] = "test-secret"
+```
+
+In the test, we just pretent that the API_TOKEN is "test-secret". In the test you can give the token to the header like that:
+
+```python
+valid_payload = {
+    "sepal_length": 5.1,
+    "sepal_width": 3.5,
+    "petal_length": 1.4,
+    "petal_width": 0.2
+}
+
+def test_predict_success():
+    response = client.post(
+        "/predict",
+        json=valid_payload,
+        headers={"X-API-Token": "test-secret"}
+    )
+    assert response.status_code == 200
+    assert "prediction" in response.json()
+
+def test_predict_invalid_token():
+    response = client.post(
+        "/predict",
+        json=valid_payload,
+        headers={"X-API-Token": "wrong-token"}
+    )
+    assert response.status_code == 401
+    assert response.json()["detail"] == "Unauthorized"
+```
+
+* `headers={"X-API-Token": "test-secret"}`: Adds a custom header with the API token, required for authentication.
+
+
 ## 6. Dockerize the FastAPI App
 
 ### 6.1 app/requirements.txt
 
 ```
-fastapi
+fastapi[standard]
 uvicorn
 pydantic
 pandas
 scikit-learn
 joblib
+python-dotenv
 ```
 
 ### 6.2 Dockerfile
@@ -518,6 +612,7 @@ caprover deploy
 Select the app name and follow instructions.
 
 Once deployed:
+* add in the App Configuration in CapRover https://caprover.com/docs/app-configuration.html#app-config as the environment variable  `API_TOKEN` and as the value your secrete token (e.g. `DEMO`). Save and update
 * Visit https://iris.yourdomain.com/predict and test it in Insomnia
 
 Check the documentation: https://iris.yourdomain.com/docs
