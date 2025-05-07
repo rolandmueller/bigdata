@@ -176,8 +176,9 @@ plt.tight_layout()
 plt.show()
 ```
 
-Go up and change the symbol to 'META' and 'GOOG' and see how their revenue changed over the years.
+* Go up and change the symbol to 'META' and 'GOOG' and see how their revenue changed over the years.
 
+* Look at https://www.alphavantage.co/documentation/ on how to get the daily adjusted full time series of the stock price. Plot it.
 
 # Streamlit App
 
