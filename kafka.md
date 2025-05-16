@@ -314,10 +314,10 @@ sdf = sdf.print()
 
 ```mermaid
 graph LR
-  m@{ shape: docs, label: "Messages\nfrom Topic"} --> f1["apply(temp_transform)"]
+  m@{ shape: docs, label: "Messages"} --> f1["apply(temp_transform)"]
   f1 --> f2["filter(alert)"]
   f2 --> f3["print()"]
-  f3 --> m2@{ shape: docs, label: "New Filtered Messages"}
+  f3 --> m2@{ shape: docs, label: "Filtered Messages"}
 ```
 
 Restart the consumer in the Terminal:
