@@ -1,6 +1,31 @@
-# A small Kafka Example
+# Real-Time Stream Processing of IoT Sensor Data with Apache Kafka
 
-In this tutorial, we will create a small system with the streaming service Kafka.
+In this tutorial, we will create a small system with the data streaming service Apache Kafka.
+
+The goal is to create a distributed service that  integrates real-time sensor measurement with a message queue. We have the following components:
+1. A producer of messages that measures the temperature of an IoT device and writes it into Kafka. Rigth now we do not have a real sensor so we simulate it.
+2. A consumer of messages that reads the messages from Kafka, transforms the data stream and looks for outliers. If there is an outlier, an alert message is writen into Kafka
+3. A real-time dashboard that shows the current temperature and a chart of the last 100 seconds.
+4. The Message Quque based on Apache Kafka
+
+```mermaid
+C4Container
+Person(customer, User, "Checks Status of IoT System", $tags="v1.0")
+System_Boundary(iotsystem, "IoT Application") {
+      Container(streamlit, "Dashboard", "Python, Streamlit", "Real-Time Dashboard for KPIs")
+      Container(consumer, "Consumer: Stream Processing", "Python", "Transforms stream and creates alerts")
+      Container(producer, "Producer: IoT Sensor", "Python", "Produces the measurement messages")
+      Boundary(b3, "Stream Processing", "") {
+        ComponentQueue(kafka, "Message Queue", "Apache Kafka", "Stores sensor events")
+      }
+  }
+Rel(customer, streamlit, "Uses", "HTTP")
+Rel(kafka, streamlit, "Uses")
+Rel(producer, kafka, "Sensor Messages")
+BiRel(consumer, kafka, "Sensor and Alert Messages")
+UpdateRelStyle(streamlit, kafka, $offsetY="-2000")
+```
+
 
 ## VS Code and Python environment
 
@@ -512,9 +537,13 @@ Stop it with the shortcut `control` + `C`.
 
 ## Aditional tasks
 
-* We want the following two new metrics: The number of alerts in the last 5 seconds and the average temperatur in the last 10 seconds. Include these two new KPIs in the Dashboard as two metric widgets. In the Stream Data Framework API, the concept of `windowed aggregation` will help you: https://quix.io/docs/quix-streams/windowing.html and https://quix.io/docs/quix-streams/aggregations.html You can either do this directly in the Streamlit Dashboard or use a separate Python file with a pipeline and store it into a new topic.
+* Create a new data pipeline (a new consumer as a separate Python file). It should calculate a new KPI as the count of alerts in the last 5 seconds and store it as a new topic. In the Stream Data Framework API, the concept of `windowed aggregation` will help you: https://quix.io/docs/quix-streams/windowing.html and https://quix.io/docs/quix-streams/aggregations.html
+* Add a metric widget in the Streamlit Dashboard and display the new KPI.
+* Create a new data pipeline for the average temperatur in the last 10 seconds and store it as a new topic.
+* Add a metric widget in the Streamlit Dashboard and display the new KPI.
 * Take a screenshot of your dashboard. Include the screenshot in the code folder
 * Write an explanation in the README.md. Include the screenshot in the Markdown file (so that the image is shown).
+* You can put the metric widgets side by side in Streamlit with columns: https://docs.streamlit.io/develop/api-reference/layout/st.columns
 * Add everything into Git and push it to GitHub
 * On Moodle, include the GitHub Link to the repository.
 
