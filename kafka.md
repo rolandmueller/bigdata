@@ -421,6 +421,7 @@ from datetime import datetime
 from quixstreams import Application
 import streamlit as st
 
+
 st.title("Real-Time IoT Dashboard")
 
 @st.cache_resource
@@ -442,17 +443,15 @@ with app.get_consumer() as consumer:
     previous_temp = 0
     while True:
         msg = consumer.poll(timeout=1.0)
-        if msg is not None:
+        if msg is not None and msg.topic() == sensor_topic.name:
             sensor_msg = sensor_topic.deserialize(msg)
-            if sensor_msg.value is not None:
-                temperature = sensor_msg.value.get('temperature')
-                if temperature is not None:
-                    device_id = sensor_msg.value.get('device_id')
-                    timestamp = datetime.fromisoformat(sensor_msg.value.get('timestamp'))
-                    diff = temperature - previous_temp
-                    previous_temp = temperature
-                    timestamp_str = timestamp.strftime("%H:%M:%S")
-                    st_metric_temp.metric(label=device_id, value=f"{temperature:.2f} °C", delta=f"{diff:.2f} °C")
+            temperature = sensor_msg.value.get('temperature')
+            device_id = sensor_msg.value.get('device_id')
+            timestamp = datetime.fromisoformat(sensor_msg.value.get('timestamp'))
+            diff = temperature - previous_temp
+            previous_temp = temperature
+            timestamp_str = timestamp.strftime("%H:%M:%S")
+            st_metric_temp.metric(label=device_id, value=f"{temperature:.2f} °C", delta=f"{diff:.2f} °C")
 ```
 
 Before we run this, let us discuss a couple of lines:
@@ -463,11 +462,9 @@ Before we run this, let us discuss a couple of lines:
 * `consumer.subscribe([sensor_topic.name, alert_topic.name])`: Subscribes the consumer to both "sensor" and "alert" Kafka topics.
 * `while True:`: Starts an infinite loop to continuously poll messages from Kafka.
 * `msg = consumer.poll(timeout=1.0)`: Polls Kafka for new messages with a timeout of 1 second.
-* `if msg is not None:`: Checks if a message was received from the poll.
+* `if msg is not None and msg.topic() == sensor_topic.name:`: Checks if a message was received from the poll and that it is from the "sensor" topic.
 * `sensor_msg = sensor_topic.deserialize(msg)`: Deserializes the Kafka message into a Python object using the "sensor" topic schema.
-* `if sensor_msg.value is not None:`: Ensures the deserialized message has a valid `value` before processing.
 * `temperature = sensor_msg.value.get('temperature')`: Extracts the temperature value from the message payload.
-* `if temperature is not None:`: Ensures that the temperature data exists before continuing.
 * `device_id = sensor_msg.value.get('device_id')`: Retrieves the device ID from the message payload.
 * `diff = temperature - previous_temp`: Calculates the temperature difference from the previous reading.
 * `previous_temp = temperature`: Updates the previous temperature with the current reading for future comparison.
