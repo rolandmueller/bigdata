@@ -8,6 +8,8 @@ The goal is to create a distributed service that  integrates real-time sensor me
 3. A real-time dashboard that shows the current temperature and a chart of the last 100 seconds.
 4. The Message Quque based on Apache Kafka
 
+The [C4 Model](https://en.wikipedia.org/wiki/C4_model) of the system looks something like that:
+
 ```mermaid
 C4Container
 Person(customer, User, "Checks Status of IoT System", $tags="v1.0")
