@@ -49,7 +49,7 @@ uv add streamlit
 uv add quixstreams
 ```
 
-Within a ux project you can run a python file either with `uv run` like this:
+Within a uv project you can run a python file either with `uv run` like this:
 
 ```bash
 uv run hello.py
@@ -72,6 +72,8 @@ And then run
 ```bash
 python hello.py
 ```
+
+In both cases you have access to all Python packages in the environment.
 
 ## Kafka Docker
 
