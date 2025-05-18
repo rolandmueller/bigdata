@@ -49,6 +49,14 @@ uv add streamlit
 uv add quixstreams
 ```
 
+Within a ux project you can run a python file either with `uv run` like this:
+
+```bash
+uv run hello.py
+```
+
+Or you can activate the Python environment:
+
 Activate the environment on Mac:
 ```bash
 source .venv/bin/activate
@@ -57,6 +65,12 @@ source .venv/bin/activate
 Activate on Windows:
 ```bash
 .venv\Scripts\Activate.ps1
+```
+
+And then run
+
+```bash
+python hello.py
 ```
 
 ## Kafka Docker
@@ -97,7 +111,7 @@ docker compose up -d
 
 ## Create a Kafka Producer
 
-Create a Python file with the name `producer.py`
+Rename the `hello.py` Python file to the name `producer.py`.
 
 ```python
 import time
